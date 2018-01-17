@@ -1,0 +1,93 @@
+<view class="topView">
+
+    <view class="topFirstView" >
+      <view class="topSecondView" >
+
+     <view class="shop-lessonType"> 
+                    <image class='lessonTypeImage' src='../../image/fourTypeIcon.png'></image>
+                    <view class='lessonTypeTitle'>课程练习</view>
+                  </view>
+
+        <view class='detail-lianxiView' bindtap='navigateToLessonPractise'>
+          <view class='lianxi-title'>{{practiseName}}课后测试</view>
+          <view class='lianxi-pingfen'>
+            <view class='pingfen-name'>{{lessonData.courseInfo.teacher}}</view>
+            <view class='starView' wx:if="{{exerciseData.score == 0}}">
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+            </view>
+            <view class='starView' wx:if="{{exerciseData.score == 1}}">
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+            </view>
+            <view class='starView' wx:if="{{exerciseData.score == 2}}">
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+            </view>
+            <view class='starView' wx:if="{{exerciseData.score == 3}}">
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+            </view>
+            <view class='starView' wx:if="{{exerciseData.score == 4}}">
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+            </view>
+            <view class='starView' wx:if="{{exerciseData.score == 5}}">
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+            </view>
+          </view>
+        </view>
+        <view class='comment-line'></view>
+
+      <block  wx:for="{{questionList}}" wx:for-item="item" wx:key="index">
+        <view class='practiseView'>
+          <view class='practise-titleAndStar'>
+            <view class='practise-title'>{{item.questionName}}</view>
+            <view wx:if="{{item.score == 1}}">
+              <image class='practise-star' src='../../image/zhengquexingicon.png'></image>
+            </view>
+            <view wx:else>
+              <image class='practise-star' src='../../image/cuowuxingicon.png'></image>
+            </view>
+          </view>
+          <block  wx:for="{{item.optionsList}}" wx:for-item="answer" wx:key="index">
+            <view class="practise-answer-yellow" wx:if="{{answer.correct == 1}}"  data-objectid="{{answer.objectId}}" data-questionid='{{item.objectId}}'>{{answer.optionName}}</view>
+            <view class="practise-answer-gray" wx:if="{{answer.choice == 1 && answer.correct == 0}}"  data-objectid="{{answer.objectId}}" data-questionid='{{item.objectId}}'>{{answer.optionName}}</view>
+            <view class="practise-answer-normal" wx:if="{{answer.correct== 0 && answer.choice == 0}}"  data-objectid="{{answer.objectId}}" data-questionid='{{item.objectId}}'>{{answer.optionName}}</view>
+           </block>
+
+          <view class='answer-section-title'>答案分析</view>
+          <view class='answer-section-content'>{{item.explain}}</view>
+
+        </view>
+        <view class='comment-line'></view>
+      </block>
+
+
+
+      </view>
+    </view>
+
+
+</view>
+
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

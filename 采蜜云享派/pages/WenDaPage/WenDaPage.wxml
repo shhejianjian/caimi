@@ -1,0 +1,85 @@
+<view class="topView">
+  <view class="topFirstView" >
+    <view class="topSecondView" >
+      <view class="topThirdView" >
+
+        <view class='top-tagView'>
+          <view class='top-tagfirst'>
+            <block wx:for="{{questionInfo.tagList}}" wx:for-item="item" wx:key="index">
+              <view class='top-tag' data-tagid='{{item.objectId}}' data-tagname='{{item.name}}' bindtap='navigateToTagDetail'>{{item.name}}</view>
+            </block>
+            <view class='top-time' wx:if="{{questionInfo.solved==0}}">剩余{{questionInfo.date}}</view>
+            <view class='top-time' wx:if="{{questionInfo.solved==1}}">已解决</view>
+          </view>
+          <view class='shop-moneyView'>
+            <image class='shop-moneyImage' src='../../image/money.png'></image>
+            <view class="shop-money">赏金：￥{{questionInfo.reward}}</view>
+          </view>
+        </view>
+
+        <view class='shop-title'>{{questionInfo.title}}</view>
+        <view class='shop-content'>{{questionInfo.content}}</view>
+        <view class='line'></view>
+
+        <view class='answerCountAndSort'>
+          <view class='title-guanzhu'>
+            <view class='answer-title'>{{questionInfo.answerCount}}个回答 · </view>
+            <view class='answer-guanzhuwenti' bindtap='guanzhuClick' data-followstr='{{questionInfo.followStr}}'> {{questionInfo.followStr}}</view>
+          </view>
+          <view class='answer-sort'>按时间排序</view>
+        </view>
+
+        <view class='second-line'></view>
+
+
+      <view wx:if="{{answerInfo.length>0}}">
+        <block wx:for="{{answerInfo}}" wx:for-item="shop" wx:key="index">
+                <view class="shop-item"  bindtap="navigateToDetail" data-answerid='{{shop.answerId}}'>
+                  <view class='shop-user'>
+                    <view class='iconAndName'>
+                      <view >
+                        <image class='shop-usericon' src="{{shop.userAvatar}}"></image>
+                      </view>
+                      <view class='shop-username'>{{shop.userNickName}}</view>
+                    </view>
+
+                    <view class='bestAnswerView' wx:if="{{shop.choice==1}}">
+                      <image class='bestAnswerImage' src='../../image/youzhihuida.png'></image>
+                      <view class='moneyView'>
+                        <image class='moneyImage' src='../../image/money.png'></image>
+                        <view class='moneyTitle'>获得赏金￥{{shop.reward}}</view>
+                      </view>
+                    </view>
+
+                  </view>
+                  
+                  <view class='shop-answercontent'>{{shop.content}}</view>
+                  
+                  <view class='shop-likeCountAndTime'>
+                    <view class='shop-likeCount'>{{shop.likeCount}}个赞 · {{shop.commentCount}}个评论</view>
+                    <view class='shop-time'>发布于{{shop.date}}</view>
+                  </view>
+
+                </view>
+
+                <view class="list-line"></view>
+            </block>
+        </view>
+        <view wx:else>
+          <view class='tipView'>暂时还没有用户回答，您可以关注该问题，有新的回答会及时通知您</view>
+        
+        </view>
+
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<view class='floatView' wx:if="{{questionInfo.solved==0}}">
+            <button class='float-leftView' plain='true' bindtap='shareToAnswer' open-type="share">邀请回答</button>
+            <view class="float-rightView {{(answerInfo.length==0 && questionInfo.self==1)?'float-rightView-active':''}}" bindtap='navigateToRespond' data-answertext='{{questionInfo.answerText}}' data-answerid='{{questionInfo.myAnswerId}}'>{{questionInfo.answerText}}</view>
+          </view>
+
+
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

@@ -1,0 +1,126 @@
+@import "/pages/PublicWxss/PublicWxss.wxss";
+.TopView{
+  width: 100%;
+  height: 100rpx;
+  background-image: linear-gradient(-180deg, #41C3FD 0%, #08A4FF 100%);
+}
+.topFirstView{
+  padding-top: 10rpx;
+  /* margin-top: 20rpx;  */
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  height: 100rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+.topSecondView{
+  padding-top: 10rpx;
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  height: 100rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+ .topThirdView{
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  background: #FFFFFF;
+  box-shadow: 0 -16rpx 16rpx -16rpx rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+} 
+.itemView{
+  padding: 30rpx 40rpx 20rpx 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.item-title{
+  font-family: PingFangSC-Medium;
+  font-size: 28rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.item-image{
+  height: 25rpx;
+  width: 25rpx;
+}
+.line{
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  opacity: 0.5;
+  background: #E6E6E6;
+  height: 1rpx;
+}
+.iconAndEnter{
+  display: flex;
+  align-items: center;
+}
+.item-usericon{
+  margin-right: 10rpx;
+  border-radius: 50%;
+  width: 60rpx;
+  height: 60rpx;
+}
+.item-content1{
+  margin-right: 10rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 28rpx;
+  color: #9B9B9B;
+  letter-spacing: 0;
+}
+.item-content{
+  margin-right: 10rpx;
+  text-align: right;
+  font-family: PingFangSC-Medium;
+  font-size: 28rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+  white-space: nowrap;
+  overflow-x: hidden;
+  width: 500rpx;
+  text-overflow: ellipsis;
+
+
+}
+.item-content-active{
+  color: #9B9B9B;
+  margin-right: 10rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 28rpx;
+}
+.item-content2{
+  padding-left: 500rpx;
+  margin-right: 10rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 28rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.item-content2-active{
+  color: #9B9B9B;
+}
+.item-content-birthday{
+  padding-left: 350rpx;
+  margin-right: 10rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 28rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.item-content-birthday-active{
+  color: #9B9B9B;
+}
+.item-city-content{
+  padding-left: 400rpx;
+  margin-right: 10rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 28rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.item-city-content-active{
+  padding-left: 200rpx;
+  color: #9B9B9B;
+}

@@ -1,0 +1,72 @@
+<view class="TopView"> 
+  <view class="topFirstView" >
+    <view class="topSecondView" >
+      <view class="topThirdView" >
+
+        <view class='itemView' bindtap='changePhoto'>
+          <view class='item-title'>头像</view>
+          <view class='iconAndEnter'>
+            <image class='item-usericon' src='{{user.avatar}}'></image>
+            <image class='item-image' src='../../image/enter.png'></image>
+          </view>
+        </view>
+        <view class='line'></view>
+
+        <view class='itemView' bindtap='navigateToChangName' data-username='{{user.nickName}}'>
+          <view class='item-title'>昵称</view>
+          <view class='iconAndEnter'>
+            <view class="item-content-active">{{user.nickName}}</view>
+            <image class='item-image' src='../../image/enter.png'></image>
+          </view>
+        </view>
+        <view class='line'></view>
+
+        <view class='itemView' >
+          <view class='item-title'>性别</view>
+          <view class='iconAndEnter'>
+            <picker bindchange="bindPickerChange" value="{{user.gender}}" range="{{genderArr}}">
+              <view class="item-content2 {{user.gender!=0?'item-content2-active':''}}">{{genderArr[user.gender]}}</view>
+            </picker>
+            <image class='item-image' src='../../image/enter.png'></image>
+          </view>
+        </view>
+        <view class='line'></view>
+
+        <view class='itemView'>
+          <view class='item-title'>位置</view>
+          <view class='iconAndEnter'>
+            <picker mode="region" bindchange="bindRegionChange" value="{{user.cityList}}">
+              <view class="item-city-content {{user.cityText.length>0?'item-city-content-active':''}}">{{user.cityText || '未填写'}}</view>
+            </picker>
+            <image class='item-image' src='../../image/enter.png'></image>
+          </view>
+        </view>
+        <view class='line'></view>
+
+        <view class='itemView'>
+          <view class='item-title'>生日</view>
+          <view class='iconAndEnter'>
+            <picker mode="date" value="{{user.birthday || '1990-01-01'}}" start="1900-01-01" end="2020-01-01" bindchange="bindDateChange">
+              <view class="item-content-birthday {{user.birthday.length>0?'item-content-birthday-active':''}}">{{user.birthday || '未填写'}}</view>
+            </picker>
+            <image class='item-image' src='../../image/enter.png'></image>
+          </view>
+        </view>
+        <view class='line'></view>
+
+        <view class='itemView' bindtap='navigateToChangIntro' data-userintro='{{user.intro}}'>
+          <view class='item-title'>个人简介</view>
+          <view class='iconAndEnter'>
+            <view class="item-content {{user.intro.length>0?'item-content-active':''}}">{{user.intro || '未填写'}}</view>
+            <image class='item-image' src='../../image/enter.png'></image>
+          </view>
+        </view>
+        <view class='line'></view>
+
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

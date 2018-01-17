@@ -1,0 +1,28 @@
+<view class="topView">
+  <view class="topFirstView" >
+    <view class="topSecondView" >
+      <view class="topThirdView" >
+
+        <view class='lesson-title'>
+          <view class='lessonListTitle' bindtap='cancel'>取消</view>
+          <view class='liuyanTitle' bindtap='press'>保存</view>
+
+        </view>
+        <view class='comment-line'></view>
+
+        <view class="text-section">
+          <textarea class='textareaView' placeholder-class="placeholder" bindinput="bindinputChange" placeholder="输入20个字符以内的个人简介" value='{{introText}}' auto-height auto-focus maxlength='20' />
+        </view>
+
+         <view class='comment-line'></view>
+
+        <view class='text-content'>介绍一下自己吧（20字以内）</view>
+
+
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

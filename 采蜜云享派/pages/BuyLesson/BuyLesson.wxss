@@ -1,0 +1,221 @@
+@import "/pages/PublicWxss/PublicWxss.wxss";
+.topView{
+  width: 100%;
+  height: 500rpx;
+  background-image: linear-gradient(-180deg, #41C3FD 0%, #08A4FF 100%);
+}
+.top-titleView{
+  position: relative;
+  width: 100%;
+}
+
+.top-image{
+  width: 95%;
+  margin-top: 20rpx; 
+  margin-left: 20rpx; 
+  margin-right: 20rpx; 
+  height: 460rpx;
+  position: absolute;
+  border-radius: 10rpx;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+}
+.top-titleAndContent{
+  position: absolute; 
+  top: 330rpx; 
+  height: 140rpx;
+  left: 20rpx; 
+  right: 20rpx; 
+  background-image: linear-gradient(90deg, rgba(0,111,255,0.50) 0%, rgba(0,111,255,0.00) 99%);
+}
+.top-title{
+  font-family: PingFangSC-Semibold;
+  font-size: 48rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  margin-top: 20rpx;
+  margin-left: 40rpx;
+}
+.top-content{
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  margin-left: 40rpx;
+  letter-spacing: 0;
+}
+.bottomView{
+  position: relative;
+}
+.bottomFirstView{
+  margin-top: -30rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  padding-top: 10rpx;
+  height: 300rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+.bottomSecondView{
+  /* margin-top: -20rpx; */
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+  /* height: 400rpx; */
+}
+.bottom-scribe{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.scribe-image{
+  margin-top: 20rpx;
+  width: 200rpx;
+  height: 40rpx;
+}
+.scribe-number{
+  margin-top: 20rpx;
+  margin-right: 40rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.scribe-content{
+  margin-top: 20rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+  line-height: 40rpx;
+}
+.scribe-content2{
+  margin-top: 20rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  padding-bottom: 240rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+  line-height: 40rpx;
+}
+.line{
+  margin-top: 20rpx;
+  margin-right: 40rpx;
+  margin-left: 40rpx;
+  background:  #E6E6E6;
+  height: 1rpx;
+}
+.scribe-quanwen{
+  margin-top: 30rpx;
+  text-align: center;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #FFA900;
+  letter-spacing: 0;
+}
+.audioView{
+  position: fixed;
+  bottom: 120rpx;
+  left: 20rpx;
+  right: 20rpx;
+  /* margin-top: 20rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx; */
+  height: 100rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.audio-image{
+  height: 100rpx;
+  width: 100rpx;
+}
+.audio-titleAndTime{
+  margin-left: -260rpx;
+}
+.audio-title{
+  font-family: PingFangSC-Semibold;
+  font-size: 24rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.audio-time{
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #4A4A4A;
+  /* margin-top: 8rpx; */
+  letter-spacing: 0;
+}
+.audio-image2{
+  height: 40rpx;
+  width: 40rpx;
+  margin-right: 20rpx;
+}
+.floatView{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  line-height: 100rpx;
+  /* margin-top: 20rpx; */
+  display: flex;
+  align-items: center;
+  height: 100rpx;
+}
+.float-leftView{
+  width: 50%;
+  height: 100rpx;
+  background: #FFFFFF;
+  border: 1rpx solid #9B9B9B;
+  font-family: PingFangSC-Semibold;
+  font-size: 24rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.float-rightView{
+  width: 50%;
+  height: 100rpx;
+  background: #FFD100;
+  border: 1rpx solid #FFD100;
+  font-family: PingFangSC-Semibold;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+}
+.richTextView{
+  margin-top: 20rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  padding-right:40rpx; 
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+  line-height: 40rpx; 
+}
+.shop-lessonType{
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+}
+.lessonTypeImage{
+  margin-left: -40rpx;
+  width: 256rpx;
+  height: 50rpx;
+}
+.lessonTypeTitle{
+   margin-left: -180rpx; 
+  font-family: PingFangSC-Semibold;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+}

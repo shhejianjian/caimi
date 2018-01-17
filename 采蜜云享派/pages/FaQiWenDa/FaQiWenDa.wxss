@@ -1,0 +1,289 @@
+@import "/pages/PublicWxss/PublicWxss.wxss";
+.topView{
+  width: 100%;
+  height: 300rpx;
+  background-image: linear-gradient(-180deg, #41C3FD 0%, #08A4FF 100%);
+}
+.topFirstView{
+  padding-top: 16rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  height: 100rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+.topSecondView{
+  padding-top: 16rpx;
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  height: 100rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+ .topThirdView{
+  padding-top: 30rpx;
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  background: #FFFFFF;
+  box-shadow: 0 -16rpx 16rpx -16rpx rgba(0,111,255,0.50);
+  /* border-top: solid 0.5rpx rgba(0,111,255,0.20); */
+  border-radius: 10rpx;
+  padding-bottom: 100rpx;
+} 
+.lesson-title{
+  margin-top: 15rpx;
+  margin-left: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.lessonListTitle{
+  font-family: PingFangSC-Medium;
+  font-size: 22rpx;
+  color: #FFD100;
+  letter-spacing: 0;
+}
+.liuyanTitle{
+  /* margin-right: 40rpx; */
+  padding: 0rpx 50rpx 0rpx 50rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 22rpx;
+  color: #FFD100;
+  letter-spacing: 0;
+}
+.comment-line{
+  margin: 20rpx 40rpx 10rpx 40rpx;
+  background:  #E6E6E6;
+  height: 1rpx;
+}
+.text-section{
+  margin-top: 20rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  
+  letter-spacing: 0;
+  line-height: 34rpx;
+}
+.placeholder{
+  color: #9B9B9B;
+}
+.questioninput{
+  width: 100%;
+}
+.shop-item{
+  padding: 20rpx 40rpx 0 40rpx;
+  
+}
+.shop-title{
+  font-family: PingFangSC-Semibold;
+font-size: 24rpx;
+color: #4A4A4A;
+letter-spacing: 0;
+}
+.countView{
+  display: flex;
+  align-items: center;
+}
+.counttitle{
+  font-family: PingFangSC-Regular;
+font-size: 20rpx;
+color: #9B9B9B;
+letter-spacing: 0;
+}
+
+.tagicon{
+  border-radius: 50%;
+  height: 60rpx;
+  width: 60rpx;
+}
+.shop-content{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 40rpx 0 40rpx;
+}
+.iconAndTitle{
+  display: flex;
+  align-items: center;
+}
+.titleAndCount{
+  margin-left: 26rpx;
+}
+.shop-title2{
+  font-family: PingFangSC-Semibold;
+font-size: 28rpx;
+color: #4A4A4A;
+letter-spacing: 0;
+}
+.addTagView{
+  padding: 4rpx 22rpx 4rpx 22rpx;
+  background: #FFD100;
+border-radius: 10rpx;
+  font-family: PingFangSC-Semibold;
+font-size: 22rpx;
+color: #FFFFFF;
+letter-spacing: 0;
+}
+.creatTagView{
+  padding: 20rpx 40rpx 0 40rpx;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+}
+.creatTitle{
+  font-family: PingFangSC-Semibold;
+  font-size: 28rpx;
+  color: #FFD100;
+  letter-spacing: 0;
+}
+
+
+.addedView{
+  
+  margin-left: 30rpx;
+  display: flex;
+  flex-flow: wrap;
+  align-items: center;
+}
+.priceTip{
+  margin-top: 20rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+}
+.tip-title{
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #9B9B9B;
+  letter-spacing: 0;
+  line-height: 34rpx;
+}
+.price-bottomView{
+  display: flex;
+  align-items: center;
+}
+.zerenshengming{
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #FFA900;
+  letter-spacing: 0;
+  line-height: 17px;
+}
+
+.help {
+position: fixed;
+z-index: 100;
+top: 50%;
+left: 0;
+width: 100%;
+height: auto;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.box {
+position: relative;
+display: flex;
+flex-direction: column;
+align-items: stretch;
+width: 80%;
+background: #fff;
+border-radius: 10px;
+box-shadow: 0 0 50px rgba(22,22,22,.35);
+transform: translate3d(0,-400rpx,0);
+}
+.box-hd {
+display: flex;
+align-items: center;
+justify-content: center;
+height: 80rpx;
+border-bottom: 1px solid #eee;
+}
+.box-title {
+font-family: PingFangSC-Semibold;
+font-size: 40rpx;
+color: #FFD100;
+letter-spacing: 0;
+}
+.box-close {
+position: absolute;
+right: 20rpx;
+width: 35rpx;
+height: 35rpx;
+padding: 15rpx;
+}
+.box-content{
+  margin: 40rpx;
+  font-family: PingFangSC-Regular;
+font-size: 24rpx;
+color: #9B9B9B;
+letter-spacing: 0;
+line-height: 34rpx;
+}
+.tagAndDeleteView{
+  margin-top: 5rpx;
+  display: flex;
+  align-items: center;
+  margin-left: 10rpx;
+  padding: 4rpx 22rpx 4rpx 22rpx;
+  background: #FFD100;
+  border-radius: 10rpx;
+  font-family: PingFangSC-Semibold;
+  font-size: 22rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+}
+.tagAndDeleteView-active{
+  background: #08A4FF;
+}
+.deleteImage{
+  width: 25rpx;
+  height: 25rpx;
+  margin-left: 15rpx;
+}
+
+
+.images-wrapper {
+  padding: 40rpx;
+  background-color: #fff;
+  margin-top: 20rpx;
+}
+.images-wrapper-text {
+  font-size: 28rpx;
+}
+.images-list {
+  display: flex;
+  /* margin-top: 20rpx; */
+  flex-wrap: wrap;
+}
+.images-image {
+  width: 30%;
+  height: 200rpx;
+  margin: 10rpx;
+}
+.image-plus {
+  border: 1px solid #999;
+  position: relative;
+}
+.image-plus-horizontal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #d9d9d9;
+  width: 4rpx;
+  height: 80rpx;
+  transform: translate(-50%, -50%);
+}
+.image-plus-vertical {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #d9d9d9;
+  width: 80rpx;
+  height: 4rpx;
+  transform: translate(-50%, -50%);
+}

@@ -1,0 +1,149 @@
+<view class="TopView"> 
+
+  <view class="topSearchView">
+    <image class="topSearchImg" src="../../image/shouyesixin.png" bindtap='navigateToNotice'> </image>
+    <input class="topSearchInput" bindconfirm="bindfocus"/> 
+    <image class="topSearchImg" src="../../image/shouyedengpao.png" bindtap='navigateToFaQiWenDa'> </image>
+  </view>
+
+  <view class="middleImageView"> 
+    <image class="middleImage" src="../../image/morenImage.png"> </image>
+  </view>
+
+
+
+<view class="bottomView">
+   <view class="bottomFirstView" >
+      <view class="bottomSecondView" >
+        <view class="bottomThirdView" >
+
+          <view class='chooseTypeView' >
+            <view class='firstType' bindtap='showFirstSortList'>
+              <view class="typeTitle {{showNavIndex==1?'typeTitle-active':''}}">{{menuName}}</view>
+              <image class='xiajiantou' src='../../image/xiajiantou-normal.png'></image>
+            </view>
+
+            <view class='firstType' bindtap='showSecondSortList'>
+              <view class="typeTitle {{showNavIndex==2?'typeTitle-active':''}}">{{sortName}}</view>
+              <image class='xiajiantou' src='../../image/xiajiantou-normal.png'></image>
+            </view>
+          
+            <view class='firstType' bindtap='clickJiejue'>
+              <view class='typeTitle'>{{jiejueText}}</view>
+              <image class='kaiguan' src='{{kaiguanImage}}'></image>
+            </view>
+
+          </view>
+          <view class="blueline"></view>
+
+          <view wx:if="{{openSort}}" class='sortList'>
+            <view class='chooseTypeView' >
+            <view class='firstType' bindtap='showFirstSortList'>
+              <view class="typeTitle {{showNavIndex==1?'typeTitle-active':''}}">{{menuName}}</view>
+              <image class='xiajiantou' src='../../image/xiajiantou-normal.png'></image>
+            </view>
+
+            <view class='firstType' bindtap='showSecondSortList'>
+              <view class="typeTitle {{showNavIndex==2?'typeTitle-active':''}}">{{sortName}}</view>
+              <image class='xiajiantou' src='../../image/xiajiantou-normal.png'></image>
+            </view>
+          
+            <view class='firstType' bindtap='clickJiejue'>
+              <view class='typeTitle'>{{jiejueText}}</view>
+              <image class='kaiguan' src='{{kaiguanImage}}'></image>
+            </view>
+
+
+            
+
+            </view >
+             <view class="sortline1" wx:if="{{showNavIndex==1}}"></view> 
+
+              <view wx:for="{{sortList}}" wx:for-item="item" wx:key="index" wx:if="{{showNavIndex==2}}">
+                 <view class="sortline"></view> 
+                <view class="sortItem {{itemIndex==item.contentType?'sortItem-active':''}}" data-index='{{item.contentType}}' data-name='{{item.name}}' bindtap="clickSortItem">{{item.name}}</view>
+              </view>
+
+            <view class='filter-panel' wx:if="{{showNavIndex==1}}">
+              <!-- <view class="sortline"></view> -->
+              <view class='filter-panel-left'>
+                <view  wx:for="{{menuList}}" wx:for-item="item" wx:key="index" bindtap='clickMainMenu' data-menuindex='{{index}}' data-tagid='{{item.objectId}}' data-menuname='{{item.name}}'>
+                <view class="leftItemView {{selectedMainIndex==index?'leftItemView-active':''}}">{{item.name}}</view>
+                  <view class='menuline'></view>
+                </view>
+              </view>
+              <view class='filter-panel-right'>
+                <view  wx:for="{{menuList[menuIndex].childList}}" wx:for-item="item" wx:key="index" data-subindex='{{index}}' bindtap='clickSubMenu' data-tagid='{{item.objectId}}' data-name='{{item.name}}'>
+                <view class="rightItemView {{selectedSubIndex==index?'rightItemView-active':''}}">{{item.name}}</view>
+                </view>
+              </view>
+            </view>
+          
+          </view>
+
+          
+          <view>
+              <view class='kongbaiView' wx:if="{{questionList.length==0}}">
+                  <image class='kongbaiImage' src='../../image/kongbaiyeicon.png'></image>
+                  <view class='kongbaiTitle'>您似乎来到了外太空...</view>
+                </view>
+            <block wx:for="{{questionList}}" wx:for-item="shop" wx:key="index">
+                
+                <view class="shop-item" >
+                    
+                  <view class="shop-lessonType" wx:if="{{shop.isPublic == 1}}"> 
+                    <image class='lessonTypeImage2' src='../../image/fourTypeIcon.png'></image>
+                    <view class='lessonTypeTitle'>热门问答</view>
+                    <view class="lessonType-more" bindtap='changeListData' > 换一批</view>
+                  </view>
+
+
+                  <view class="shop-contentView"> 
+
+                    <view  bindtap="navigateToDetail" data-topicid='{{shop.topicId}}'>
+                      <view class='titleAndMoney'>
+                        <view class="shop-title">{{shop.title}}</view>
+                        <view class='shop-moneyView'>
+                          <image class='shop-moneyImage' src='../../image/money.png'></image>
+                          <view class="shop-money">赏金：￥{{shop.reward}}</view>
+                        </view>
+                      </view>
+
+                      <view class='shop-imageView' wx:if="{{shop.isPublic == 1}}"> 
+                        <image class="middleImage" src="../../image/morenImage.png"> </image>
+                      </view>
+
+                      <view class='shop-content'>{{shop.content}}</view>
+                    </view>
+
+
+                    <view class='shop-bottom' wx:if="{{shop.solved==0}}">
+                      <view class='shop-summry'>{{shop.answerCount}}人回答·</view>
+                      <view class='shop-subsummry' bindtap='followQuestion' data-topicid='{{shop.topicId}}'>{{shop.followStr}}·剩余{{shop.date}}</view>
+                    </view>
+
+                    <view class='shop-bottom' bindtap='navigateToSingleDetail' wx:if="{{shop.solved==1}}" data-answerid='{{shop.bestAnswerId}}' data-topicid='{{shop.topicId}}'>
+                      <view class="bottom-title {{shop.bestAnswerLiked==1?'bottom-title-active':''}}">{{shop.likeStr}}</view>
+                      <view class='bottom-count'> · {{shop.bestAnswerLikeCount}}个赞</view>
+                      <view class='bottom-title2'>{{pinglunText}}</view>
+                      <view class='bottom-count'> · {{shop.bestAnswerCommentCount}}个评论</view>
+                    </view>
+
+                  </view>
+
+                </view>
+
+                <view class="line"></view>
+            </block>
+          </view>
+
+        </view>
+      </view>
+    </view>
+</view>
+
+</view>
+
+
+<view wx:if="{{isShowBackView}}" bindtap='clickBackView' class='backgroundView'></view>
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

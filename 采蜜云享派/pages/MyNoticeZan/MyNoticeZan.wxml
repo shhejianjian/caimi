@@ -1,0 +1,110 @@
+<view class="topView">
+  <view class="topFirstView" >
+    <view class="topSecondView" >
+      <view class="topThirdView" >
+
+      <view class='lesson-title'>
+            <view class="lessonListTitle {{isMyOrRecieve==true?'lessonListTitle-active':''}}" bindtap='changeReciveReplyList'>我点赞的</view>
+            <view class="lessonListTitle {{isMyOrRecieve==false?'lessonListTitle-active':''}}" bindtap='changeMyReplyList'>收到的赞</view>
+
+      </view>
+      <view class='comment-line2'></view>
+
+      <view wx:if="{{isMyOrRecieve}}">
+      <view class='kongbaiView' wx:if="{{myZanList.length==0}}">
+                  <image class='kongbaiImage' src='../../image/kongbaiyeicon.png'></image>
+                </view>
+        <block wx:for="{{myZanList}}" wx:for-item="shop" wx:key="index">
+          <view wx:if="{{shop.contentInfo.relatedType=='Comment'}}">
+          
+            <view class='commentView' bindtap='navigateToCommentDetail' data-commentid='{{shop.contentInfo.relatedId}}'>
+                <view>
+                  <image class='comment-image' src="{{shop.contentInfo.userAvatar}}"></image>
+                </view>
+                <view>
+                  <view class='comment-username'>{{shop.contentInfo.userNickName}}</view>
+                  <view class='comment-content'>{{shop.contentInfo.content}} </view>
+                </view>
+
+              </view>
+              <view class='comment-bottom'>
+                <view class='comment-time'>{{shop.contentInfo.date}}</view>
+                <view class='comment-pinglunView' bindtap='huifuComment'  data-commentid='{{shop.contentInfo.relatedId}}'>
+                  <image class='pinglunView-image' src='../../image/pinglunicon.png'></image>
+                  <view class='pinglunView-count'>{{shop.contentInfo.commentCount}}</view>
+                </view>
+                <view class='comment-dianzanView' bindtap='Commentdianzan' data-commentid='{{shop.contentInfo.relatedId}}'>
+                  <image class='pinglunView-image' src='{{shop.contentInfo.zanImg}}'></image>
+                  <view class='pinglunView-count'>{{shop.contentInfo.likeCount}}</view>
+                </view>
+                
+              </view>
+          
+          </view>
+
+          <view wx:if="{{shop.contentInfo.relatedType=='Answer'}}">
+            <view class='answerView' bindtap='navigateToWenDaSingleDetail' data-answerid='{{shop.contentInfo.relatedId}}'>
+              <view class='answer-user'>
+                <view >
+                  <image class='answeruser-icon' src='{{shop.contentInfo.userAvatar}}'></image>
+                </view>
+                <view class='answeruser-name'>{{shop.contentInfo.userNickName}}</view>
+              </view>
+              <view class='answer-content'>{{shop.contentInfo.content}}</view>
+
+                  <view class='answerBottomView'>
+                    <view class='answer-bottom' >
+                      <view class="bottom-title {{shop.contentInfo.liked==1?'bottom-title-active':''}}">已赞</view>
+                      <view class='bottom-count'> · {{shop.contentInfo.likeCount}}个赞</view>
+                      <view class='bottom-title2'>评论</view>
+                      <view class='bottom-count'> · {{shop.contentInfo.commentCount}}个评论</view>
+                    </view>
+
+                    <view class='bottom-time'>回复于{{shop.contentInfo.date}}</view>
+                  </view>
+
+            </view>
+
+          
+          </view>
+
+          <view class='line'></view>
+
+        </block>
+      </view>
+
+      <view wx:else>
+      <view class='kongbaiView' wx:if="{{receiveZanList.length==0}}">
+                  <image class='kongbaiImage' src='../../image/kongbaiyeicon.png'></image>
+                </view>
+        <block wx:for="{{receiveZanList}}" wx:for-item="shop" wx:key="index">
+          <view class='shop-item'  bindtap='navigateToDetail' data-commenttype='{{shop.contentInfo.relatedType}}' data-commentid='{{shop.contentInfo.relatedId}}'>
+            <view class='shop-topView'>
+              <view class='shop-userView'>
+                <view>
+                  <image class='user-icon' src='{{shop.userAvatar}}'></image>
+                </view>
+                <view class='nameAndTime'>
+                  <view class='user-name'>{{shop.userNickName}}</view>
+                  <view class='user-time'>{{shop.date}}</view>
+                </view>
+              </view>
+              <view class='weinidianzanView'>为你点赞</view>
+            
+            </view>
+
+              <view class='shop-content'>{{shop.contentInfo.userNickName}} : {{shop.contentInfo.content}}</view>
+          
+          </view>
+          <view class='line'></view>
+      
+        </block>
+      </view>
+
+
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

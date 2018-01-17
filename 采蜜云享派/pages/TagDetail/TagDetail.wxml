@@ -1,0 +1,112 @@
+<view class="topView">
+  <view class='top-userView'>
+    <image class="item-userIcon" src="../../image/ceshitouxiang.png"> </image>
+    <view class='tag-title'>{{tagName}}</view>
+  </view>
+
+  <view class="bottomView"> 
+      <view class="bottomFirstView" >
+         <view class="bottomSecondView" >
+          <view class="bottomThirdView" >
+              <view class='bottom-titleView'> 
+              <view class='twotitleView'>
+                <view class="lessonListTitle {{isLessonOrComment==1?'lessonListTitle-active':''}}" bindtap='changeLessonList'>课程</view>
+                <view class="lessonListTitle {{isLessonOrComment==2?'lessonListTitle-active':''}}" bindtap='changeCommentList'>问答</view>
+              </view>
+                <view class='lessonListTitle' bindtap='showSortList'>按时间排序</view>
+              </view>
+            <view class='comment-line2'></view>
+
+          <view wx:if="{{isLessonOrComment==1}}">
+          <view class='kongbaiView' wx:if="{{lessons.length==0}}">
+                    <image class='kongbaiImage' src='../../image/kongbaiyeicon.png'></image>
+                    <view class='kongbaiTitle'>您似乎来到了外太空...</view>
+                  </view>
+            <block wx:for="{{lessons}}" wx:for-item="shop" wx:key="index">
+                <view class="item-item">
+                    
+
+                  <view class="item-contentView" bindtap="navigateToBuyLesson" data-contentype="{{shop.contentType}}" data-objectid="{{shop.courseId}}" data-subscribed="{{shop.subscribed}}" data-pricingrule="{{shop.pricingRule}}"> 
+                  <view>
+                    <image class="item-userIcon" src="{{baseUrl}}{{shop.cover}}"> </image>
+                    </view>
+                    <view class="item-rightView"> 
+                      <view class="item-titleAndMoney"> 
+                        <view class="item-title">{{shop.name}}</view>
+                        <view class="item-money">{{shop.money}}</view>
+                      </view>
+                      <view class="item-teacher"> {{shop.teacher}} · {{shop.teacherIntro}}</view>
+                      <view class='item-tips'>{{shop.tips}}</view>
+                      <view class="item-timeAndSummry" wx:if="{{shop.pricingRule==null}}"> 
+                        <view class="item-time">{{shop.date}} 更新 </view>
+                        <view class="item-summry">{{shop.lastUpdateContent}}</view>
+                      </view>
+                      <view wx:else>
+                        <view class='item-subscribView'>{{shop.subscription}}人订阅</view>
+                      </view>
+                    </view>
+                  </view>
+
+                </view>
+
+                <view class="item-line"></view>
+            </block>
+          </view>
+
+          <view wx:else>
+            <view class='kongbaiView' wx:if="{{questionList.length==0}}">
+                    <image class='kongbaiImage' src='../../image/kongbaiyeicon.png'></image>
+                    <view class='kongbaiTitle'>您似乎来到了外太空...</view>
+                  </view>
+            <block wx:for="{{questionList}}" wx:for-item="shop" wx:key="index">
+                <view class="shop-item" >
+                  
+
+                  <view class="shop-contentView"> 
+
+                    <view  bindtap="navigateToDetail" data-topicid='{{shop.topicId}}'>
+                      <view class='titleAndMoney'>
+                        <view class="shop-title">{{shop.title}}</view>
+                        <view class='shop-moneyView'>
+                          <image class='shop-moneyImage' src='../../image/money.png'></image>
+                          <view class="shop-money">赏金：￥{{shop.reward}}</view>
+                        </view>
+                      </view>
+
+
+                      <view class='shop-content'>{{shop.content}}</view>
+                    </view>
+
+
+                    <view class='shop-bottom' wx:if="{{shop.solved==0}}">
+                      <view class='shop-summry'>{{shop.answerCount}}人回答·</view>
+                      <view class='shop-subsummry' bindtap='followQuestion' data-topicid='{{shop.topicId}}'>{{shop.followStr}}·剩余{{shop.date}}</view>
+                    </view>
+
+                    <view class='shop-bottom' bindtap='navigateToSingleDetail' wx:if="{{shop.solved==1}}" data-answerid='{{shop.bestAnswerId}}' data-topicid='{{shop.topicId}}'>
+                      <view class="bottom-title {{shop.bestAnswerLiked==1?'bottom-title-active':''}}">{{shop.likeStr}}</view>
+                      <view class='bottom-count'> · {{shop.bestAnswerLikeCount}}个赞</view>
+                      <view class='bottom-title2'>{{pinglunText}}</view>
+                      <view class='bottom-count'> · {{shop.bestAnswerCommentCount}}个评论</view>
+                    </view>
+
+                  </view>
+
+                </view>
+
+                <view class="line"></view>
+            </block>
+          
+          
+          </view>
+
+
+
+          </view> 
+        </view> 
+      </view>
+  </view>
+</view>
+
+
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

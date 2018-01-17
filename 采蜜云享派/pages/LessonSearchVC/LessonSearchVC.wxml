@@ -1,0 +1,147 @@
+<view class="TopView"> 
+
+  <view class="topSearchView">
+    <image class="topSearchImg" src="../../image/shouyesixin.png"> </image>
+    <input bindinput='searchInputChange' value='{{textValue}}' class="topSearchInput"/> 
+    <image class="topSearchImg" src="../../image/shouyedengpao.png"> </image>
+  </view>
+
+  <view class="topFirstView" >
+    <view class="topSecondView" >
+      <view class="topThirdView" >
+
+      <view class='lesson-title'>
+          <view class="lessonListTitle {{searchType==1?'lessonListTitle-active':''}}" bindtap='searchLesson'>课程</view>
+          <view class="lessonListTitle {{searchType==2?'lessonListTitle-active':''}}" bindtap='searchAnswer'>问答</view>
+          <view class="lessonListTitle {{searchType==3?'lessonListTitle-active':''}}" bindtap='searchUser'>用户</view>
+
+        </view>
+      <view class="comment-line2"></view> 
+
+          <view wx:if="{{searchType==1}}">
+            <block wx:for="{{lessons}}" wx:for-item="shop" wx:key="index">
+                    <view class="shop-contentView" bindtap="navigateToBuyLesson" data-index='{{shop.index}}' data-contentype="{{shop.contentType}}" data-objectid="{{shop.courseId}}" data-subscribed="{{shop.subscribed}}" data-pricingrule="{{shop.pricingRule}}"> 
+                      <view>
+                        <image class="userIcon" src="{{baseUrl}}{{shop.cover}}"> </image>
+                      </view>
+                      <view class="shop-rightView"> 
+                        <view class="titleAndMoney"> 
+                          <view class="shop-title">{{shop.name}}</view>
+                          <view class="shop-money">{{shop.realPrice}}</view>
+                        </view>
+                        <view class="shop-teacher"> {{shop.teacher}} | {{shop.teacherIntro}}</view>
+                        <view class='shop-tips'>{{shop.tips}}</view>
+                        <view class="timeAndSummry" wx:if="{{!shop.pricingRule}}"> 
+                          <view class="shop-time">{{shop.date}} 更新 </view>
+                          <view class="shop-summry">{{shop.lastUpdateContent || ''}}</view>
+                        </view>
+                        <view wx:else>
+                          <view class='subscribView'>{{shop.subscription}}人订阅</view>
+                        </view>
+                      </view>
+                    </view>
+                    <view class="list-line"></view>
+                  </block>
+          </view>
+
+          <view wx:if="{{searchType==2}}">
+
+          <block wx:for="{{noSolveList}}" wx:for-item="shop" wx:key="index">
+                <view class="answer-item">
+
+                  <view class="answer-contentView" bindtap="navigateToDetail" data-topicid='{{shop.topicId}}'> 
+
+                    <view class='titleAndMoney'>
+                      <view class="answer-title">{{shop.title}}</view>
+                      <view class='answer-moneyView'>
+                        <image class='answer-moneyImage' src='../../image/money.png'></image>
+                        <view class="answer-money">赏金：￥{{shop.reward}}</view>
+                      </view>
+                    </view>
+
+                    <!-- <view class='answer-imageView' wx:if="{{shop.image}}"> 
+                      <image class="middleImage" src="{{shop.image}}"> </image>
+                    </view> -->
+
+                    <view class='answer-content'>{{shop.content}}</view>
+                  </view>
+                  <view class='shop-bottom' wx:if="{{shop.solved==0}}">
+                      <view class='shop-summry2'>{{shop.answerCount}}人回答·</view>
+                      <view class='shop-subsummry' bindtap='followQuestion' data-topicid='{{shop.topicId}}'>{{shop.followStr}}·剩余{{shop.date}}</view>
+                    </view>
+
+                </view>
+
+                <view class="line"></view>
+            </block>
+
+            <block wx:for="{{solvedList}}" wx:for-item="shop" wx:key="index">
+                <view class="answer-item" >
+
+                  <view class="answer-contentView" bindtap="navigateToDetail" data-topicid='{{shop.topicId}}'> 
+
+                    <view class='titleAndMoney'>
+                      <view class="answer-title">{{shop.title}}</view>
+                      <view class='answer-moneyView'>
+                        <image class='answer-moneyImage' src='../../image/money.png'></image>
+                        <view class="answer-money">赏金：￥{{shop.reward}}</view>
+                      </view>
+                    </view>
+
+                    <!-- <view class='answer-imageView' wx:if="{{shop.image}}"> 
+                      <image class="middleImage" src="{{shop.image}}"> </image>
+                    </view> -->
+
+                    <view class='answer-content'>{{shop.content}}</view>
+                  </view>
+
+                  <view class='shop-bottom' wx:if="{{shop.solved==1}}" bindtap='navigateToSingleDetail' data-answerid='{{shop.bestAnswerId}}' data-topicid='{{shop.topicId}}'>
+                      <view class="bottom-title {{shop.bestAnswerLiked==1?'bottom-title-active':''}}">{{shop.likeStr}}</view>
+                      <view class='bottom-count'> · {{shop.bestAnswerLikeCount}}个赞</view>
+                      <view class='bottom-title2'>{{pinglunText}}</view>
+                      <view class='bottom-count'> · {{shop.bestAnswerCommentCount}}个评论</view>
+                    </view>
+
+                </view>
+
+                <view class="line"></view>
+            </block>
+
+          </view>
+
+          <view wx:if="{{searchType==3}}">
+            <block wx:for="{{users}}" wx:for-item="shop" wx:key="index">
+              <view class="user-item"  >
+                <view class='user-contentView'>
+                  <view class='user-iconAndName' bindtap='navigateToUserInfo' data-userid='{{shop.userId}}' data-isself='{{shop.isSelf}}'>
+                    <view>
+                      <image class="userIcon" src="{{shop.avatar}}"> </image>
+                    </view>
+
+                    <view class='usercontent'>
+                      <view class='user-username'>{{shop.nickName}}</view>
+                      <view class='user-usercontent'>{{shop.intro || ''}}</view>
+                      <view class='user-userearnmoney'>{{shop.answerCount}}个回答 · {{shop.income || ''}}元收入</view>
+                    </view>
+                  </view>
+
+                  <view class='guanzhuView' bindtap='guanzhuClick' data-teacherid='{{shop.userId}}' wx:if="{{!shop.currentUserFollow}}" hidden='{{shop.isSelf}}'>关注</view>
+                  <view class='yiguanzhuView' bindtap='deleteguanzhuClick' data-teacherid='{{shop.userId}}' wx:if="{{shop.currentUserFollow==1}}" hidden='{{shop.isSelf}}'>已关注</view>
+
+                </view>
+              </view>
+              <view class="line"></view>
+            </block>
+
+          </view>
+
+
+
+      </view>
+    </view>
+  </view>
+
+
+
+</view>
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

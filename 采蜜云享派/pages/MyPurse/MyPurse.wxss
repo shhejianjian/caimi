@@ -1,0 +1,108 @@
+@import "/pages/PublicWxss/PublicWxss.wxss";
+.topView{
+  width: 100%;
+  height: 200rpx;
+  background-image: linear-gradient(-180deg, #41C3FD 0%, #08A4FF 100%);
+}
+.topFirstView{
+  padding-top: 16rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  height: 200rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+.topSecondView{
+  padding-top: 16rpx;
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  height: 200rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+ .topThirdView{
+  padding-top: 30rpx;
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  background: #FFFFFF;
+  box-shadow: 0 -16rpx 16rpx -16rpx rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+  padding-bottom: 100rpx;
+} 
+.shop-lessonType{
+  display: flex;
+  align-items: center;
+}
+.lessonTypeImage{
+  margin-left: -40rpx;
+  width: 256rpx;
+  height: 50rpx;
+}
+.lessonTypeTitle{
+   margin-left: -180rpx; 
+  font-family: PingFangSC-Semibold;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+}
+.topTypeView{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.moneyDetail{
+  font-family: PingFangSC-Semibold;
+font-size: 24rpx;
+color: #9B9B9B;
+letter-spacing: 0;
+margin-right: 40rpx;
+}
+.beeImageView{
+  margin-top: 160rpx;
+  text-align: center;
+}
+.beeImage{
+  
+  height: 200rpx;
+  width: 200rpx;
+}
+.purseTitle{
+  text-align: center;
+  margin-top: 20rpx;
+  font-family: PingFangSC-Semibold;
+  font-size: 36rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.purseMoney{
+  text-align: center;
+  margin-top: 10rpx;
+  font-family: PingFangSC-Semibold;
+  font-size: 72rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.cashView{
+  text-align: center;
+  line-height: 100rpx;
+  margin-top: 20rpx;
+  height: 100rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  font-family: PingFangSC-Semibold;
+  font-size: 36rpx;
+  color: #9B9B9B;
+  letter-spacing: 0;
+  background: #FFD100;
+  border-radius: 10rpx;
+}
+.tipTitle{
+  margin-top: 320rpx;
+  text-align: center;
+  font-family: PingFangSC-Semibold;
+  font-size: 24rpx;
+  color: #9B9B9B;
+  letter-spacing: 0;
+}

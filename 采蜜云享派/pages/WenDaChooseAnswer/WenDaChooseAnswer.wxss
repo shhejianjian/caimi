@@ -1,0 +1,207 @@
+@import "/pages/PublicWxss/PublicWxss.wxss";
+
+.topView{
+  width: 100%;
+  height: 300rpx;
+  background-image: linear-gradient(-180deg, #41C3FD 0%, #08A4FF 100%);
+}
+.topFirstView{
+  padding-top: 16rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  height: 300rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+.topSecondView{
+  padding-top: 16rpx;
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  height: 300rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+ .topThirdView{
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  background: #FFFFFF;
+  box-shadow: 0 -16rpx 16rpx -16rpx rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+  padding-bottom: 100rpx;
+} 
+.commitfloatView{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #E6E6E6;
+  height: 100rpx;
+  font-family: PingFangSC-Semibold;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  text-align: center;
+  line-height: 100rpx;
+}
+.commitfloatView-active{
+  background: #FFD100;
+}
+.top-tagView{
+  width: 100%;
+  height: 60rpx;
+  /* background-image: radial-gradient(0 100%, #2EBAFF 100%, #006FFF 100%); */
+  background-image: linear-gradient(90deg, #2EBAFF 0%, #006FFF 99%);
+  border-radius: 5px 5px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.top-tipTitle{
+  margin-left: 40rpx;
+  font-family: PingFangSC-Semibold;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+}
+.top-tipTime{
+  margin-right: 40rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+}
+.shop-title{
+  margin-top: 20rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  font-family: PingFangSC-Semibold;
+  font-size: 40rpx;
+  color: #000000;
+  letter-spacing: 0;
+}
+.shop-content{
+  margin-top: 20rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.line{
+    margin-left: 30rpx;
+    margin-right: 30rpx;
+    margin-top: 20rpx; 
+    background: #E6E6E6;
+    opacity: 0.5;
+    height: 1rpx;
+}
+.second-line{
+  margin-left: 30rpx;
+    margin-right: 30rpx;
+    margin-top: 14rpx; 
+    background: #E6E6E6;
+    opacity: 0.5;
+    height: 1rpx;
+}
+.answerCountAndSort{
+  margin-top: 14rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.title-guanzhu{
+  display: flex;
+}
+.answer-title{
+  margin-left: 40rpx;
+  font-family: PingFangSC-Regular;
+font-size: 20rpx;
+color: #9B9B9B;
+letter-spacing: 0;
+}
+.answer-guanzhuwenti{
+  font-family: PingFangSC-Regular;
+  font-size: 20rpx;
+  color: #FFA900;
+  letter-spacing: 0;
+  line-height: 28rpx;
+}
+.answer-sort{
+  margin-right: 40rpx;
+  font-family: PingFangSC-Regular;
+font-size: 20rpx;
+color: #9B9B9B;
+letter-spacing: 0;
+}
+.shop-item {
+    padding: 20rpx 40rpx 20rpx 40rpx;
+    height: auto;
+}
+.shop-user{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.shop-userAndName{
+  display: flex;
+  align-items: center;
+}
+.shop-usericon{
+  border-radius: 50%;
+  width: 60rpx;
+  height: 60rpx;
+}
+.shop-username{
+  margin-left: 20rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.shop-answercontent{
+  margin-top: 20rpx;
+  font-family: PingFangSC-Regular;
+font-size: 24rpx;
+color: #4A4A4A;
+letter-spacing: 0;
+line-height: 17px;
+}
+.shop-likeCountAndTime{
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.shop-likeCount{
+  font-family: PingFangSC-Medium;
+font-size: 20rpx;
+color: #9B9B9B;
+letter-spacing: 0;
+}
+.shop-time{
+  font-family: PingFangSC-Medium;
+font-size: 20rpx;
+color: #9B9B9B;
+letter-spacing: 0;
+}
+.list-line{
+    margin-left: 30rpx;
+    margin-right: 30rpx;
+    margin-top: 10rpx; 
+    background: #E6E6E6;
+    opacity: 0.5;
+    height: 1rpx;
+}
+.choosePointView{
+  border-radius: 50%;
+  height: 36rpx;
+  width: 36rpx;
+  background: #FFFFFF;
+  box-shadow: 0 4rpx 8rpx 0 rgba(0,111,255,0.50);
+}
+.choosePointView-active{
+  background-image: linear-gradient(-180deg, #2EBAFF 0%, #006FFF 100%);
+}

@@ -1,0 +1,56 @@
+<view class="topView"> 
+
+
+  <view class="bottomView"> 
+      <view class="bottomFirstView" >
+        <view class="bottomSecondView">
+          <view class="bottomThirdView">
+
+              <view class="shop-lessonType"> 
+                    <image class='lessonTypeImage' src='../../image/fourTypeIcon.png'></image>
+                    <view class='lessonTypeTitle'>{{lessonTypeTitle}}</view>
+                  </view>
+
+          <view>
+            <view class='kongbaiView' wx:if="{{lessons.length==0}}">
+                  <image class='kongbaiImage' src='../../image/kongbaiyeicon.png'></image>
+                  <view class='kongbaiTitle'>您似乎来到了外太空...</view>
+                </view>
+          <block wx:for="{{lessons}}" wx:for-item="shop" wx:key="index">
+                <view class="shop-item">
+                    
+
+                  <view class="shop-contentView" bindtap="navigateToBuyLesson" data-contentype="{{shop.contentType}}" data-objectid="{{shop.courseId}}" data-subscribed="{{shop.subscribed}}" data-pricingrule="{{shop.pricingRule}}" data-lessonid='{{shop.lessonId}}'> 
+                    <view>
+                     <image class="userIcon" src="{{baseUrl}}{{shop.cover}}"> </image>
+                    </view>
+                    <view class="shop-rightView"> 
+                      <view class="titleAndMoney"> 
+                        <view class="shop-title">{{shop.name}}</view>
+                        <view class="shop-money">{{shop.money}}</view>
+                      </view>
+                      <view class="shop-teacher"> {{shop.teacher}} · {{shop.teacherIntro}}</view>
+                      <view class='shop-tips'>{{shop.tips}}</view>
+                      <view class="timeAndSummry" wx:if="{{shop.pricingRule==null}}"> 
+                        <view class="shop-time">{{shop.date}} 更新 </view>
+                        <view class="shop-summry">{{shop.lastUpdateContent}}</view>
+                      </view>
+                      <view wx:else>
+                        <view class='subscribView'>{{shop.subscription}}人订阅</view>
+                      </view>
+                    </view>
+                  </view>
+
+                </view>
+
+                <view class="list-line"></view>
+            </block>
+          </view>
+
+          </view>
+        </view> 
+      </view> 
+  </view>
+
+</view>
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

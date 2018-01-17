@@ -1,0 +1,31 @@
+<view class="topView">
+  <view class="topFirstView" >
+    <view class="topSecondView" >
+      <view class="topThirdView" >
+
+       <view class='topTitleView'>
+        <view class='jubaoText'>举报</view>
+        <view class='titleName'>@{{userNickName}}的评论:</view>
+       </view>
+
+       <view class='grayView'>@{{userNickName}}的评论:{{userContent}} </view>
+
+
+          <view class='itemView'>
+                <block wx:for="{{reportReason}}" wx:for-item="item" wx:key="index">
+                    <view class='section' bindtap='chooseReportItem' data-reasonindex='{{item.objectId}}'>
+                      <view class="pointView {{reasonId==item.objectId?'pointView-active':''}}"></view>
+                      <view class='item-title'>{{item.name}}</view>
+                    </view>
+                </block>
+          </view>
+
+          <view class='jubaoFloatView' bindtap='commit'>举报</view>
+
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

@@ -1,0 +1,198 @@
+@import "/pages/PublicWxss/PublicWxss.wxss";
+.TopView{
+  width: 100%;
+  height: 505rpx;
+  background-image: linear-gradient(-180deg, #41C3FD 0%, #08A4FF 100%);
+}
+.userView{
+  display: flex;
+  margin-left: 60rpx;
+  
+}
+.userIcon{
+  border-radius: 50%;
+  border: 4rpx solid #FFFFFF;
+  box-shadow: 0 4rpx 8rpx 0 #006FFF;
+  height: 120rpx;
+  width: 120rpx;
+}
+.userName{
+  font-family: PingFangSC-Semibold;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  margin-top: 28rpx;
+  margin-left: 40rpx;
+}
+.follws{
+  padding: 0rpx 50rpx 0rpx 50rpx;
+}
+.fans{
+  padding: 0rpx 50rpx 0rpx 50rpx;
+}
+.notice{
+  padding: 0rpx 50rpx 0rpx 50rpx;
+}
+.learnTitle{
+  margin-left: 40rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 20rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+}
+.yellowView{
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-between;
+}
+.xiaomifeng{
+  height: 200rpx;
+  width: 200rpx;
+  margin-top: -80rpx;
+  margin-right: 30rpx;
+}
+.earnMoneyView{
+  margin-top: 40rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  height: 120rpx;
+  background: #FFD100;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+.answerCount{
+  padding-top: 15rpx;
+  margin-left: 40rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+}
+.shouru{
+  margin-left: 8rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+}
+.moneyView{
+  margin-left: 40rpx;
+  align-items: center;
+  display: flex;
+}
+.moneyCount{
+  font-family: CYuen2HKS-Xbold;
+  font-size: 48rpx;
+  color: #FFFFFF;
+  font-weight: bold;
+  letter-spacing: 0;
+}
+.followAndFansView{
+  margin-top: 20rpx;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.followCount{
+  font-family: CYuen2HKS-Xbold;
+  font-size: 40rpx;
+  color: #FFD100;
+  font-weight: bold;
+  letter-spacing: 0;
+}
+.followCount-active{
+  color: #FFFFFF;
+}
+.followTitle{
+  font-family: PingFangSC-Regular;
+  font-size: 20rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+}
+.bottomView{
+   margin-top: 20rpx; 
+}
+.bottomFirstView{
+  padding-top: 10rpx;
+  margin-top: 20rpx; 
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  height: 300rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+.bottomSecondView{
+  padding-top: 10rpx;
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  height: 300rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+ .bottomThirdView{
+  
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  background: #FFFFFF;
+  box-shadow: 0 -16rpx 16rpx -16rpx rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+} 
+.myItemBox{
+  padding-top: 30rpx;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.myItemRightView{
+  display: flex;
+  align-items: center;
+}
+.jiantouimage{
+  margin-left: 10rpx;
+  height: 25rpx;
+  width: 25rpx;
+}
+.myItemTitle{
+  margin-left: 20rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 28rpx;
+  color: #000000;
+  letter-spacing: 0;
+}
+.myItemCount{
+  font-family: PingFangSC-Medium;
+  font-size: 28rpx;
+  color: #FFA900;
+  letter-spacing: 0;
+}
+.line {
+    margin-left: 30rpx;
+    margin-right: 30rpx;
+    margin-top: 20rpx;
+    background: #E6E6E6;
+    opacity: 0.5;
+    height: 1rpx;
+}
+.iconAndTitle{
+  display: flex;
+  align-items: center;
+}
+.myItemImage{
+  height: 50rpx;
+  width: 50rpx;
+}
+
+.noticePoint{
+  position: absolute;
+  margin-top: -55rpx;
+  margin-left: 45rpx;
+  height: 12rpx;
+  width: 12rpx;
+  border-radius: 50%;
+  background: #FF3B30;
+}

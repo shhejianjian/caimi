@@ -1,0 +1,80 @@
+<view class="topView">
+    <view class='top-userView'>
+      <view >
+        <view class='commentView'>
+          <view bindtap='navigateToUserInfo' data-userid='{{commentData.userId}}'>
+            <image class='comment-image' src="{{commentData.userAvatar}}"></image>
+          </view>
+          <view bindtap='showReport' data-commentid='{{commentData.commentId}}' data-username='{{commentData.userNickName}}' data-usercontent='{{commentData.content}}'>
+            <view class='comment-username'>{{commentData.userNickName}}</view>
+            <view class='comment-content'>{{commentData.content}}</view>
+          </view>
+
+        </view>
+
+        <view class='comment-bottom'>
+          <view class='comment-time'>{{commentData.submitTime}}</view>
+          <view class='comment-pinglunView'>
+            <image class='pinglunView-image' src='../../image/pinglunicon.png'></image>
+            <view class='pinglunView-count'>{{commentData.replyCount}}</view>
+          </view>
+          <view class='comment-dianzanView' bindtap='dianzan' data-commentid='{{commentData.commentId}}'>
+            <image class='pinglunView-image' src='{{commentData.zanImg}}'></image>
+            <view class='pinglunView-count'>{{commentData.likeCount}}</view>
+          </view>
+          
+        </view>
+      </view>
+
+        <view class="topFirstView" >
+          <view class="topSecondView" >
+            <view class='bottomTitleView'>
+              <view class='bottom-title'>回复列表</view>
+              <view class='bottom-sort'>按时间排序</view>
+            </view>
+
+            <view class="comment-line"></view>
+
+            <block wx:for="{{comments}}" wx:for-item="comment" wx:key="index">
+
+              <view bindtap='showReport' data-commentid='{{comment.commentId}}' data-username='{{comment.userNickName}}' data-usercontent='{{comment.content}}'>
+                <view class='commentView'>
+                  <view>
+                    <image class='comment-image' src="{{comment.userAvatar}}"></image>
+                  </view>
+                  <view>
+                    <view class='comment-username'>{{comment.userNickName}}</view>
+                    <view class='comment-content'>{{comment.content}} </view>
+                  </view>
+
+                </view>
+                <view class='comment-bottom2'>
+                  <view class='comment-time'>{{comment.submitTime}}</view>
+                  <!-- <view class='comment-pinglunView'>
+                    <image class='pinglunView-image' src='../../image/pinglunicon.png'></image>
+                    <view class='pinglunView-count'>{{comment.replyCount}}</view>
+                  </view> -->
+                  <view class='comment-dianzanView' bindtap='dianzan' data-commentid='{{comment.commentId}}'>
+                    <image class='pinglunView-image' src='{{comment.zanImg}}'></image>
+                    <view class='pinglunView-count'>{{comment.likeCount}}</view>
+                  </view>
+                </view>
+              </view>
+              <view class="comment-line"></view> 
+            </block>
+
+            <view class='commentInputView' wx:if="{{isClickComment}}">
+              <input class='comment-input' focus="{{focus}}" bindblur="bindblur" bindconfirm="bindconfirm"></input>
+            </view>
+
+          </view>
+        </view>
+    
+    </view>
+
+</view>
+
+
+
+<view class='huifufloatView' wx:if="{{!isClickComment}}" bindtap='huifuComment'>回复评论</view>
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

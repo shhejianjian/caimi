@@ -1,0 +1,23 @@
+<view class="topView">
+  <view class="topFirstView" >
+    <view class="topSecondView" >
+      <view class="topThirdView" >
+
+        <view class='lesson-title'>
+          <view class='lessonListTitle' bindtap='cancel'>取消</view>
+          <view class='liuyanTitle' bindtap='press'>发布</view>
+
+        </view>
+        <view class='comment-line'></view>
+
+        <view class="text-section">
+          <textarea class='textareaView' placeholder-class="placeholder" bindinput="bindinputChange" placeholder="填写回答内容" auto-focus maxlength='-1' />
+        </view>
+
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

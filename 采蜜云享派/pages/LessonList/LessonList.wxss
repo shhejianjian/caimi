@@ -1,0 +1,154 @@
+@import "/pages/PublicWxss/PublicWxss.wxss";
+.topView{
+  width: 100%;
+  height: 200rpx;
+  background-image: linear-gradient(-180deg, #41C3FD 0%, #08A4FF 100%);
+}
+.bottomView{
+   /* margin-top: 20rpx;  */
+}
+.bottomFirstView{
+  padding-top: 16rpx;
+  /* margin-top: 20rpx;  */
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  height: 100rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+.bottomSecondView{
+  padding-top: 16rpx;
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  height: 100rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+ .bottomThirdView{
+  padding-top: 20rpx;
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  background: #FFFFFF;
+  box-shadow: 0 -16rpx 16rpx -16rpx rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+} 
+.detail-typeimage{
+  margin-top: 20rpx;
+  width: 200rpx;
+  height: 48rpx;
+}
+.shop-contentView{
+  display: flex;
+  padding: 25rpx;
+  align-items: center;
+}
+.shop-rightView{
+  margin-left: 25rpx;
+  width: 540rpx;
+}
+.titleAndMoney{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.shop-money{
+  font-family: PingFangSC-Regular;
+  font-size: 20rpx;
+  color: #FFA900;
+  letter-spacing: 0;
+}
+.shop-title{
+  font-family: HYe4gj;
+  font-weight: bold;
+  font-size: 28rpx;
+  color: #000000;
+  letter-spacing: 0;
+  white-space: nowrap;
+  overflow-x: hidden;
+  width: 500rpx;
+  text-overflow: ellipsis;
+}
+.shop-teacher{
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.shop-tips{
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #9B9B9B;
+  letter-spacing: 0;
+}
+.timeAndSummry{
+  margin-top: 8rpx;
+  display: flex;
+  align-items: center;
+}
+.shop-time{
+  font-family: PingFangSC-Regular;
+  font-size: 20rpx;
+  color: #000000;
+  letter-spacing: 0;
+  background: #FFD100;
+  padding: 3rpx 20rpx 3rpx 20rpx;
+  border-radius: 15rpx;
+  white-space: nowrap;
+}
+.shop-summry{
+  margin-left: 5rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+  white-space: nowrap;
+  overflow-x: hidden;
+  width: 350rpx;
+  text-overflow: ellipsis;
+}
+.userIcon{
+  border-radius: 50%;
+  border: 4rpx solid #FFFFFF;
+  box-shadow: 0 4rpx 8rpx 0 #006FFF;
+  height: 120rpx;
+  width: 120rpx;
+}
+.shop-item {
+    padding: 25rpx;
+    height: auto;
+}
+.list-line{
+  margin-left: 200rpx;
+    margin-right: 30rpx;
+    margin-top: -30rpx;
+    background: #E6E6E6;
+    opacity: 0.7;
+    height: 1rpx;
+}
+.shop-lessonType{
+  display: flex;
+  align-items: center;
+
+  /* justify-content:space-between; */
+  
+}
+.lessonTypeImage{
+  margin-left: -40rpx;
+  width: 256rpx;
+  height: 50rpx;
+}
+.lessonTypeTitle{
+   margin-left: -180rpx; 
+  font-family: PingFangSC-Semibold;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+}
+.subscribView{
+  font-family: PingFangSC-Regular;
+  font-size: 20rpx;
+  color: #9B9B9B;
+  letter-spacing: 0;
+}

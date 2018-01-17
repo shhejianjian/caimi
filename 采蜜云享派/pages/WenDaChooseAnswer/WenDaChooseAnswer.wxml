@@ -1,0 +1,61 @@
+<view class="topView">
+  <view class="topFirstView" >
+    <view class="topSecondView" >
+      <view class="topThirdView" >
+
+        <view class='top-tagView'>
+          <view class='top-tipTitle'>选出至多3个您满意的优质回答</view>
+          <view class='top-tipTime'>{{questionInfo.date}}</view>
+        </view>
+
+        <view class='shop-title'>{{questionInfo.title}}</view>
+        <view class='shop-content'>{{questionInfo.content}}</view>
+        <view class='line'></view>
+
+        <view class='answerCountAndSort'>
+          <view class='title-guanzhu'>
+            <view class='answer-title'>{{questionInfo.answerCount}}个回答 · </view>
+            <view class='answer-guanzhuwenti'> 关注问题</view>
+          </view>
+          <view class='answer-sort'>按时间排序</view>
+        </view>
+
+        <view class='second-line'></view>
+
+
+        <block wx:for="{{answerInfo}}" wx:for-item="shop" wx:key="index">
+                <view class="shop-item" bindtap="changePoint" data-answerid='{{shop.answerId}}' data-index='{{index}}'>
+                  <view class='shop-user'>
+                    <view class='shop-userAndName'>
+                    <view>
+                      <image class='shop-usericon' src="{{shop.userAvatar}}"></image>
+                      </view>
+                      <view class='shop-username'>{{shop.userNickName}}</view>
+                    </view>
+                    
+
+                    <view class="choosePointView {{shop.isChoose == 1?'choosePointView-active':''}}" ></view>
+
+                  </view>
+                  
+                  <view class='shop-answercontent'>{{shop.content}}</view>
+                  
+                  <view class='shop-likeCountAndTime'>
+                    <view class='shop-likeCount'>{{shop.likeCount}}个赞 · {{shop.commentCount}}个评论</view>
+                    <view class='shop-time'>回复于{{shop.date}}</view>
+                  </view>
+
+                </view>
+
+                <view class="list-line"></view>
+            </block>
+
+
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="commitfloatView {{isThreeAnswer?'commitfloatView-active':''}}" bindtap='commit'>提  交</view>
+
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

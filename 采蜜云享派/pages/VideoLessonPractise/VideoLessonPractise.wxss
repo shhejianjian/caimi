@@ -1,0 +1,154 @@
+@import "/pages/PublicWxss/PublicWxss.wxss";
+.topView{
+  padding-top: 20rpx;
+  width: 100%;
+  height: 500rpx;
+  background-image: linear-gradient(-180deg, #41C3FD 0%, #08A4FF 100%);
+  position: relative;
+}
+
+.top-videoView{
+  position: absolute;
+  /* position: fixed; */
+  background: white;
+   text-align: center; 
+  /* z-index: 999999; */
+  top: 0;
+  left: 20rpx; 
+  right: 20rpx; 
+  height: 420rpx;
+  border-radius: 10rpx;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+}
+.Video{
+  width: 100%;
+  height: 420rpx;
+  border-radius: 10rpx;
+}
+.topFirstView{
+  top: 420rpx;
+  position: relative; 
+  padding-top: 16rpx;
+  margin-top: -20rpx;  
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  height: 300rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+.topSecondView{
+   padding-top: 16rpx; 
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+.detail-lianxiView{
+  margin-top: 20rpx;
+  margin-left: 40rpx;
+}
+.lianxi-title{
+  font-family: PingFangSC-Semibold;
+  font-size: 28rpx;
+  color: #000000;
+  letter-spacing: 0;
+}
+.lianxi-pingfen{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pingfen-name{
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #006FFF;
+  letter-spacing: 0;
+}
+.pingfen-star{
+  margin-right: 10rpx;
+  height: 36rpx;
+  width: 38rpx;
+}
+.practise-star{
+  margin-right: 40rpx;
+  height: 36rpx;
+  width: 38rpx;
+}
+.starView{
+  margin-right: 40rpx;
+  display: flex;
+}
+.detail-typeimage{
+  margin-top: 20rpx;
+  width: 200rpx;
+  height: 48rpx;
+}
+.comment-line{
+  margin: 20rpx 40rpx 10rpx 40rpx;
+  background:  #E6E6E6;
+  height: 1rpx;
+}
+.practiseView{
+  margin-top: 20rpx;
+  margin-left: 40rpx;
+}
+.practise-title{
+  font-family: PingFangSC-Semibold;
+  font-size: 28rpx;
+  color: #000000;
+  letter-spacing: 0;
+}
+.practise-answer{
+  padding: 20rpx;
+  margin-top: 20rpx;
+  margin-right: 40rpx;
+  background: #FFFFFF;
+  box-shadow: 0 4rpx 8rpx 0 rgba(0,111,255,0.50);
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+  line-height: 34rpx;
+}
+.practise-answer-active{
+  border-bottom: solid 10rpx  #006FFF;
+}
+.jiaojuanfloatView{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #E6E6E6;
+  height: 100rpx;
+  font-family: PingFangSC-Semibold;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  text-align: center;
+  line-height: 100rpx;
+}
+.jiaojuanfloatView-active{
+  background: #FFD100;
+}
+.shop-lessonType{
+  display: flex;
+  align-items: center;
+}
+.lessonTypeImage{
+  margin-left: -40rpx;
+  width: 256rpx;
+  height: 50rpx;
+}
+.lessonTypeTitle{
+   margin-left: -180rpx; 
+  font-family: PingFangSC-Semibold;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+}
+.practise-titleAndStar{
+  display: flex;
+  justify-content: space-between;
+}

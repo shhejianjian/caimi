@@ -1,0 +1,27 @@
+<view class="topView">
+  <view class="topFirstView" >
+    <view class="topSecondView" >
+      <view class="topThirdView" >
+
+        <view class='lesson-title'>
+          <view class='lessonListTitle' bindtap='cancel'>取消</view>
+          <view class='liuyanTitle' bindtap='press'>保存</view>
+
+        </view>
+        <view class='comment-line'></view>
+
+        <view class="text-section">
+          <input class='textareaView' placeholder-class="placeholder" bindinput="bindinputChange" placeholder="输入昵称" value='{{valueText}}' auto-focus maxlength='12' />
+        </view>
+
+        <view class='comment-line'></view>
+
+        <view class='text-content'>昵称可以是中英文、数字的任意组合，最多输入12个字符。</view>
+
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

@@ -1,0 +1,30 @@
+<view class="topView">
+  <view class="topFirstView" >
+    <view class="topSecondView" >
+      <view class="topThirdView" >
+
+        <view class='topTypeView'>
+          <view class="shop-lessonType"> 
+            <image class='lessonTypeImage' src='../../image/fourTypeIcon.png'></image>
+            <view class='lessonTypeTitle'>我的钱包</view>
+          </view>
+          <view class='moneyDetail' bindtap='navigateToPurseDetail'>钱包明细</view>
+        </view>
+
+      <view class='beeImageView'>
+        <image class='beeImage' src='../../image/xiaomifengImage.png'></image>
+      </view>
+
+      <view class='purseTitle'>我的小金库</view>
+      <view class='purseMoney'>￥23,481</view>
+
+      <view class='cashView'>提现</view>
+
+      <view class='tipTitle'>须知</view>
+
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

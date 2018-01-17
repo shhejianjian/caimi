@@ -1,0 +1,114 @@
+@import "/pages/PublicWxss/PublicWxss.wxss";
+.topView{
+  width: 100%;
+  height: 200rpx;
+  background-image: linear-gradient(-180deg, #41C3FD 0%, #08A4FF 100%);
+}
+.topFirstView{
+  padding-top: 16rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  height: 200rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+.topSecondView{
+  padding-top: 16rpx;
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  height: 200rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+ .topThirdView{
+  padding-top: 30rpx;
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  background: #FFFFFF;
+  box-shadow: 0 -16rpx 16rpx -16rpx rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+  padding-bottom: 100rpx;
+} 
+.lesson-title{
+  margin-top: 15rpx;
+  margin-left: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.lessonListTitle{
+  font-family: PingFangSC-Medium;
+  font-size: 22rpx;
+  color: #FFD100;
+  letter-spacing: 0;
+}
+.liuyanTitle{
+  /* width: 120rpx; */
+  padding: 0rpx 0rpx 0rpx 50rpx;
+  text-align: center;
+  margin-right: 40rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 22rpx;
+  color: #FFD100;
+  letter-spacing: 0;
+}
+.comment-line{
+  margin: 20rpx 40rpx 10rpx 40rpx;
+  background:  #E6E6E6;
+  height: 1rpx;
+}
+.phone-section{
+  margin-left: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.phoneArea{
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #9B9B9B;
+  letter-spacing: 0;
+}
+.inputView{
+  margin-left: 20rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: black;
+  letter-spacing: 0;
+  width: 580rpx;
+}
+.verify-inputView{
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: black;
+  letter-spacing: 0;
+  width: 450rpx;
+}
+.placeholder{
+  color: #9B9B9B;
+}
+
+.verify-section{
+  margin-left: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.getVerify{
+  margin-right: 40rpx;
+  background: #FFD100;
+  border-radius: 5rpx;
+  font-family: PingFangSC-Semibold;
+  font-size: 22rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  padding: 5rpx 15rpx 5rpx 15rpx;
+  width: 120rpx;
+  text-align: center;
+}
+.getVerify-active{
+  background: #9B9B9B;
+  color: white;
+}

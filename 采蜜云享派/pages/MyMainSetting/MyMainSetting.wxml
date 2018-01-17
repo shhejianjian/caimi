@@ -1,0 +1,31 @@
+<view class="TopView"> 
+  <view class="topFirstView" >
+    <view class="topSecondView" >
+      <view class="topThirdView" >
+
+        <view class='itemView' bindtap='navigateToSingleInfo'>
+          <view class='item-title'>编辑个人资料</view>
+          <image class='item-image' src='../../image/enter.png'></image>
+        </view>
+        <view class='line'></view>
+
+        <view class='itemView' bindtap='navigateToBindPhone'>
+          <view class='item-title'>绑定手机号</view>
+
+          <view class='telephoneView' wx:if="{{phoneNumber!='null'}}">
+            <view class='telephoneNumber'>{{phoneNumber}}</view>
+            <image class='item-image' src='../../image/enter.png'></image>
+          </view>
+           <view wx:else>
+            <image class='item-image' src='../../image/enter.png'></image>
+          </view> 
+        </view>
+        <view class='line'></view>
+
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

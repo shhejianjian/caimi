@@ -1,0 +1,270 @@
+@import "/pages/PublicWxss/PublicWxss.wxss";
+.topView{
+  width: 100%;
+  height: 300rpx;
+  background-image: linear-gradient(-180deg, #41C3FD 0%, #08A4FF 100%);
+}
+.topFirstView{
+  padding-top: 16rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  height: 300rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+.topSecondView{
+  padding-top: 16rpx;
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  height: 300rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+ .topThirdView{
+  padding-top: 30rpx;
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  background: #FFFFFF;
+  box-shadow: 0 -16rpx 16rpx -16rpx rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+  padding-bottom: 100rpx;
+} 
+.top-tagView{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.top-tag{
+  margin-left: 10rpx;
+  padding: 2rpx 12rpx 2rpx 12rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 20rpx;
+  color: #FFFFFF;
+  letter-spacing: 1px;
+  background: #FFD100;
+  border-radius: 4rpx;
+}
+.top-time{
+  margin-left: 10rpx;
+  font-family: PingFangSC-Regular;
+font-size: 20rpx;
+color: #4A4A4A;
+letter-spacing: 0;
+}
+.shop-money{
+  margin-left: 10rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 20rpx;
+  color: #FFA900;
+  letter-spacing: 0;
+}
+.shop-moneyView{
+  margin-right: 40rpx;
+  display: flex;
+  align-items: center;
+}
+.top-tagfirst{
+  display: flex;
+  align-items: center;
+}
+.shop-moneyImage{
+  width: 30rpx;
+  height: 30rpx;
+}
+.shop-title{
+  margin-top: 20rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  font-family: PingFangSC-Semibold;
+  font-size: 40rpx;
+  color: #000000;
+  letter-spacing: 0;
+}
+.shop-content{
+  margin-top: 20rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.line{
+    margin-left: 30rpx;
+    margin-right: 30rpx;
+    margin-top: 20rpx; 
+    background: #E6E6E6;
+    opacity: 0.5;
+    height: 1rpx;
+}
+.second-line{
+  margin-left: 30rpx;
+    margin-right: 30rpx;
+    margin-top: 14rpx; 
+    background: #E6E6E6;
+    opacity: 0.5;
+    height: 1rpx;
+}
+.answerCountAndSort{
+  margin-top: 14rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.title-guanzhu{
+  display: flex;
+  align-items: center;
+}
+.answer-title{
+  margin-left: 40rpx;
+  font-family: PingFangSC-Regular;
+font-size: 20rpx;
+color: #9B9B9B;
+letter-spacing: 0;
+}
+.answer-guanzhuwenti{
+  font-family: PingFangSC-Regular;
+  font-size: 20rpx;
+  color: #FFA900;
+  letter-spacing: 0;
+  line-height: 28rpx;
+}
+.answer-sort{
+  margin-right: 40rpx;
+  font-family: PingFangSC-Regular;
+font-size: 20rpx;
+color: #9B9B9B;
+letter-spacing: 0;
+}
+.shop-item {
+    padding: 20rpx 40rpx 20rpx 40rpx;
+    height: auto;
+}
+.shop-user{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.iconAndName{
+  display: flex;
+  align-items: center;
+}
+.shop-usericon{
+  border-radius: 50%;
+  width: 60rpx;
+  height: 60rpx;
+}
+.shop-username{
+  margin-left: 20rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.shop-answercontent{
+  margin-top: 20rpx;
+  font-family: PingFangSC-Regular;
+font-size: 24rpx;
+color: #4A4A4A;
+letter-spacing: 0;
+line-height: 17px;
+}
+.shop-likeCountAndTime{
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.shop-likeCount{
+  font-family: PingFangSC-Medium;
+font-size: 20rpx;
+color: #9B9B9B;
+letter-spacing: 0;
+}
+.shop-time{
+  font-family: PingFangSC-Medium;
+font-size: 20rpx;
+color: #9B9B9B;
+letter-spacing: 0;
+}
+.list-line{
+    margin-left: 30rpx;
+    margin-right: 30rpx;
+    margin-top: 10rpx; 
+    background: #E6E6E6;
+    opacity: 0.5;
+    height: 1rpx;
+}
+.floatView{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  line-height: 100rpx;
+  /* margin-top: 20rpx; */
+  display: flex;
+  align-items: center;
+  height: 100rpx;
+}
+.float-leftView{
+  width: 50%;
+  height: 100rpx;
+  background: #FFFFFF;
+  border: 1rpx solid #9B9B9B;
+  font-family: PingFangSC-Semibold;
+  font-size: 24rpx;
+  line-height: 100rpx;
+  border-radius: 0;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.float-rightView{
+  width: 50%;
+  height: 100rpx;
+  background: #FFD100;
+  border: 1rpx solid #FFD100;
+  font-family: PingFangSC-Semibold;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+}
+.float-rightView-active{
+  background: #E6E6E6;
+  border: 1rpx solid #E6E6E6;
+}
+.tipView{
+  margin-top: 20rpx;
+  margin-left: 80rpx;
+  margin-right: 80rpx;
+  text-align: center;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #9B9B9B;
+  letter-spacing: 0;
+}
+.bestAnswerImage{
+  margin-right: -40rpx;
+  width: 280rpx;
+  height: 60rpx;
+}
+.moneyView{
+  position: absolute; 
+  display: flex;
+  align-items: center;
+  margin-top: -55rpx;
+  margin-left: 50rpx;
+}
+.moneyImage{
+  height: 30rpx;
+  width: 30rpx;
+}
+.moneyTitle{
+  margin-left: 10rpx;
+  font-family: PingFangSC-Regular;
+font-size: 20rpx;
+color: #FFFFFF;
+letter-spacing: 0;
+}

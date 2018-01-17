@@ -1,0 +1,33 @@
+<view class="topView">
+  <view class="topFirstView" >
+    <view class="topSecondView" >
+      <view class="topThirdView" >
+
+        <view class='lesson-title'>
+          <view class='lessonListTitle' bindtap='cancel'>取消</view>
+          <view class='liuyanTitle' bindtap='press'>提交</view>
+
+        </view>
+        <view class='comment-line'></view>
+
+        <view class='phone-section'>
+          <view class='phoneArea'>+86</view>
+          <input class='inputView' placeholder-class="placeholder" bindinput="phoneInputChange" placeholder="请输入手机号" auto-focus maxlength='11' />
+        </view>
+
+        <view class='comment-line'></view>
+
+        <view class='verify-section'>
+          <input class='verify-inputView' placeholder-class="placeholder" bindinput="verifyInputChange" placeholder="请输入验证码" auto-focus maxlength='6' />
+          <view class="getVerify {{isVerify?'getVerify-active':''}}" bindtap='getVerify'>{{verifyText}}</view>
+        </view>
+
+        <view class='comment-line'></view>
+
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

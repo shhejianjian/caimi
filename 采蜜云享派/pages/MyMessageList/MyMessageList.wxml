@@ -1,0 +1,53 @@
+<view class="topView">
+  <view class="topFirstView" >
+    <view class="topSecondView" >
+      <view class="topThirdView" >
+
+    <scroll-view  scroll-y="true" bindscrolltoupper="toupper" upper-threshold="0" style="height:{{scrollViewYheight}}rpx" scroll-into-view="{{toView}}">
+
+      <block wx:for="{{messageList}}" wx:for-item="item" wx:key="index">
+        <view class='item-date' wx:if="{{item.successive==0}}">{{item.date}}</view>
+      <view class='itemView' id="#{{shop.messageId}}">
+        
+        <view class='leftView' wx:if="{{item.mine==0}}">
+          <view class='iconView'>
+            <image class='left-item-icon' src='{{item.avatar}}'></image>
+          </view>
+          <view class='left-item-content'>{{item.content}}
+            <view class='leftsub-item-content'></view>
+          </view>
+
+        </view>
+
+        <view class='rightView' wx:if="{{item.mine==1}}">
+          <view class='right-item-content'>{{item.content}}
+              <view class='rightsub-item-content'></view>
+          </view>
+          <view class='iconView2'>
+            <image class='right-item-icon' src='{{item.avatar}}'></image>
+          </view>        
+        </view>
+      </view>
+
+      </block>
+        <view id="bottom"></view>
+      </scroll-view>
+
+      
+
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='bottomInputView'>
+    <input class='inputView' value='{{textValue}}' maxlength='-1' bindconfirm='bindConfirm' confirm-type='发送' confirm-hold='true'></input>
+    <view>
+      <image class='bottomImage' src='../../image/charutupianicon.png'></image>
+    </view>
+    <view>
+      <image class='bottomImage2' src='../../image/yuyinicon.png'></image>
+    </view>
+</view>
+
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

@@ -1,0 +1,67 @@
+@import "/pages/PublicWxss/PublicWxss.wxss";
+.TopView{
+  width: 100%;
+  height: 100rpx;
+  background-image: linear-gradient(-180deg, #41C3FD 0%, #08A4FF 100%);
+}
+.topFirstView{
+  padding-top: 10rpx;
+  /* margin-top: 20rpx;  */
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  height: 100rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+.topSecondView{
+  padding-top: 10rpx;
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  height: 100rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+ .topThirdView{
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  background: #FFFFFF;
+  box-shadow: 0 -16rpx 16rpx -16rpx rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+} 
+.itemView{
+  padding: 30rpx 40rpx 20rpx 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.item-title{
+  font-family: PingFangSC-Medium;
+  font-size: 28rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.item-image{
+  height: 25rpx;
+  width: 25rpx;
+}
+.line{
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  opacity: 0.5;
+  background: #E6E6E6;
+  height: 1rpx;
+}
+
+.telephoneView{
+  display: flex;
+  align-items: center;
+}
+.telephoneNumber{
+  font-family: PingFangSC-Medium;
+  font-size: 28rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+  margin-right: 10rpx;
+}

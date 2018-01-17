@@ -1,0 +1,131 @@
+@import "/pages/PublicWxss/PublicWxss.wxss";
+.topView{
+  width: 100%;
+  height: 200rpx;
+  background-image: linear-gradient(-180deg, #41C3FD 0%, #08A4FF 100%);
+}
+.topFirstView{
+  padding-top: 16rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  height: 200rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+.topSecondView{
+  padding-top: 16rpx;
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  height: 200rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+ .topThirdView{
+  padding-top: 30rpx;
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  background: #FFFFFF;
+  box-shadow: 0 -16rpx 16rpx -16rpx rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+  padding-bottom: 100rpx;
+} 
+
+.lesson-title{
+  margin-top: 15rpx;
+  margin-left: 40rpx;
+  display: flex;
+  align-items: center;
+}
+.lessonListTitle{
+  width: 180rpx;
+  padding-bottom:16rpx; 
+  font-family: PingFangSC-Medium;
+  font-size: 22rpx;
+  color: #9B9B9B;
+  letter-spacing: 0;
+}
+.lessonListTitle-active{
+  margin-top: 4rpx;
+  border-bottom: 4rpx solid #FFD100;
+  color: #FFD100;
+}
+.comment-line2{
+  margin: 0 40rpx 10rpx 40rpx;
+  background:  #E6E6E6;
+  height: 1rpx;
+}
+.comment-userView{
+  padding: 20rpx 40rpx 20rpx 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.iconAndName{
+  display: flex;
+  align-items: center;
+}
+.user-icon{
+  border-radius: 50%;
+  height: 60rpx;
+  width: 60rpx;
+}
+.nameAndDate{
+  margin-left: 20rpx;
+}
+.user-name{
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.user-date{
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #9B9B9B;
+  letter-spacing: 0;
+}
+.line {
+    margin-left: 180rpx;
+    margin-right: 20rpx;
+    background: #E6E6E6;
+    opacity: 0.7;
+    height: 1rpx;
+}
+.user-huifu{
+  padding: 5rpx 15rpx 5rpx 15rpx;
+  font-family: PingFangSC-Semibold;
+  font-size: 22rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  background: #FFD100;
+  border-radius: 10rpx;
+}
+.comment-conten{
+  margin: 0 40rpx 20rpx 120rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.comment-replyView{
+  display: flex;
+  align-items: center;
+  margin: 0 40rpx 20rpx 120rpx;
+  background: #F5F5F5;
+  padding: 20rpx;
+}
+.reply-username{
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #FFA900;
+  letter-spacing: 0;
+}
+.reply-usercontent{
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #000000;
+  letter-spacing: 0;
+  line-height: 34rpx;
+}

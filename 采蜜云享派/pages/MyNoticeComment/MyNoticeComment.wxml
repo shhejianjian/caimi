@@ -1,0 +1,79 @@
+<view class="topView">
+  <view class="topFirstView" >
+    <view class="topSecondView" >
+      <view class="topThirdView" >
+
+      <view class='lesson-title'>
+            <view class="lessonListTitle {{isMyOrRecieve==true?'lessonListTitle-active':''}}" bindtap='changeReciveReplyList'>收到的回复</view>
+            <view class="lessonListTitle {{isMyOrRecieve==false?'lessonListTitle-active':''}}" bindtap='changeMyReplyList'>我回复的</view>
+
+      </view>
+      <view class='comment-line2'></view>
+
+      <view wx:if="{{isMyOrRecieve}}">
+      <view class='kongbaiView' wx:if="{{receiveReplyList.length==0}}">
+                  <image class='kongbaiImage' src='../../image/kongbaiyeicon.png'></image>
+                </view>
+        <block wx:for="{{receiveReplyList}}" wx:for-item="shop" wx:key="index">
+          <view class='comment-userView'>
+            <view class='iconAndName'>
+              <view>
+                <image class='user-icon' src='{{shop.userAvatar}}'></image>
+              </view>
+              <view class='nameAndDate'>
+                <view class='user-name'>{{shop.userNickName}}</view>
+                <view class='user-date'>{{shop.date}}</view>
+              </view>
+            </view>
+            <view class='user-huifu'>回复</view>
+          </view>
+
+          <view class='comment-conten'>{{shop.content}}</view>
+
+          <view class='comment-replyView' wx:if="{{shop.replyList.length>0}}">
+            <view class='reply-username'>{{shop.replyList[0].userNickName}}：</view>
+            <view class='reply-usercontent'>{{shop.replyList[0].content}}</view>
+          </view>
+
+          <view class='line'></view>
+
+        </block>
+      </view>
+
+      <view wx:else>
+      <view class='kongbaiView' wx:if="{{myReplyList.length==0}}">
+                  <image class='kongbaiImage' src='../../image/kongbaiyeicon.png'></image>
+                </view>
+        <block wx:for="{{myReplyList}}" wx:for-item="shop" wx:key="index">
+          <view class='comment-userView'>
+            <view class='iconAndName'>
+              <view>
+                <image class='user-icon' src='{{shop.userAvatar}}'></image>
+              </view>
+              <view class='nameAndDate'>
+                <view class='user-name'>{{shop.userNickName}}</view>
+                <view class='user-date'>{{shop.date}}</view>
+              </view>
+            </view>
+          </view>
+
+          <view class='comment-conten'>{{shop.content}}</view>
+
+          <view class='comment-replyView' wx:if="{{shop.replyList.length>0}}">
+            <view class='reply-username'>{{shop.replyList[0].userNickName}}：</view>
+            <view class='reply-usercontent'>{{shop.replyList[0].content}}</view>
+          </view>
+
+          <view class='line'></view>
+
+        </block>
+      
+      </view>
+
+
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

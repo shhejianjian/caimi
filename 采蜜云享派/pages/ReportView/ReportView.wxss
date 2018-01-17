@@ -1,0 +1,105 @@
+@import "/pages/PublicWxss/PublicWxss.wxss";
+.topView{
+  width: 100%;
+  height: 200rpx;
+  background-image: linear-gradient(-180deg, #41C3FD 0%, #08A4FF 100%);
+}
+.topFirstView{
+  padding-top: 16rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  height: 200rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+.topSecondView{
+  padding-top: 16rpx;
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  height: 200rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+ .topThirdView{
+  padding-top: 30rpx;
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  background: #FFFFFF;
+  box-shadow: 0 -16rpx 16rpx -16rpx rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+  padding-bottom: 100rpx;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+} 
+.topTitleView{
+  display: flex;
+  align-items: center;
+}
+.jubaoText{
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.titleName{
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #FFD100;
+  letter-spacing: 0;
+  line-height: 40rpx;
+}
+.grayView{
+  margin-top: 20rpx;
+  background: #F5F5F5;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+  padding: 20rpx;
+}
+
+.itemView{
+  display: flex;
+  flex-flow: wrap;
+  align-items: center;
+}
+.section{
+  display: flex;
+  align-items: center;
+  width: 50%;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+.pointView{
+  border-radius: 50%;
+  height: 36rpx;
+  width: 36rpx;
+  background: #FFFFFF;
+  box-shadow: 0 4rpx 8rpx 0 rgba(0,111,255,0.50);
+}
+.pointView-active{
+  background-image: linear-gradient(-180deg, #2EBAFF 0%, #006FFF 100%);
+}
+.item-title{
+  margin-left: 25rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.jubaoFloatView{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #FFD100;
+  height: 100rpx;
+  font-family: PingFangSC-Semibold;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  text-align: center;
+  line-height: 100rpx;
+}

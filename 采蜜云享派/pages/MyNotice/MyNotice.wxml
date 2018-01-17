@@ -1,0 +1,72 @@
+<view class="topView">
+  <view class="topFirstView" >
+    <view class="topSecondView" >
+      <view class="topThirdView" >
+
+      <view class="shop-lessonType"> 
+            <image class='lessonTypeImage' src='../../image/fourTypeIcon.png'></image>
+            <view class='lessonTypeTitle'>我的通知</view>
+          </view>
+
+      <view class='questionAndAnswerView' bindtap='navigateToMyNoticeAnswer'>
+
+        <view wx:if="{{noticeCount.notice>0}}">
+          <image class='view-image' src='../../image/youwendaicon.png'></image>
+        </view>
+        <view wx:else>
+          <image class='view-image' src='../../image/wuwendaicon.png'></image>
+        </view>
+        <view class='view-title'>问答</view>
+      </view>
+      <view class='line'></view>
+
+      <view class='questionAndAnswerView' bindtap='navigateToMyNoticeComment'>
+        <view wx:if="{{noticeCount.comment>0}}">
+          <image class='view-image' src='../../image/youhuifuicon.png'></image>
+        </view>
+        <view wx:else>
+          <image class='view-image' src='../../image/wuhuifuicon.png'></image>
+        </view>
+        <view class='view-title'>回复</view>
+      </view>
+      <view class='line'></view>
+
+      <view class='questionAndAnswerView' bindtap='navigateToMyNoticeZan'>
+
+        <view wx:if="{{noticeCount.like>0}}">
+          <image class='view-image' src='../../image/youdianzanicon.png'></image>
+        </view>
+        <view wx:else>
+          <image class='view-image' src='../../image/wudianzanicon.png'></image>
+        </view>
+        <view class='view-title'>赞</view>
+      </view>
+      <view class='line'></view>
+
+
+      <block wx:for="{{messageList}}" wx:for-item="shop" wx:key="index">
+          <view class='shop-item' bindtap='navigateToMessageList' data-userid='{{shop.userId}}' data-nickname='{{shop.userNickName}}'>
+            <view class='shop-topView'>
+                <view class='shop-userView'>
+                  <view>
+                    <image class='user-icon' src='{{shop.userAvatar}}'></image>
+                  </view>
+                  <view class='nameAndTime'>
+                    <view class='user-name'>{{shop.userNickName}}</view>
+                    <view class='user-time'>{{shop.lastMessageInfo.content}}</view>
+                  </view>
+                </view>
+                <view class='weinidianzanView'>{{shop.date}}</view>
+              
+              </view>
+
+          </view>
+          <view class='line'></view>
+      </block>
+
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

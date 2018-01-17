@@ -1,0 +1,58 @@
+<view class="topView">
+  <view class="topFirstView" >
+    <view class="topSecondView" >
+      <view class="topThirdView" >
+
+      <view wx:if="{{isFollowView}}">
+        <view class='lesson-title'>
+          <view class="lessonListTitle {{isRecommend==1?'lessonListTitle-active':''}}" bindtap='changeRecommend'>推荐关注</view>
+          <view class="lessonListTitle {{isRecommend==2?'lessonListTitle-active':''}}" bindtap='changeSelf'>关注</view>
+        </view>
+        <view class="comment-line2"></view> 
+      </view>
+
+      <view wx:else>
+          <view class="shop-lessonType"> 
+            <image class='lessonTypeImage' src='../../image/fourTypeIcon.png'></image>
+            <view class='lessonTypeTitle'>我的粉丝</view>
+          </view>
+      </view>
+
+
+        <view>
+            <view class='kongbaiView' wx:if="{{users.length==0}}">
+                    <image class='kongbaiImage' src='../../image/kongbaiyeicon.png'></image>
+                    <view class='kongbaiTitle'>您似乎来到了外太空...</view>
+                  </view>
+        <block wx:for="{{users}}" wx:for-item="shop" wx:key="index">
+              <view class="user-item"  >
+                <view class='user-contentView'>
+
+                  <view class='user-iconAndContent' bindtap="navigateToUserInfo"  data-userid='{{shop.userId}}'>
+                    <view>
+                      <image class="userIcon" src="{{shop.avatar}}"> </image>
+                    </view>
+
+                    <view class='usercontent'>
+                      <view class='user-username'>{{shop.nickName}}</view>
+                      <view class='user-usercontent'>{{shop.usercontent}}</view>
+                      <view class='user-userearnmoney'>{{shop.userearnmoney}}</view>
+                    </view>
+                  </view>
+
+
+                  <view class='guanzhuView'  bindtap='guanzhuClick' data-teacherid='{{shop.userId}}' wx:if="{{shop.currentUserFollow==0}}">关注</view>
+                  <view class='yiguanzhuView'  bindtap='deleteguanzhuClick' data-teacherid='{{shop.userId}}' wx:if="{{shop.currentUserFollow==1}}">已关注</view>
+
+                </view>
+              </view>
+              <view class="line"></view>
+            </block>
+          </view>
+
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

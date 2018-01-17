@@ -1,0 +1,348 @@
+@import "/pages/PublicWxss/PublicWxss.wxss";
+.topView{
+  padding-top: 40rpx;
+  width: 100%;
+  height: 500rpx;
+  background-image: linear-gradient(-180deg, #41C3FD 0%, #08A4FF 100%);
+}
+.top-userView{
+  
+  text-align: center;
+}
+
+.tag-title{
+  font-family: PingFangSC-Semibold;
+  font-size: 36rpx;
+  color: #FFFFFF;
+  letter-spacing: 1.8px;
+}
+.bottomView{
+   margin-top: 40rpx; 
+}
+.bottomFirstView{
+  padding-top: 16rpx;
+  margin-top: 20rpx; 
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  height: 300rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+.bottomSecondView{
+  padding-top: 16rpx;
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  height: 300rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+}
+ .bottomThirdView{
+  padding-top: 15rpx;
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+  background: #FFFFFF;
+  box-shadow: 0 -16rpx 16rpx -16rpx rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+} 
+.bottom-titleView{
+  margin-left: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.bottom-lesson{
+  font-family: PingFangSC-Medium;
+  font-size: 22rpx;
+  color: #9B9B9B;
+  letter-spacing: 0;
+}
+.bottom-answer{
+  margin-left: -200rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 22rpx;
+  color: #9B9B9B;
+  letter-spacing: 0;
+}
+.bottom-sort{
+  margin-right: 40rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 20rpx;
+  color: #9B9B9B;
+  letter-spacing: 0;
+}
+.line{
+  margin-top: 20rpx;
+  margin-right: 40rpx;
+  margin-left: 40rpx;
+  background:  #E6E6E6;
+  height: 1rpx;
+}
+.item-item {
+    padding: 25rpx;
+    height: auto;
+}
+.item-line {
+    margin-left: 200rpx;
+    margin-right: 30rpx;
+    margin-top: -30rpx;
+    background: #E6E6E6;
+    opacity: 0.7;
+    height: 1rpx;
+}
+.item-contentView{
+  display: flex;
+  padding: 25rpx;
+  align-items: center;
+}
+.item-rightView{
+  margin-left: 25rpx;
+}
+.item-titleAndMoney{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.item-money{
+  font-family: PingFangSC-Regular;
+  font-size: 20rpx;
+  color: #FFA900;
+  letter-spacing: 0;
+}
+.item-title{
+  font-family: HYe4gj;
+  font-weight: bold;
+  font-size: 28rpx;
+  color: #000000;
+  letter-spacing: 0;
+  white-space: nowrap;
+  overflow-x: hidden;
+  width: 500rpx;
+  text-overflow: ellipsis;
+}
+.item-teacher{
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.item-tips{
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #9B9B9B;
+  letter-spacing: 0;
+}
+.item-timeAndSummry{
+  margin-top: 8rpx;
+  display: flex;
+  align-items: center;
+}
+.item-time{
+  font-family: PingFangSC-Regular;
+  font-size: 20rpx;
+  color: #000000;
+  letter-spacing: 0;
+  background: #FFD100;
+  padding: 3rpx 20rpx 3rpx 20rpx;
+  border-radius: 15rpx;
+  white-space: nowrap;
+}
+.item-summry{
+  margin-left: 5rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+  white-space: nowrap;
+  overflow-x: hidden;
+  width: 350rpx;
+  text-overflow: ellipsis;
+}
+.item-userIcon{
+  border-radius: 50%;
+  border: 4rpx solid #FFFFFF;
+  box-shadow: 0 4rpx 8rpx 0 #006FFF;
+  height: 120rpx;
+  width: 120rpx;
+}
+.item-subscribView{
+  font-family: PingFangSC-Regular;
+  font-size: 20rpx;
+  color: #9B9B9B;
+  letter-spacing: 0;
+}
+.twotitleView{
+  display: flex;
+  align-items: center;
+}
+.lessonListTitle{
+  width: 180rpx;
+  padding-bottom:16rpx; 
+  font-family: PingFangSC-Medium;
+  font-size: 22rpx;
+  color: #9B9B9B;
+  letter-spacing: 0;
+}
+.lessonListTitle-active{
+  margin-top: 4rpx;
+  border-bottom: 4rpx solid #FFD100;
+  color: #FFD100;
+}
+.comment-line2{
+  margin: 0 40rpx 10rpx 40rpx;
+  background:  #E6E6E6;
+  height: 1rpx;
+}
+
+
+.shop-item {
+    padding: 20rpx 40rpx 20rpx 40rpx;
+    height: auto;
+}
+.usericonAndTitle{
+  align-items: center;
+  display: flex;
+}
+.shop-icon{
+  border-radius: 50%;
+  width: 60rpx;
+  height: 60rpx;
+}
+.shop-iconcontent{
+  display: flex;
+  align-items: center;
+  margin-left: 20rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.moneyTitle{
+  color: #FFD100;
+}
+.shop-moneySection{
+  margin-left: 5rpx;
+}
+.shop-title{
+  margin-top: 20rpx;
+  font-family: PingFangSC-Semibold;
+font-size: 28rpx;
+color: #4A4A4A;
+letter-spacing: 0;
+}
+.shop-content{
+  margin-top: 15rpx;
+  font-family: PingFangSC-Regular;
+font-size: 24rpx;
+color: #4A4A4A;
+letter-spacing: 0;
+line-height: 34rpx;
+}
+.shop-likeCountAndTime{
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.shop-likeCount{
+  font-family: PingFangSC-Medium;
+font-size: 20rpx;
+color: #FFA900;
+letter-spacing: 0;
+}
+.shop-time{
+  font-family: PingFangSC-Medium;
+font-size: 20rpx;
+color: #9B9B9B;
+letter-spacing: 0;
+}
+.list-line{
+    margin-left: 30rpx;
+    margin-right: 30rpx;
+    margin-top: 10rpx; 
+    background: #E6E6E6;
+    opacity: 0.5;
+    height: 1rpx;
+}
+.guanzhuicon{
+  width: 80rpx;
+  height: 160rpx;
+  margin-top: -55rpx;
+  position: absolute;
+  margin-left: 100rpx;
+}
+.guanzhuTitle{
+  font-family: PingFangSC-Semibold;
+  font-size: 22rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  position: absolute;
+  margin-left: 120rpx;
+  margin-top: 20rpx;
+}
+.guanzhuTitle-active{
+  margin-left: 110rpx;
+}
+.shop-bottom{
+    margin-top: 15rpx;
+  display: flex;
+  align-items: center;
+}
+.bottom-title{
+  font-family: PingFangSC-Medium;
+  font-size: 20rpx;
+  color: #FFA900;
+  letter-spacing: 0;
+}
+.bottom-title-active{
+  color: #9B9B9B;
+}
+.bottom-title2{
+  margin-left: 10rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 20rpx;
+  color: #FFA900;
+  letter-spacing: 0;
+}
+.bottom-count{
+  font-family: PingFangSC-Medium;
+  font-size: 20rpx;
+  color: #9B9B9B;
+  letter-spacing: 0;
+}
+.shop-summry{
+  font-family: PingFangSC-Medium;
+  font-size: 20rpx;
+  color: #FFA900;
+  letter-spacing: 0;
+}
+.shop-subsummry{
+  font-family: PingFangSC-Medium;
+  font-size: 20rpx;
+  color: #FFA900;
+  letter-spacing: 0;
+}
+.shop-rightView{
+  margin-left: 25rpx;
+}
+.titleAndMoney{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.shop-money{
+  margin-left: 10rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 20rpx;
+  color: #FFA900;
+  letter-spacing: 0;
+}
+.shop-moneyView{
+  display: flex;
+  align-items: center;
+}
+.shop-moneyImage{
+  width: 30rpx;
+  height: 30rpx;
+}

@@ -1,0 +1,129 @@
+<view class="topView">
+  <view class="topFirstView" >
+    <view class="topSecondView" >
+      <view class="topThirdView" >
+
+      <view class='lesson-title'>
+          <view class='lessonListTitle' bindtap='cancelOrPastStep'>{{cancelText}}</view>
+          <view class='liuyanTitle' bindtap='nextStep'>{{nextStepText}}</view>
+
+        </view>
+        <view class='comment-line'></view>
+
+        <view class="text-section" wx:if="{{step==1}}">
+          <input class='questioninput' placeholder-class="placeholder" value='{{questionTitleText}}' bindinput='firstInputChange'  placeholder="输入问题标题" maxlength='-1' />
+        </view>
+        <view class="text-section" wx:if="{{step==2}}">
+          <textarea class='questioninput' placeholder-class="placeholder" value='{{questionContentText}}' bindinput='secondInputChange'  placeholder="输入问题相关描述信息（选填）" auto-height='true' maxlength='-1' />
+        </view>
+        <view class="text-section" wx:if="{{step==3}}">
+          <input class='questioninput' placeholder-class="placeholder" value='{{creatTagText}}' bindinput='thirdInputChange' disabled='{{isEnable}}'  placeholder="至少添加一个基础标签后可输入(6个字符以内)"  maxlength='6' />
+        </view>
+        <view class="text-section" wx:if="{{step==4}}">
+          <input class='questioninput' placeholder-class="placeholder" type="number" value='{{questionPriceText}}' bindinput='forthInputChange'  placeholder="您可以悬赏赏金来增加问题关注度" maxlength='-1' />
+        </view>
+
+        <view class='comment-line'></view>
+
+        <view wx:if="{{step==1}}" wx:for="{{relatedQuesList}}" wx:for-item="shop" wx:key="index">
+          <view class='shop-item' bindtap='navigateToWenDaPage' data-topicid='{{shop.topicId}}'>
+            <view class='shop-title'>{{shop.title}}</view>
+            <view class='countView'>
+              <view class='counttitle'>{{shop.followCount}}人关注 ·</view>
+              <view class='counttitle'> {{shop.answerCount}}个回答</view>
+            </view>
+          </view>
+          <view class='comment-line'></view>
+        </view>
+
+
+        <view wx:if="{{step==2}}">
+          <view class="images-wrapper">
+            <view class="images-list">
+                <block wx:for="{{imageList}}" wx:for-item="image" wx:key="index">
+                    <image src="{{image}}" class="images-image" data-src="{{image}}" bindtap="previewImage"></image>
+                </block>
+                <view class="images-image image-plus" bindtap="chooseImage">
+                    <view class="image-plus-horizontal"></view>
+                    <view class="image-plus-vertical"></view>
+                </view>
+            </view>
+          </view>
+        
+        </view>
+
+          <view class='addedView' wx:if="{{step==3}}" >
+            <view wx:for="{{addtagList}}" wx:for-item="shop" wx:key="index">
+              <view class="tagAndDeleteView  {{shop.isBase?'tagAndDeleteView-active':''}}" data-name='{{shop.name}}' data-index='{{index}}' bindtap='deleteTag'>
+                <view class="addedTagView">{{shop.name}}</view>
+                <image class='deleteImage' src='../../image/deleteIcon.png'></image>
+              </view>
+            </view>
+          </view>
+        
+        <view wx:if="{{step==3}}" wx:for="{{tagList}}" wx:for-item="shop" wx:key="index">
+          <view class='shop-content'>
+            <view class='iconAndTitle'>
+              <view>
+                <image class='tagicon' src='../../image/ceshitouxiang.png'></image>
+              </view>
+              <view class='titleAndCount'>
+                <view class='shop-title2'>{{shop.name}}</view>
+                <view class='counttitle'> {{shop.topicCount}}个回答</view>
+              </view>
+            </view>
+            <view class='addTagView' bindtap='addTagClick' data-tagid='{{shop.objectId}}' data-tagname='{{shop.name}}'>添加</view>
+          </view>
+          <view class='comment-line'></view>
+          
+        </view>
+
+        <view wx:if="{{step==3 && creatTagText.length>0}}">
+          <view class='creatTagView'>
+            <view class='creatTitle'>新建标签:{{creatTagText}}</view>
+            <view class='addTagView' bindtap='creatAndAddClick'>添加</view>
+          </view>
+          <view class='comment-line'></view>
+        </view>
+
+        <view class='priceTip' wx:if="{{step==4}}">
+          <view class='tip-title'>1.您可以跳过设置悬赏直接发布问题</view> 
+          <view class='tip-title'>2.用户有7天时间通过回答来参加优质问答评选</view>
+          <view class='tip-title'>3.当您的问题至少有1个回答时，您可以从回答中评选出优质回答（至多三个至少一个）</view>
+          <view class='tip-title'>4.优质回答将会平分悬赏金</view>
+          <view class='tip-title'>5.若7天内未有用户回答您的问题，则赏金将会原路返还给您</view>
+          <view class='tip-title'>6.若您在7天内未评选，则系统自动评选出优质回答  </view>
+
+          <view class='comment-line'></view>
+
+          <view class='price-bottomView'>
+            <view class='tip-title'>我已阅读并同于问答细则及</view>
+            <view class="zerenshengming" bindtap='showToastModel'>责任声明</view>
+          </view>
+          <view class='comment-line'></view>
+        </view>
+        
+
+
+
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="help" id="help" wx:if="{{showZRSM}}" >
+  <view class="box">
+    <view class="box-hd">
+      <text class="box-title">责任声明</text>
+      <image class="box-close" src="../../image/close.png" bindtap="hideZRSM"></image>
+    </view>
+
+    <view class='box-content'>在报纸电视等诸多媒体上，有时我们可以看到这样的字眼 “我国政府严正声明，中国内政不容干涉”。而在生活中，我们时常可以听到“在此，申明我做此决定的原因”。“声明”、“申明”的区别何在？　　《现代汉语词典》（1996年，商务印书馆修订版）：（1）声明，（作动词）公开表示态度或说明真相。如：郑重声明；（作名词）声明的文告。如：发表联合声明。（2）申明，（作动词）郑重说明。如：申明理由。　　由此可见，“声明”有动词和名词的用法，可作谓语、主语、宾语、定语；而“申明”只有动词的用法，只能作谓语、定语。　　同时，都含有动词性的“声明”与“申明”也存在一定的区别：①词义着重的方面不同。“声明”着重在当众宣布、公开表明立场态度或说明情况。如：“向全世界声明我们的公正立场”；“申明”着重在陈述和说明，不一定要当众公开。②意义范围不同。“声明”则指公开宣布所持的立场、观点、态度；“申明”有时含有解释、分辨的意思，指对所持的立场、观点、态度进行申说和解释。如：“申明我这样做的理由”。</view>
+      
+
+
+
+
+  </view>
+</view>
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

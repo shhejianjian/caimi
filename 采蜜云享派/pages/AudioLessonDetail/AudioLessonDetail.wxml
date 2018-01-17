@@ -1,0 +1,230 @@
+<view class="topView">
+    <view class='top-audioView'>
+      <view class='audio-usericon'>
+        <image class='usericon-icon' src='../../image/ceshitouxiang.png'></image>
+      </view>
+      <view>
+        <view class='audio-title'>{{lessonData.name}}</view>
+        <view class='audio-contentAndTime'>
+          <view class='audio-content'>{{lessonData.courseInfo.teacher}} | {{lessonData.courseInfo.teacherIntro}}</view>
+          <view class='audio-time'>{{audioCurrentTime}}/{{lessonData.contentDurationText}}</view>
+        </view>
+        
+        <progress class='audio-progress' stroke-width='4' percent="{{audioProgress}}" activeColor='#FFA900' />
+
+        <view class='playIconView'>
+          <image class='past-icon' src='../../image/pastSongicon.png'></image>
+          <image class='play-icon' bindtap='playAudio' src='{{playOrStop}}'></image>
+          <image class='next-icon' src='../../image/nextSongicon.png'></image>
+        </view>
+
+      </view>
+      
+    </view>
+
+
+    <view class="topFirstView">
+    
+      <view class="topSecondView" >
+      <scroll-view  scroll-y="true" style="height:{{scrollViewYheight}}rpx">
+
+
+
+      
+        <view class='lesson-title'>
+          <view class="lessonListTitle {{isLessonOrComment==1?'lessonListTitle-active':''}}" bindtap='changeLessonList'>课程</view>
+          <view class="lessonListTitle {{isLessonOrComment==3?'lessonListTitle-active':''}}" bindtap='changeArtical'>文稿</view>
+          <view class="lessonListTitle {{isLessonOrComment==2?'lessonListTitle-active':''}}" bindtap='changeCommentList'>留言</view>
+
+        </view>
+        <view class="comment-line2"></view> 
+
+
+      <view wx:if="{{isLessonOrComment == 1}}">
+        <view class="top-scrollView">
+          <scroll-view class="scroll-view_H" scroll-x="true">
+              <block  wx:for="{{tabs}}" wx:for-item="item" wx:key="index">
+                  <view class="scroll-view_outView {{activeTab==item.objectId?'scroll-view_outView-active':''}}" bindtap="handlerTabTap" data-index="{{item.objectId}}" data-name='{{item.title}}'>
+                      <view class="outView-title {{activeTab==item.objectId?'outView-title-active':''}}">{{item.title}}</view>
+                      <view class="outView-content {{activeTab==item.objectId?'outView-content-active':''}}">{{item.content}}</view>
+                  </view>
+              </block>
+          </scroll-view>     
+        </view>
+
+        <view class="lesson-line"></view> 
+
+<view class="shop-lessonType"> 
+                    <image class='lessonTypeImage' src='../../image/fourTypeIcon.png'></image>
+                    <view class='lessonTypeTitle'>课程练习</view>
+                  </view>
+
+        <view class='detail-lianxiView' bindtap='navigateToLessonPractise' data-exercise='{{lessonData.exerciseInfo}}'>
+          <view class='lianxi-title'>{{practiseName}}课后测试</view>
+          <view class='lianxi-pingfen'>
+            <view class='pingfen-name'>{{lessonData.courseInfo.teacher}}</view>
+            <view class='starView' wx:if="{{lessonData.exerciseInfo.score == 0}}">
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+            </view>
+            <view class='starView' wx:if="{{lessonData.exerciseInfo.score == 1}}">
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+            </view>
+            <view class='starView' wx:if="{{lessonData.exerciseInfo.score == 2}}">
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+            </view>
+            <view class='starView' wx:if="{{lessonData.exerciseInfo.score == 3}}">
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+            </view>
+            <view class='starView' wx:if="{{lessonData.exerciseInfo.score == 4}}">
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+            </view>
+            <view class='starView' wx:if="{{lessonData.exerciseInfo.score == 5}}">
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/zhengquexingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+            </view>
+            <view class='starView' wx:if="{{lessonData.exerciseInfo == null}}">
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+            </view>
+          </view>
+        </view>
+        <view class='comment-line'></view>
+        <view class="shop-lessonType"> 
+                    <image class='lessonTypeImage' src='../../image/fourTypeIcon.png'></image>
+                    <view class='lessonTypeTitle'>相关课程</view>
+                  </view>
+
+          <block wx:for="{{lessons}}" wx:for-item="shop" wx:key="index">
+                <view class="shop-item">
+                    
+
+                  <view class="shop-contentView" bindtap="navigateToBuyLesson" data-contentype="{{shop.contentType}}" data-objectid="{{shop.courseId}}" data-subscribed="{{shop.subscribed}}" data-pricingrule="{{shop.pricingRule}}">
+                    <view>
+                      <image class="userIcon" src="{{baseUrl}}{{shop.cover}}"> </image>
+                    </view>
+                    <view class="shop-rightView"> 
+                      <view class="titleAndMoney"> 
+                        <view class="shop-title">{{shop.name}}</view>
+                        <view class="shop-money">{{shop.money}}</view>
+                      </view>
+                      <view class="shop-teacher"> {{shop.teacher}} · {{shop.teacherIntro}}</view>
+                      <view class='shop-tips'>{{shop.tips}}</view>
+                      <view class="timeAndSummry" wx:if="{{shop.pricingRule==null}}"> 
+                        <view class="shop-time">{{shop.date}} 更新 </view>
+                        <view class="shop-summry">{{shop.lastUpdateContent}}</view>
+                      </view>
+                      <view wx:else>
+                        <view class='subscribView'>{{shop.subscription}}人订阅</view>
+                      </view>
+                    </view>
+                  </view>
+
+                </view>
+
+                <view class="list-line"></view>
+            </block>
+
+          </view>
+
+
+        <view wx:if="{{isLessonOrComment == 3}}">
+          <view class="shop-lessonType"> 
+                      <image class='lessonTypeImage' src='../../image/fourTypeIcon.png'></image>
+                      <view class='lessonTypeTitle'>课程文稿</view>
+                    </view>
+          <view class='richTextView'>
+            <rich-text class="scribe-content" nodes="{{lessonData.courseInfo.intro}}" ></rich-text>
+          </view>
+          <view class='liuyanfloatView' bindtap='comment'>留  言</view>
+            <view class='commentInputView' wx:if="{{isClickComment}}">
+              <input class='comment-input' focus="{{focus}}" bindblur="bindblur" bindconfirm="bindconfirm"></input>
+            </view>
+        </view>
+        <!-- <view class='scribe-quanwen' bindtap='zhankaiquanwen'>{{ZkOrSq}}</view>
+        <view class='comment-line'></view> -->
+
+
+          <view class='bottomcommentView' wx:if="{{isLessonOrComment == 2}}">
+            <block wx:for="{{comments}}" wx:for-item="comment" wx:key="index">
+              <view class='commentView'>
+                <view bindtap='navigateToUserInfo' data-userid='{{comment.userId}}'>
+                  <image class='comment-image' src="{{comment.userAvatar}}"></image>
+                </view>
+                <view class='showReportView' bindtap='showReport' data-commentid='{{comment.commentId}}' data-username='{{comment.userNickName}}' data-usercontent='{{comment.content}}'>
+                  <view class='comment-username'>{{comment.userNickName}}</view>
+                  <view class='comment-content'>{{comment.content}} </view>
+                </view>
+
+              </view>
+
+              <view class='comment-huifuView' bindtap='navigateToCommentDetail' data-commentid='{{comment.commentId}}' wx:if="{{comment.replyList.length>0}}">
+
+            <view class='userAndHuifu'> 
+              <rich-text class='huifu-title' nodes="<span class='huifu-user'>{{comment.replyList[0].userNickName}}:  </span>{{comment.replyList[0].content}}"></rich-text>
+            </view>
+            <view class='userAndHuifu'  wx:if="{{comment.replyList.length>1}}"> 
+              <rich-text class='huifu-title' nodes="<span class='huifu-user'>{{comment.replyList[1].userNickName}}:  </span>{{comment.replyList[1].content}}"></rich-text>
+            </view>
+
+            <view class='huifu-count' >共{{comment.replyCount}}条回复</view>
+
+                </view>
+
+              <view class='comment-bottom'>
+                <view class='comment-time'>{{comment.submitTime}}</view>
+                <view class='comment-pinglunView' bindtap='huifuComment'  data-commentid='{{comment.commentId}}'>
+                  <image class='pinglunView-image' src='../../image/pinglunicon.png'></image>
+                  <view class='pinglunView-count'>{{comment.replyCount}}</view>
+                </view>
+                <view class='comment-dianzanView' bindtap='dianzan' data-commentid='{{comment.commentId}}'>
+                  <image class='pinglunView-image' src='{{comment.zanImg}}'></image>
+                  <view class='pinglunView-count'>{{comment.likeCount}}</view>
+                </view>
+                
+              </view>
+              <view class="commentList-line"></view> 
+            </block>
+
+            <view class='liuyanfloatView' bindtap='comment'>留  言</view>
+            <view class='commentInputView' wx:if="{{isClickComment}}">
+              <input class='comment-input' focus="{{focus}}" bindblur="bindblur" bindconfirm="bindconfirm"></input>
+            </view>
+
+
+          </view>
+
+
+
+</scroll-view>
+      </view>
+    
+    </view>
+</view>
+
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

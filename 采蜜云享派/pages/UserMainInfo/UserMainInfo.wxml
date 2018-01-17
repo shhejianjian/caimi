@@ -1,0 +1,164 @@
+<view class="TopView"> 
+
+  <view class="topSearchView" wx:if="{{isSelf==0}}">
+    <image class="topSearchImg" src="../../image/shouyesixin.png" bindtap='navigateToNotice'> </image>
+    <input class="topSearchInput"/> 
+    <image class="topSearchImg" src="../../image/shouyedengpao.png" bindtap='navigateToFaQiWenDa'> </image>
+  </view>
+
+  <view class="userView"> 
+      <image class="userIcon" src="{{userInfo.avatar}}"> </image>
+      <view>
+        <view class="userName">{{userInfo.nickName}}</view>
+        <view class="learnTitle">{{userInfo.intro || ''}}</view>
+        <view class="learnTitle">{{userInfo.answerCount}}个回答 · {{userInfo.income}}元收入</view>
+      </view>
+
+      <view wx:if="{{isSelf==0}}" bindtap='guanzhuClick' data-userid='{{userInfo.userId}}' data-followname='{{userInfo.followStr}}'>
+        <image class='guanzhuicon' src='../../image/yonghuguanzhuicon.png'></image>
+        <view class="guanzhuTitle {{userInfo.currentUserFollow==1?'guanzhuTitle-active':''}}">{{userInfo.followStr}}</view>
+      </view>
+
+    </view>
+
+    <view class="topFirstView" >
+      <view class="topSecondView" >
+        <view class="topThirdView" >
+
+          <view class='lesson-title'>
+            <view class="lessonListTitle {{isQuestionOrAnswer==1?'lessonListTitle-active':''}}" bindtap='changeQuestionList'>{{questionTabtitle}}</view>
+            <view class="lessonListTitle {{isQuestionOrAnswer==2?'lessonListTitle-active':''}}" bindtap='changeAnswerList'>{{answerTabtitle}}</view>
+            <view wx:if="{{isSelf==1}}">
+              <view class="lessonListTitle {{isQuestionOrAnswer==3?'lessonListTitle-active':''}}" bindtap='changeMyFollowList'>我的关注</view>
+            </view>
+          </view>
+          <view class='comment-line2'></view>
+
+        <view wx:if="{{isQuestionOrAnswer==1}}">
+          <view class='kongbaiView' wx:if="{{questionsList.length==0}}">
+                  <image class='kongbaiImage' src='../../image/kongbaiyeicon.png'></image>
+                  <view class='kongbaiTitle'>您似乎来到了外太空...</view>
+                </view>
+          <block wx:for="{{questionsList}}" wx:for-item="shop" wx:key="index">
+                <view class="shop-item">
+
+                  <view bindtap="navigateToDetail" data-topicid='{{shop.topicId}}'>
+                    <view class='usericonAndTitle'>
+                      <image class="shop-icon" src="{{shop.userAvatar}}"> </image>
+                      <view class='shop-iconcontent'>
+                        <view>{{shop.userNickName}}发布了一个金额为</view>
+                        <view class='moneyTitle'>￥{{shop.reward}}</view>
+                        <view class='shop-moneySection'>的悬赏</view>
+                      
+                      </view>
+                    </view>
+                    <view class='shop-title'>{{shop.title}}</view>
+                    <view class='shop-content'>{{shop.content}} </view>
+                  </view>
+
+                    <view class='shop-bottom' wx:if="{{shop.solved==0}}">
+                      <view class='shop-summry'>{{shop.answerCount}}人回答·</view>
+                      <view class='shop-subsummry' bindtap='followQuestion' data-topicid='{{shop.topicId}}'>{{shop.followStr}}·剩余{{shop.date}}</view>
+                    </view>
+
+                    <view class='shop-bottom' bindtap='navigateToSingleDetail' wx:if="{{shop.solved==1}}" data-answerid='{{shop.bestAnswerId}}' data-topicid='{{shop.topicId}}'>
+                      <view class="bottom-title {{shop.bestAnswerLiked==1?'bottom-title-active':''}}">{{shop.likeStr}}</view>
+                      <view class='bottom-count'> · {{shop.bestAnswerLikeCount}}个赞</view>
+                      <view class='bottom-title2'>评论</view>
+                      <view class='bottom-count'> · {{shop.bestAnswerCommentCount}}个评论</view>
+                    </view>
+                  
+
+                </view>
+
+                <view class="list-line"></view>
+            </block>
+          </view>
+
+          <view wx:if="{{isQuestionOrAnswer==2}}">
+          <view class='kongbaiView' wx:if="{{answerList.length==0}}">
+                  <image class='kongbaiImage' src='../../image/kongbaiyeicon.png'></image>
+                  <view class='kongbaiTitle'>您似乎来到了外太空...</view>
+                </view>
+            <block wx:for="{{answerList}}" wx:for-item="shop" wx:key="index">
+                <view class="shop-item">
+                  <view bindtap="navigateToSingleDetail" data-topicid='{{shop.topicInfo.topicId}}' data-answerid='{{shop.answerId}}'>
+                    <view class='usericonAndTitle'>
+                      <image class="shop-icon" src="{{shop.userAvatar}}"> </image>
+                      <view class='shop-iconcontent'>
+                        <view>{{shop.userNickName}}回答了一个问题</view>
+                        <view wx:if="{{shop.reward>0}}">，获得了</view>
+                        <view wx:if="{{shop.reward>0}}" class='moneyTitle'>￥{{shop.reward}}</view>
+                        <view wx:if="{{shop.reward>0}}" class='shop-moneySection'>的赏金</view>
+                      </view>
+                    </view>
+                    <view class='shop-title'>{{shop.topicInfo.title}}</view>
+                    <view class='shop-content'>{{shop.content}}</view>
+                  </view>
+                    <view class='shop-likeCountAndTime'>
+                      <view class='shop-likeCount'>{{shop.topicInfo.answerCount}}人回答 · {{shop.topicInfo.followStr}}</view>
+                      <view class='shop-time'>发布于{{shop.date}}</view>
+                    </view>
+                  
+
+                </view>
+
+                <view class="list-line"></view>
+            </block>
+          </view>
+
+          <view wx:if="{{isQuestionOrAnswer==3}}">
+            <view class='kongbaiView' wx:if="{{followList.length==0}}">
+                    <image class='kongbaiImage' src='../../image/kongbaiyeicon.png'></image>
+                    <view class='kongbaiTitle'>您似乎来到了外太空...</view>
+                  </view>
+            <block wx:for="{{followList}}" wx:for-item="shop" wx:key="index">
+                <view class="shop-item" >
+                  
+
+                  <view class="shop-contentView"> 
+
+                    <view  bindtap="navigateToDetail" data-topicid='{{shop.topicId}}'>
+                      <view class='titleAndMoney'>
+                        <view class="shop-title">{{shop.title}}</view>
+                        <view class='shop-moneyView'>
+                          <image class='shop-moneyImage' src='../../image/money.png'></image>
+                          <view class="shop-money">赏金：￥{{shop.reward}}</view>
+                        </view>
+                      </view>
+
+
+                      <view class='shop-content'>{{shop.content}}</view>
+                    </view>
+
+
+                    <view class='shop-bottom' wx:if="{{shop.solved==0}}">
+                      <view class='shop-summry'>{{shop.answerCount}}人回答·</view>
+                      <view class='shop-subsummry' bindtap='followQuestion' data-topicid='{{shop.topicId}}'>{{shop.followStr}}·剩余{{shop.date}}</view>
+                    </view>
+
+                    <view class='shop-bottom' bindtap='navigateToSingleDetail' wx:if="{{shop.solved==1}}" data-answerid='{{shop.bestAnswerId}}' data-topicid='{{shop.topicId}}'>
+                      <view class="bottom-title {{shop.bestAnswerLiked==1?'bottom-title-active':''}}">{{shop.likeStr}}</view>
+                      <view class='bottom-count'> · {{shop.bestAnswerLikeCount}}个赞</view>
+                      <view class='bottom-title2'>{{pinglunText}}</view>
+                      <view class='bottom-count'> · {{shop.bestAnswerCommentCount}}个评论</view>
+                    </view>
+
+                  </view>
+
+                </view>
+
+                <view class="line"></view>
+            </block>
+          </view>
+
+        </view>
+      </view>
+    </view>
+
+</view>
+
+
+<view wx:if="{{isSelf==0}}" class='messagefloatView' data-userid='{{userInfo.userId}}' data-nickname='{{userInfo.nickName}}' bindtap='navigateToMessageList'>私  信</view>
+
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

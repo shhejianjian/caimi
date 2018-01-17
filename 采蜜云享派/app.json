@@ -1,0 +1,82 @@
+{
+  "pages":[
+    "pages/KeCheng/KeCheng",
+    "pages/WenDa/WenDa",
+    "pages/MyCenter/MyCenter",
+    "pages/BuyLesson/BuyLesson",
+    "pages/LessonPage/LessonPage",
+    "pages/LessonDetail/LessonDetail",
+    "pages/CommentDetail/CommentDetail",
+    "pages/TagDetail/TagDetail",
+    "pages/AudioLessonDetail/AudioLessonDetail",
+    "pages/VideoLessonDetail/VideoLessonDetail",
+    "pages/AudioLessonPractise/AudioLessonPractise",
+    "pages/LessonList/LessonList",
+    "pages/VideoLessonPractise/VideoLessonPractise",
+    "pages/VideoLessonExercise/VideoLessonExercise",
+    "pages/WenDaPage/WenDaPage",
+    "pages/AudioLessonExercise/AudioLessonExercise",
+    "pages/LessonDetailExercise/LessonDetailExercise",
+    "pages/LessonDetailPractise/LessonDetailPractise",
+    "pages/LessonSearchVC/LessonSearchVC",
+    "pages/WenDaRespond/WenDaRespond",
+    "pages/FaQiWenDa/FaQiWenDa",
+    "pages/WenDaSingleDetail/WenDaSingleDetail",
+    "pages/UserMainInfo/UserMainInfo",
+    "pages/WenDaChooseAnswer/WenDaChooseAnswer",
+    "pages/MyPurse/MyPurse",
+    "pages/MyFollows/MyFollows",
+    "pages/MyNotice/MyNotice",
+    "pages/MyMainSetting/MyMainSetting",
+    "pages/MyNoticeComment/MyNoticeComment",
+    "pages/MyNoticeZan/MyNoticeZan",
+    "pages/MyNoticeAnswer/MyNoticeAnswer",
+    "pages/MyMainSingleInfo/MyMainSingleInfo",
+    "pages/MyMainChangeName/MyMainChangeName",
+    "pages/MyMessageList/MyMessageList",
+    "pages/MyMainChangeIntro/MyMainChangeIntro",
+    "pages/MyChangePhone/MyChangePhone",
+    "pages/ReportView/ReportView"
+        
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#41C3FD",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh":"true"
+  },
+  "tabBar": {
+    "color": "#FFFFFF",
+    "selectedColor": "#006FFF",
+    "backgroundColor": "#FFD100",
+    "borderStyle": "#FFFFFF",
+    "list": [
+      {
+        "pagePath": "pages/KeCheng/KeCheng",
+        "text": "课程",
+        "iconPath": "image/kecheng-normal.png",
+        "selectedIconPath": "image/kecheng-selected.png"
+      },
+      {
+        "pagePath": "pages/WenDa/WenDa",
+        "text": "问答",
+        "iconPath": "image/wenda-normal.png",
+        "selectedIconPath": "image/wenda-selected.png"
+      },
+      {
+        "pagePath": "pages/MyCenter/MyCenter",
+        "text": "我的",
+        "iconPath": "image/wode-normal.png",
+        "selectedIconPath": "image/wode-selected.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true
+}

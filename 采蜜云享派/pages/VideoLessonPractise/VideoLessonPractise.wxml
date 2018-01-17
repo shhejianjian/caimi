@@ -1,0 +1,53 @@
+<view class="topView">
+    <view class='top-videoView'>
+        <video class='Video' id="myVideo" src="{{baseUrl}}{{videoUrl}}" danmu-list="{{danmuList}}" controls custom-cache="{{false}}"></video>
+    </view>
+
+    <view class="topFirstView" >
+      <view class="topSecondView" >
+<scroll-view  scroll-y="true" style="height:{{scrollViewYheight}}rpx">
+     <view class="shop-lessonType"> 
+                    <image class='lessonTypeImage' src='../../image/fourTypeIcon.png'></image>
+                    <view class='lessonTypeTitle'>课程练习</view>
+                  </view>
+
+        <view class='detail-lianxiView' bindtap='navigateToLessonPractise'>
+          <view class='lianxi-title'>{{practiseName}}课后测试</view>
+          <view class='lianxi-pingfen'>
+            <view class='pingfen-name'>{{lessonData.courseInfo.teacher}}</view>
+            <view class='starView'>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+             <image class='pingfen-star' src='../../image/cuowuxingicon.png'></image>
+            </view>
+          </view>
+        </view>
+        <view class='comment-line'></view>
+
+      <block  wx:for="{{questionList}}" wx:for-item="item" wx:key="index">
+        <view class='practiseView'>
+          <view class='practise-titleAndStar'>
+            <view class='practise-title'>{{item.name}}</view>
+            <view wx:if="{{item.correct == 1}}">
+              <image class='practise-star' src='../../image/zhengquexingicon.png'></image>
+            </view>
+          </view>
+          <block  wx:for="{{item.optionInfoList}}" wx:for-item="answer" wx:key="index">
+            <view class="practise-answer {{answer.isChoose?'practise-answer-active':''}}" bindtap="handlerTabTap" data-objectid="{{answer.objectId}}" data-questionid='{{item.objectId}}'>{{answer.name}}</view>
+           </block>
+        </view>
+        <view class='comment-line'></view>
+      </block>
+
+
+  </scroll-view>
+      </view>
+    </view>
+
+
+</view>
+
+<view class="jiaojuanfloatView {{isFiveAnswer?'jiaojuanfloatView-active':''}}" bindtap='commit'>交  卷</view>
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

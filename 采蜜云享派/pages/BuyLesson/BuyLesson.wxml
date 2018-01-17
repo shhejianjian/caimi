@@ -1,0 +1,58 @@
+<view class="topView">
+  <view class='top-titleView'>
+    <image class='top-image' src='{{baseUrl}}{{lessonData.cover}}'></image>
+    <view class='top-titleAndContent'>    
+      <view class="top-title">{{lessonData.name}}</view>
+      <view class="top-content">{{lessonData.tips}}</view>
+    </view>   
+  </view>
+
+</view>
+
+<view class="bottomView"> 
+      <view class="bottomFirstView" >
+        <view class="bottomSecondView">
+
+          <view class='bottom-scribe'>
+            <view class="shop-lessonType"> 
+                    <image class='lessonTypeImage' src='../../image/fourTypeIcon.png'></image>
+                    <view class='lessonTypeTitle'>课程简介</view>
+                  </view>
+            <view class='scribe-number'>{{lessonData.subscription}}人订阅</view>
+          </view>
+
+          <view class='richTextView'>
+            <rich-text class="scribe-content" nodes="{{scribeContent}}" ></rich-text>
+          </view>
+
+          <view class='scribe-quanwen' bindtap='zhankaiquanwen'>{{ZkOrSq}}</view>
+
+          <view class='line'></view>
+
+          <view class="shop-lessonType"> 
+                    <image class='lessonTypeImage' src='../../image/fourTypeIcon.png'></image>
+                    <view class='lessonTypeTitle'>适宜人群</view>
+                  </view>
+
+          <view class='scribe-content2'>{{lessonData.suitCrowds}}  </view>
+
+
+          <view class='audioView' wx:if="{{lessonData.showAudio}}">
+            <image class='audio-image' src='{{baseUrl}}{{lessonData.cover}}'></image>
+            <view class='audio-titleAndTime'>
+              <view class='audio-title'>{{lessonData.name}}</view>
+              <view class='audio-time'>{{audioCurrentTime}} - {{lessonData.teacher}}</view>
+            </view>
+            <image class='audio-image2' src='{{playOrStop}}' bindtap='playAudio'></image>
+          </view>
+
+          <view class='floatView'>
+            <view class='float-leftView' bindtap='showAudio'>蹭  课</view>
+            <view class='float-rightView' bindtap='BuyCourse'>订阅课程：￥{{lessonData.realPrice}}{{lessonData.pricingRuleName}}</view>
+          </view>
+
+        </view> 
+      </view> 
+</view>
+
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

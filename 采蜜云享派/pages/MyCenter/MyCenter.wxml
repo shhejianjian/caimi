@@ -1,0 +1,107 @@
+<view class="TopView"> 
+    <view class="userView"> 
+      <image class="userIcon" src="{{user.avatar}}"> </image>
+      <view>
+        <view class="userName">{{user.nickName}}</view>
+        <view class="learnTitle">{{user.intro || ''}}</view>
+      </view>
+    </view>
+
+  
+    <view class="earnMoneyView"> 
+      <view class='yellowView'>
+      <view>
+        <view class="answerCount">{{user.answerCount}}个回答</view>
+        <view class="moneyView">
+          <view class="moneyCount">{{user.income}}</view>
+          <view class="shouru"> 元收入</view>
+        </view> 
+      </view> 
+      <image class="xiaomifeng" src="../../image/xiaomifengImage.png"> </image>
+    </view>
+    
+  </view>
+
+    <view class="followAndFansView">
+      <view class="follws" bindtap='navigateToFollws'> 
+        <view class="followCount">{{user.followCount}}</view>
+        <view class="followTitle">关注</view>
+      </view>
+      <view class="fans" bindtap='navigateToFans'> 
+        <view class="followCount">{{user.fansCount}}</view>
+        <view class="followTitle">粉丝</view>
+      </view>
+      <view class="notice" bindtap='navigateToNotice'> 
+        <view class="followCount {{noticeCount==0?'followCount-active':''}}">{{noticeCount}}</view>
+        <view class='noticePoint' hidden="{{noNotice}}"></view>
+        <view class="followTitle">通知</view>
+      </view>
+    </view>
+
+    
+  <view class="bottomView"> 
+      <view class="bottomFirstView" >
+         <view class="bottomSecondView" >
+           <view class="bottomThirdView">
+
+            <view class='myItemBox' bindtap='navigateToMyUserInfo' data-userid='{{user.userId}}'>
+              <view class='iconAndTitle'>
+                <image class='myItemImage' src='../../image/myAnswerIcon.png'></image>
+                <view class='myItemTitle'>我的问答</view>
+              </view>
+              <view class='myItemRightView'>
+                <image class="jiantouimage" src="../../image/enter.png"></image>
+              </view>
+            </view>
+            <view class="line"></view>
+
+
+            <view class='myItemBox' bindtap='navigateToMyLessonList'>
+              <view class='iconAndTitle'>
+                <image class='myItemImage' src='../../image/mylessonIcon.png'></image>
+                <view class='myItemTitle'>我的课程</view>
+              </view>
+              <view class='myItemRightView'>
+                <image class="jiantouimage" src="../../image/enter.png"></image>
+              </view>
+            </view>
+            <view class="line"></view>
+
+
+
+            <view class='myItemBox' bindtap='navigateToMyPurse'>
+              <view class='iconAndTitle'>
+                <image class='myItemImage' src='../../image/mySettingIcon.png'></image>
+                <view class='myItemTitle'>我的钱包</view>
+              </view>
+              <view class='myItemRightView'>
+                <image class="jiantouimage" src="../../image/enter.png"></image>
+              </view>
+            </view>
+            <view class="line"></view>
+
+
+
+            <view class='myItemBox' bindtap='navigateToMySetting' data-phonenumber='{{user.phoneNo}}'>
+              <view class='iconAndTitle'>
+                <image class='myItemImage' src='../../image/mySettingIcon.png'></image>
+                <view class='myItemTitle'>我的设置</view>
+              </view>
+              <view class='myItemRightView'>
+                <image class="jiantouimage" src="../../image/enter.png"></image>
+              </view>
+            </view>
+            <view class="line"></view>
+
+          </view> 
+        </view> 
+      </view>
+  </view>
+
+
+
+</view>
+
+
+
+<view class="prevent-screen" hidden="{{!prevent}}"></view>

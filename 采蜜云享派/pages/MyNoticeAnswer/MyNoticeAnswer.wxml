@@ -1,0 +1,81 @@
+<view class="topView">
+  <view class="topFirstView" >
+    <view class="topSecondView" >
+      <view class="topThirdView" >
+
+      <view class="shop-lessonType"> 
+            <image class='lessonTypeImage' src='../../image/fourTypeIcon.png'></image>
+            <view class='lessonTypeTitle'>{{navigateTitle}}</view>
+          </view>
+
+      <view>
+      <view class='kongbaiView' wx:if="{{answerList.length==0}}">
+                  <image class='kongbaiImage' src='../../image/kongbaiyeicon.png'></image>
+                </view>
+               
+        <block wx:for="{{answerList}}" wx:for-item="shop" wx:key="index">
+
+          <view wx:if="{{shop.type==11}}">
+            <view class='shop-item' bindtap='navigateToAnswerPage' data-noticeid='{{shop.noticeReceiveId}}' data-readstatus='{{shop.readStatus}}' data-answertype='{{shop.type}}' data-answerid='{{shop.extraData.answerId}}'>
+              <view>
+                <image class='user-icon' src='{{shop.extraData.userAvatar}}'></image>
+              </view>
+
+              <view class='userNameAndContent'>
+                <view class='userNameAndDate'>
+                  <view class="user-name {{shop.readStatus==1?'user-name-active':''}}" >{{shop.title}}</view>
+                  <view class='user-date'>{{shop.date}}</view>
+                </view>
+                <view class='user-content'>{{shop.content}}</view>
+              </view>
+            </view>
+          
+          </view>
+
+          <view wx:if="{{shop.type==12}}">
+            <view class='shop-item' data-noticeid='{{shop.noticeReceiveId}}' data-readstatus='{{shop.readStatus}}' bindtap='navigateToAnswerPage' data-answertype='{{shop.type}}' data-answerid='{{shop.extraData.answerId}}' data-topicid='{{shop.extraData.topicId}}'>
+              <view>
+                <image class='user-icon2' src='../../image/noticeAnswerIcon.png'></image>
+              </view>
+
+              <view class='userNameAndContent'>
+                <view class='userNameAndDate'>
+                  <view class="user-name {{shop.readStatus==1?'user-name-active':''}}">{{shop.title}}</view>
+                  <view class='user-date'>{{shop.date}}</view>
+                </view>
+                <view class='user-content'>{{shop.content}}</view>
+              </view>
+            </view>
+          
+          </view>
+
+          <view wx:if="{{shop.type==13}}">
+            <view class='shop-item' data-noticeid='{{shop.noticeReceiveId}}' data-readstatus='{{shop.readStatus}}' bindtap='navigateToAnswerPage' data-answertype='{{shop.type}}' data-answerid='{{shop.extraData.answerId}}'>
+              <view>
+                <image class='user-icon2' src='../../image/beipingxuanicon.png'></image>
+              </view>
+
+              <view class='userNameAndContent'>
+                <view class='userNameAndDate'>
+                  <view class="user-name {{shop.readStatus==1?'user-name-active':''}}">{{shop.title}}</view>
+                  <view class='user-date'>{{shop.date}}</view>
+                </view>
+                <view class='contentAndMoney'>
+                  <view class='user-content'>{{shop.content}}</view>
+                  <view class='user-money'>+￥{{shop.extraData.reward}}</view>
+                </view>
+              </view>
+            </view>
+          
+          </view>
+          <view class='line'></view>
+
+        </block>
+        </view>
+
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="prevent-screen" hidden="{{!prevent}}"></view>
