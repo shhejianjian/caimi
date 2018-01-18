@@ -233,9 +233,10 @@
   justify-content: space-between;
 }
 .shop-money{
-  margin-left: 10rpx;
+  padding: 4rpx 8rpx 4rpx 8rpx;
+  background: #E6E6E6;
   font-family: PingFangSC-Regular;
-  font-size: 20rpx;
+  font-size: 18rpx;
   color: #FFA900;
   letter-spacing: 0;
 }
@@ -247,7 +248,7 @@
   letter-spacing: 0;
   white-space: nowrap;
   overflow-x: hidden;
-  width: 400rpx;
+  width: 330rpx;
   text-overflow: ellipsis;
 }
 .shop-teacher{
@@ -323,4 +324,16 @@
   color: #9B9B9B;
   letter-spacing: 0;
   text-decoration:line-through;
+}
+.pecentMoneyView{
+  display: flex;
+  align-items: center;
+}
+.shop-percent{
+  padding: 4rpx 8rpx 4rpx 8rpx;
+  background: #42711F;
+  font-family: PingFangSC-Regular;
+  font-size: 18rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
 }

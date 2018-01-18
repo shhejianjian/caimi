@@ -2,6 +2,9 @@ var simpleLib = require('../libs/simple-lib.js');
 var route = "pages/CommentDetail/CommentDetail";
 
 var loadQuestionInfo = function (){
+  wx.showLoading({
+    title: '加载中',
+  });
   wx.request({
     url: simpleLib.baseUrl + '/public/comment/' + commentId,
     header: {
@@ -10,6 +13,7 @@ var loadQuestionInfo = function (){
     data: {},
     method: 'GET',
     success: function (res) {
+      wx.hideLoading();
       console.log(res.data);
       if (res.statusCode == 200) {
         var date = simpleLib.getTime(res.data.submitTime);
@@ -25,24 +29,35 @@ var loadQuestionInfo = function (){
       }
     },
     fail: function (res) {
-
+      wx.hideLoading();
     }
   })
 };
 
-var loadReplyList = function (){
-  wx.showLoading({
-    title: '加载中',
-  });
+var currentPage = 1;
+var replyListArr = [];
+var getNewReplyList = function (commnetid){
+  currentPage = 1;
+  replyListArr = [];
+  loadReplyList(commnetid);
+};
+var getMoreReplyList = function (commnetid) {
+  currentPage++;
+  loadReplyList(commnetid);
+};
+
+var loadReplyList = function (commnetid){
   wx.request({
-    url: simpleLib.baseUrl + '/public/comment?parentId='+commentId,
+    url: simpleLib.baseUrl + '/public/comment?originId=' + commnetid,
     header: {
       'Cookie': 'SESSION=' + simpleLib.getGlobalData().SESSION
     },
-    data: {},
+    data: {
+      pageNo:currentPage,
+      pageSize:10,
+    },
     method: 'GET',
     success: function (res) {
-      wx.hideLoading();
       console.log(res.data);
       if (res.statusCode == 200) {
         for (var i = 0; i < res.data.content.length; i++) {
@@ -53,14 +68,62 @@ var loadReplyList = function (){
           } else if (res.data.content[i].liked == 1) {
             res.data.content[i].zanImg = '../../image/yizanicon.png';
           }
+          if (res.data.content[i].parent.commentId == commnetid) {
+            res.data.content[i].isHuifuComment = false;
+          } else {
+            res.data.content[i].isHuifuComment = true;
+          }
+          replyListArr.push(res.data.content[i]);
         }
         simpleLib.setData(route, {
-          comments: res.data.content,
+          comments: replyListArr,
         });
       }
     },
     fail: function (res) {
-      wx.hideLoading();
+
+    }
+  })
+};
+
+
+var loadNewUpdateReplyList = function (commnetid,page) {
+  replyListArr = [];
+  wx.request({
+    url: simpleLib.baseUrl + '/public/comment?originId=' + commnetid,
+    header: {
+      'Cookie': 'SESSION=' + simpleLib.getGlobalData().SESSION
+    },
+    data: {
+      pageNo: 1,
+      pageSize: page*10,
+    },
+    method: 'GET',
+    success: function (res) {
+      console.log(res.data);
+      if (res.statusCode == 200) {
+        for (var i = 0; i < res.data.content.length; i++) {
+          var date = simpleLib.getTime(res.data.content[i].submitTime);
+          res.data.content[i].submitTime = date;
+          if (res.data.content[i].liked == 0) {
+            res.data.content[i].zanImg = '../../image/dianzanicon.png';
+          } else if (res.data.content[i].liked == 1) {
+            res.data.content[i].zanImg = '../../image/yizanicon.png';
+          }
+          if (res.data.content[i].parent.commentId == commnetid) {
+            res.data.content[i].isHuifuComment = false;
+          } else {
+            res.data.content[i].isHuifuComment = true;
+          }
+          replyListArr.push(res.data.content[i]);
+        }
+        simpleLib.setData(route, {
+          comments: replyListArr,
+        });
+      }
+    },
+    fail: function (res) {
+
     }
   })
 };
@@ -78,6 +141,7 @@ var clickPreview = function () {
 
 var huifuComment = function (event) {
   clickPreview();
+  commentId = event.currentTarget.dataset.commentid;
   simpleLib.setData(route, {
     isClickComment: true,
     focus: true,
@@ -94,6 +158,7 @@ var bindblur = function () {
 
 var commentInputStr = '';
 var bindconfirm = function (event) {
+  var that = this;
   commentInputStr = event.detail.value;
   var params = {
     parent: {
@@ -113,7 +178,7 @@ var bindconfirm = function (event) {
     success: function (res) {
       console.log(res.data);
       if (res.statusCode == 200) {
-        loadReplyList();
+        loadNewUpdateReplyList(that.data.mainCommentId,currentPage);
         simpleLib.getGlobalData().isHuifu == '1';
       }
     },
@@ -124,6 +189,7 @@ var bindconfirm = function (event) {
 };
 
 var dianzan = function (event) {
+  var that = this;
   clickPreview();
   var commentID = event.currentTarget.dataset.commentid;
   wx.request({
@@ -137,7 +203,7 @@ var dianzan = function (event) {
     success: function (res) {
       console.log(res.data);
       if (res.statusCode == 200) {
-        loadReplyList();
+        loadNewUpdateReplyList(that.data.mainCommentId,currentPage);
         loadQuestionInfo();
         simpleLib.getGlobalData().isHuifu = '1';
       }
@@ -151,11 +217,12 @@ var dianzan = function (event) {
 var commentId = '';
 var onload = function (options) {
   simpleLib.setData(route, {
-    baseUrl: simpleLib.baseUrl
+    baseUrl: simpleLib.baseUrl,
+    mainCommentId: options.commentId,
   });
   commentId = options.commentId;
   loadQuestionInfo();
-  loadReplyList();
+  getNewReplyList(this.data.mainCommentId);
   
 };
 
@@ -166,7 +233,7 @@ var showReport = function (event) {
     success: function (res) {
       console.log(res.tapIndex)
       if (res.tapIndex == 0) {
-        // commentId = event.currentTarget.dataset.commentid;
+        commentId = event.currentTarget.dataset.commentid;
         simpleLib.setData(route, {
           isClickComment: true,
           focus: true,
@@ -197,10 +264,13 @@ var navigateToUserInfo = function (event) {
   })
 };
 
+var onReachBottom = function () {
+  getMoreReplyList(this.data.mainCommentId);
+};
 
 Page({
   data: {
-   
+    mainCommentId:'',
   },
   onLoad: onload,
   bindconfirm: bindconfirm,
@@ -209,4 +279,5 @@ Page({
   dianzan: dianzan,
   showReport: showReport,
   navigateToUserInfo: navigateToUserInfo,
+  onReachBottom: onReachBottom,
 })

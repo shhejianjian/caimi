@@ -157,3 +157,27 @@
   padding: 10rpx;
   border-radius: 5rpx;
 }
+.showReportView{
+  width: 100%;
+}
+.huifu-commentView{
+  margin-left: 20rpx;
+}
+.huifu-title{
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.huifu-user{
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #FFD100;
+  letter-spacing: 0;
+}
+.huifu-content{
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}

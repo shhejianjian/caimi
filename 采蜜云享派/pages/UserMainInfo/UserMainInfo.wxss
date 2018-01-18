@@ -195,9 +195,9 @@ letter-spacing: 0;
 .guanzhuicon{
   width: 80rpx;
   height: 160rpx;
-  margin-top: -55rpx;
+  top: 117rpx;
   position: absolute;
-  margin-left: 100rpx;
+  right: 85rpx;
 }
 .guanzhuTitle{
   font-family: PingFangSC-Semibold;
@@ -205,8 +205,8 @@ letter-spacing: 0;
   color: #FFFFFF;
   letter-spacing: 0;
   position: absolute;
-  margin-left: 120rpx;
-  margin-top: 20rpx;
+  right: 102rpx;
+  top: 190rpx;
 }
 .guanzhuTitle-active{
   margin-left: 110rpx;

@@ -37,23 +37,26 @@
 
             <block wx:for="{{comments}}" wx:for-item="comment" wx:key="index">
 
-              <view bindtap='showReport' data-commentid='{{comment.commentId}}' data-username='{{comment.userNickName}}' data-usercontent='{{comment.content}}'>
+              <view >
                 <view class='commentView'>
-                  <view>
+                  <view bindtap='navigateToUserInfo' data-userid='{{comment.userId}}'> 
                     <image class='comment-image' src="{{comment.userAvatar}}"></image>
                   </view>
-                  <view>
+                  <view class='showReportView' bindtap='showReport' data-commentid='{{comment.commentId}}' data-username='{{comment.userNickName}}' data-usercontent='{{comment.content}}'>
                     <view class='comment-username'>{{comment.userNickName}}</view>
-                    <view class='comment-content'>{{comment.content}} </view>
+                    <view wx:if="{{!comment.isHuifuComment}}" class='comment-content'>{{comment.content}} </view>
+                    <view wx:else class='huifu-commentView'>
+                      <rich-text class='huifu-title' nodes="回复<span class='huifu-user'>@{{comment.parent.userNickName}}:  </span>{{comment.content}}"></rich-text>
+                    </view>
                   </view>
 
                 </view>
                 <view class='comment-bottom2'>
                   <view class='comment-time'>{{comment.submitTime}}</view>
-                  <!-- <view class='comment-pinglunView'>
+                   <view class='comment-pinglunView'>
                     <image class='pinglunView-image' src='../../image/pinglunicon.png'></image>
                     <view class='pinglunView-count'>{{comment.replyCount}}</view>
-                  </view> -->
+                  </view> 
                   <view class='comment-dianzanView' bindtap='dianzan' data-commentid='{{comment.commentId}}'>
                     <image class='pinglunView-image' src='{{comment.zanImg}}'></image>
                     <view class='pinglunView-count'>{{comment.likeCount}}</view>
@@ -76,5 +79,5 @@
 
 
 
-<view class='huifufloatView' wx:if="{{!isClickComment}}" bindtap='huifuComment'>回复评论</view>
+<view class='huifufloatView' wx:if="{{!isClickComment}}" bindtap='huifuComment' data-commentid='{{commentData.commentId}}'>回复评论</view>
 <view class="prevent-screen" hidden="{{!prevent}}"></view>

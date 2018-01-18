@@ -40,7 +40,13 @@ var tishiToast = function (msg) {
     mask: true
   });
 };
+var loadingToast = function (msg) {
 
+  wx.showLoading({
+    title: '正在加载',
+    mask: true,
+  });
+};
 
 
 
@@ -220,3 +226,4 @@ module.exports.getScreenScale = getScreenScale;
 module.exports.getTime = getTime;
 module.exports.lastTime = lastTime;
 module.exports.getRequest = getRequest;
+module.exports.loadingToast = loadingToast;

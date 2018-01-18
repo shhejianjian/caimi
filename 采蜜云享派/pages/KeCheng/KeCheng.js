@@ -60,15 +60,16 @@ var getLessonList = function (){
           subData[j].date = date;
           subData[j].cover = subData[j].cover.split('.')[0]+'!128_128.jpg';
           if (!subData[j].realPrice){
-            subData[j].realPrice = '';
+            subData[j].realPriceStr = '';
           } else {
-            subData[j].realPrice = '￥' + subData[j].realPrice;
+            subData[j].realPriceStr = '￥' + subData[j].realPrice;
           }
-          if (!subData[j].referencePrice) {
-            subData[j].referencePrice = '';
-          } else {
-            subData[j].referencePrice = '￥' + subData[j].referencePrice;
-          }
+          // if (!subData[j].referencePrice) {
+          //   subData[j].referencePriceStr = '';
+          // } else {
+          //   subData[j].referencePriceStr = '￥' + subData[j].referencePrice;
+          // }
+          subData[j].percentCount = Math.floor(((subData[j].referencePrice - subData[j].realPrice) / subData[j].referencePrice)*100);
           
         }
         lessonArr.push(courseData[i]);

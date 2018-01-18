@@ -343,6 +343,20 @@ var navigateToUserInfo = function (event) {
   })
 };
 
+
+var previewImage = function (event) {
+  var imageList = event.currentTarget.dataset.imagelist;
+  var index = event.currentTarget.dataset.index;
+  for (var i = 0; i < imageList.length; i++) {
+    imageList[i] = simpleLib.baseUrl + imageList[i];
+  }
+  var current = imageList[index];
+  wx.previewImage({
+    current: current,
+    urls: imageList
+  })
+};
+
 Page({
   data: {
     isClickComment: false,
@@ -360,4 +374,5 @@ Page({
   navigateToCommentDetail: navigateToCommentDetail,
   showReport: showReport,
   navigateToUserInfo: navigateToUserInfo,
+  previewImage: previewImage,
 })

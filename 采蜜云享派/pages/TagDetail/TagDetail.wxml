@@ -13,8 +13,29 @@
                 <view class="lessonListTitle {{isLessonOrComment==1?'lessonListTitle-active':''}}" bindtap='changeLessonList'>课程</view>
                 <view class="lessonListTitle {{isLessonOrComment==2?'lessonListTitle-active':''}}" bindtap='changeCommentList'>问答</view>
               </view>
-                <view class='lessonListTitle' bindtap='showSortList'>按时间排序</view>
+
+
+                <view class='lessonListTitle' wx:if="{{isLessonOrComment==1}}" bindtap='showSortList'>{{lessonSortTitleName}}</view>
+                <view class='lessonListTitle' wx:if="{{isLessonOrComment==2}}" bindtap='showSortList'>{{answerSortTitleName}}</view>
               </view>
+                <view class='sort-sanjiao' wx:if="{{openSort}}"></view>
+                <view class='sortView' wx:if="{{openSort}}">
+                  <view wx:if="{{isLessonOrComment==1}}">
+                    <block wx:for="{{lessonSortTabs}}" wx:for-item="sortItem" wx:key="index">
+                      <view class="sortItem-title {{lessonActiveIndex==index?'sortItem-title-active':''}}" bindtap='clickLessonSortItem' data-index='{{index}}' data-sortname='{{sortItem.name}}' data-contenttype='{{sortItem.contentType}}'>{{sortItem.name}}</view>
+                      <view class='sortItem-line'></view>
+                    </block>
+                  </view>
+                  <view wx:if="{{isLessonOrComment==2}}">
+                    <block wx:for="{{answerSortTabs}}" wx:for-item="sortItem" wx:key="index">
+                      <view class="sortItem-title {{answerActiveIndex==index?'sortItem-title-active':''}}" bindtap='clickAnswerSortItem' data-index='{{index}}' data-sortname='{{sortItem.name}}' data-contenttype='{{sortItem.contentType}}'>{{sortItem.name}}</view>
+                      <view class='sortItem-line'></view>
+                    </block>
+                  </view>
+
+                </view>
+
+
             <view class='comment-line2'></view>
 
           <view wx:if="{{isLessonOrComment==1}}">
@@ -26,14 +47,17 @@
                 <view class="item-item">
                     
 
-                  <view class="item-contentView" bindtap="navigateToBuyLesson" data-contentype="{{shop.contentType}}" data-objectid="{{shop.courseId}}" data-subscribed="{{shop.subscribed}}" data-pricingrule="{{shop.pricingRule}}"> 
+                  <view class="item-contentView" bindtap="navigateToBuyLesson" data-index='{{index}}' data-contentype="{{shop.contentType}}" data-objectid="{{shop.courseId}}" data-subscribed="{{shop.subscribed}}" data-pricingrule="{{shop.pricingRule}}"> 
                   <view>
                     <image class="item-userIcon" src="{{baseUrl}}{{shop.cover}}"> </image>
                     </view>
                     <view class="item-rightView"> 
                       <view class="item-titleAndMoney"> 
                         <view class="item-title">{{shop.name}}</view>
-                        <view class="item-money">{{shop.money}}</view>
+                        <view class='pecentMoneyView' wx:if="{{shop.pricingRule}}">
+                            <view class='shop-percent'>-{{shop.percentCount}}%</view>
+                            <view class="shop-money">{{shop.realPriceStr}}</view>
+                          </view>
                       </view>
                       <view class="item-teacher"> {{shop.teacher}} · {{shop.teacherIntro}}</view>
                       <view class='item-tips'>{{shop.tips}}</view>
@@ -69,7 +93,7 @@
                         <view class="shop-title">{{shop.title}}</view>
                         <view class='shop-moneyView'>
                           <image class='shop-moneyImage' src='../../image/money.png'></image>
-                          <view class="shop-money">赏金：￥{{shop.reward}}</view>
+                          <view class="answer-money">赏金：￥{{shop.reward}}</view>
                         </view>
                       </view>
 
@@ -108,5 +132,6 @@
   </view>
 </view>
 
+<view wx:if="{{isShowBackView}}" bindtap='clickBackView' class='backgroundView'></view>
 
 <view class="prevent-screen" hidden="{{!prevent}}"></view>

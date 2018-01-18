@@ -170,3 +170,8 @@ page{
   color: #9B9B9B;
   letter-spacing: 0;
 }
+.contentImage{
+  width: 300rpx;
+  max-height: 300rpx;
+  
+}

@@ -11,8 +11,28 @@
         <view class='comment-line'></view>
 
         <view class="text-section">
-          <textarea class='textareaView' placeholder-class="placeholder" bindinput="bindinputChange" placeholder="填写回答内容" auto-focus maxlength='-1' />
+          <textarea class='textareaView' placeholder-class="placeholder" bindinput="bindinputChange" placeholder="填写回答内容" auto-focus='true' maxlength='-1' auto-height='true' />
         </view>
+
+        <view class='comment-line'></view>
+
+        <view class="images-wrapper">
+            <view class="images-list">
+                <block wx:for="{{imageList}}" wx:for-item="image" wx:key="index">
+                    <image src="{{image}}" class="images-image" data-src="{{image}}" bindtap="previewImage"></image>
+                </block>
+                <view class="images-image image-plus" bindtap="chooseImage">
+                    <view class="image-plus-horizontal"></view>
+                    <view class="image-plus-vertical"></view>
+                </view>
+            </view>
+        </view>
+
+
+        <view class='yuyinView'>
+          <image class='yuyinImage' src='../../image/yuyinicon.png'></image>
+        </view>
+
 
       </view>
     </view>

@@ -66,6 +66,18 @@ var getLessonList = function (url) {
         }
         
         lessonData[i].realPrice = '￥' + lessonData[i].realPrice;
+
+        if(lessonData[i].courseInfo){
+          lessonData[i].title = lessonData[i].courseInfo.name;
+          lessonData[i].teacher = lessonData[i].courseInfo.teacher;
+          lessonData[i].teacherIntro = lessonData[i].courseInfo.teacherIntro;
+          lessonData[i].tips = lessonData[i].courseInfo.tips;
+          lessonData[i].date = simpleLib.getTime(lessonData[i].courseInfo.lastUpdateTime);
+          lessonData[i].lastUpdateContent = lessonData[i].name;
+        } else {
+          lessonData[i].title = lessonData[i].name;
+        }
+
         lessonArr.push(lessonData[i]);
       }
 

@@ -19,6 +19,15 @@
 
         <view class='shop-title'>{{questionInfo.title}}</view>
         <view class='shop-content'>{{questionInfo.content}}</view>
+
+      <view class='imageitemView' >
+        <block wx:for="{{questionInfo.imageList}}" wx:for-item="image" wx:key="index">
+          <view data-imagelist='{{questionInfo.imageList}}' bindtap='previewImage' data-index='{{index}}'>
+            <image class='imageItem' src='{{baseUrl}}{{image}}'></image>
+          </view>
+        </block>
+      </view>
+
         <view class='line'></view>
 
         <view class='answerCountAndSort'>
@@ -26,34 +35,52 @@
             <view class='answer-title'>{{questionInfo.answerCount}}个回答 · </view>
             <view class='answer-guanzhuwenti' bindtap='guanzhuClick' data-followstr='{{questionInfo.followStr}}'> {{questionInfo.followStr}}</view>
           </view>
-          <view class='answer-sort'>按时间排序</view>
+          <view class='answer-sort' bindtap='showSortList'>{{answerSortName}}</view>
         </view>
+
+              <view class='sort-sanjiao' wx:if="{{openSort}}"></view>
+                <view class='sortView' wx:if="{{openSort}}">
+                    <block wx:for="{{sortTabs}}" wx:for-item="sortItem" wx:key="index">
+                      <view class="sortItem-title {{activeIndex==index?'sortItem-title-active':''}}" bindtap='clickSortItem' data-index='{{index}}' data-sortname='{{sortItem.name}}' data-contenttype='{{sortItem.contentType}}'>{{sortItem.name}}</view>
+                      <view class='sortItem-line'></view>
+                    </block>
+                </view>
 
         <view class='second-line'></view>
 
 
       <view wx:if="{{answerInfo.length>0}}">
         <block wx:for="{{answerInfo}}" wx:for-item="shop" wx:key="index">
-                <view class="shop-item"  bindtap="navigateToDetail" data-answerid='{{shop.answerId}}'>
-                  <view class='shop-user'>
-                    <view class='iconAndName'>
-                      <view >
-                        <image class='shop-usericon' src="{{shop.userAvatar}}"></image>
-                      </view>
-                      <view class='shop-username'>{{shop.userNickName}}</view>
-                    </view>
+                <view class="shop-item">
 
-                    <view class='bestAnswerView' wx:if="{{shop.choice==1}}">
-                      <image class='bestAnswerImage' src='../../image/youzhihuida.png'></image>
-                      <view class='moneyView'>
-                        <image class='moneyImage' src='../../image/money.png'></image>
-                        <view class='moneyTitle'>获得赏金￥{{shop.reward}}</view>
+                  <view bindtap="navigateToDetail" data-answerid='{{shop.answerId}}'>
+                    <view class='shop-user'>
+                      <view class='iconAndName'>
+                        <view >
+                          <image class='shop-usericon' src="{{shop.userAvatar}}"></image>
+                        </view>
+                        <view class='shop-username'>{{shop.userNickName}}</view>
                       </view>
-                    </view>
 
+                      <view class='bestAnswerView' wx:if="{{shop.choice==1}}">
+                        <image class='bestAnswerImage' src='../../image/youzhihuida.png'></image>
+                        <view class='moneyView'>
+                          <image class='moneyImage' src='../../image/money.png'></image>
+                          <view class='moneyTitle'>获得赏金￥{{shop.reward}}</view>
+                        </view>
+                      </view>
+
+                    </view>
+                    
+                    <view class='shop-answercontent'>{{shop.content}}</view>
                   </view>
-                  
-                  <view class='shop-answercontent'>{{shop.content}}</view>
+                  <view class='imageitemView' >
+                    <block wx:for="{{shop.imageList}}" wx:for-item="image" wx:key="index">
+                      <view data-imagelist='{{shop.imageList}}' bindtap='previewImage' data-index='{{index}}'>
+                        <image class='imageItem' src='{{baseUrl}}{{image}}'></image>
+                      </view>
+                    </block>
+                  </view>
                   
                   <view class='shop-likeCountAndTime'>
                     <view class='shop-likeCount'>{{shop.likeCount}}个赞 · {{shop.commentCount}}个评论</view>
@@ -81,5 +108,5 @@
             <view class="float-rightView {{(answerInfo.length==0 && questionInfo.self==1)?'float-rightView-active':''}}" bindtap='navigateToRespond' data-answertext='{{questionInfo.answerText}}' data-answerid='{{questionInfo.myAnswerId}}'>{{questionInfo.answerText}}</view>
           </view>
 
-
+<view wx:if="{{isShowBackView}}" bindtap='clickBackView' class='backgroundView'></view>
 <view class="prevent-screen" hidden="{{!prevent}}"></view>

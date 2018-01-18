@@ -118,7 +118,7 @@
   letter-spacing: 0;
   white-space: nowrap;
   overflow-x: hidden;
-  width: 500rpx;
+  width: 380rpx;
   text-overflow: ellipsis;
 }
 .item-teacher{
@@ -194,7 +194,13 @@
   background:  #E6E6E6;
   height: 1rpx;
 }
-
+.answer-money{
+  margin-left: 10rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 20rpx;
+  color: #FFA900;
+  letter-spacing: 0;
+}
 
 .shop-item {
     padding: 20rpx 40rpx 20rpx 40rpx;
@@ -209,6 +215,7 @@
   width: 60rpx;
   height: 60rpx;
 }
+
 .shop-iconcontent{
   display: flex;
   align-items: center;
@@ -331,13 +338,12 @@ letter-spacing: 0;
   align-items: center;
   justify-content: space-between;
 }
-.shop-money{
-  margin-left: 10rpx;
+/* .shop-money{
   font-family: PingFangSC-Regular;
   font-size: 20rpx;
   color: #FFA900;
   letter-spacing: 0;
-}
+} */
 .shop-moneyView{
   display: flex;
   align-items: center;
@@ -345,4 +351,64 @@ letter-spacing: 0;
 .shop-moneyImage{
   width: 30rpx;
   height: 30rpx;
+}
+.pecentMoneyView{
+  display: flex;
+  align-items: center;
+}
+.shop-percent{
+  padding: 4rpx 8rpx 4rpx 8rpx;
+  background: #42711F;
+  font-family: PingFangSC-Regular;
+  font-size: 18rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+}
+.shop-money{
+  padding: 4rpx 8rpx 4rpx 8rpx;
+  background: #E6E6E6;
+  font-family: PingFangSC-Regular;
+  font-size: 18rpx;
+  color: #FFA900;
+  letter-spacing: 0;
+}
+.sortView{
+  background: #FFFFFF;
+  box-shadow: 0 4rpx 8rpx 0 rgba(0,111,255,0.50);
+  width: 200rpx;
+  max-height: 480rpx;
+  overflow-y: auto;
+  position: absolute;
+  border-radius: 10rpx;
+  z-index: 9999999;
+  right: 35rpx;
+}
+.sort-sanjiao{
+  width: 15rpx;
+  height: 15rpx;
+  position: absolute;
+  right: 125rpx; 
+  transform: rotate(45deg);
+  background-color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  z-index: 99999999;
+  margin-top: -9rpx;
+}
+.sortItem-title{
+  margin-top: 20rpx;
+  text-align: center;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #9B9B9B;
+  letter-spacing: 0;
+}
+.sortItem-title-active{
+  color: #FFD100;
+}
+
+.sortItem-line{
+  margin-top: 20rpx;
+  background:  #E6E6E6;
+  height: 1rpx;
+  opacity: 0.7;
 }

@@ -2,6 +2,22 @@ var simpleLib = require('../libs/simple-lib.js');
 var route = "pages/WenDaPage/WenDaPage";
 
 
+var answerSortTabs = [
+  {
+    name: '按时间排序',
+    contentType: '',
+  },
+  {
+    name: '最多点赞数',
+    contentType: 'likeCount',
+  },
+  {
+    name: '最多评论数',
+    contentType: 'commentCount',
+  },
+];
+
+
 var clickPreview = function () {
   simpleLib.setData(route, {
     prevent: true
@@ -87,20 +103,37 @@ var onShareAppMessage = function () {
 var topicID = '';
 var onload = function (options) {
   simpleLib.setData(route, {
-    baseUrl: simpleLib.baseUrl
+    baseUrl: simpleLib.baseUrl,
+    sortTabs:answerSortTabs,
   });
   topicID = options.topicId;
   getQuestionDetailInfo();
-  getAnswerList();
+  getNewAnswerData(answerConentType);
 };
 
+
+var currentPage = 1;
 var answerArr=[];
-var getAnswerList = function (){
+var getNewAnswerData = function (sortby){
+  currentPage = 1;
   answerArr = [];
+  getAnswerList(sortby);
+}
+var getMoreAnswerData = function (sortby) {
+  currentPage++;
+  getAnswerList(sortby);
+}
+
+var getAnswerList = function (sortby){
   wx.request({
     url: simpleLib.baseUrl + '/public/topic/' + topicID + '/answer',
     header: {
       'Cookie': 'SESSION=' + simpleLib.getGlobalData().SESSION
+    },
+    data:{
+      pageNo:currentPage,
+      pageSize:10,
+      sortBy:sortby,
     },
     success: function (res) {
       console.log(res.data)
@@ -110,15 +143,6 @@ var getAnswerList = function (){
         answerData[i].date = date;
         answerArr.push(answerData[i]);
       }
-      // if (answerArr.length > 0) {
-      //   simpleLib.setData(route, {
-      //     isNoAnswer: 0
-      //   });
-      // } else {
-      //   simpleLib.setData(route, {
-      //     isNoAnswer: 1
-      //   });
-      // }
       simpleLib.setData(route, {
         answerInfo: answerArr
       });
@@ -160,6 +184,7 @@ var getQuestionDetailInfo = function (){
       }
       var date = simpleLib.lastTime(questionData.expiredTime);
       questionData.date = date;
+
 
       simpleLib.setData(route, {
         questionInfo: questionData
@@ -204,12 +229,12 @@ var guanzhuClick = function (event){
 
 var onShow = function (){
   if (simpleLib.getGlobalData().isChoose == '1') {
-    getAnswerList();
+    getNewAnswerData(answerConentType);
     getQuestionDetailInfo();
     simpleLib.getGlobalData().isChoose = '';
   }
   if (simpleLib.getGlobalData().isPressSuccess == '1'){
-    getAnswerList();
+    getNewAnswerData(answerConentType);
     getQuestionDetailInfo();
     simpleLib.getGlobalData().isPressSuccess = '';
     simpleLib.getGlobalData().isHuifu = '';
@@ -291,17 +316,71 @@ var getApplicationInfo = function () {
 }
 
 
+var previewImage = function (event){
+  var imageList = event.currentTarget.dataset.imagelist;
+  var index = event.currentTarget.dataset.index;
+  for(var i = 0;i<imageList.length;i++){
+    imageList[i] = simpleLib.baseUrl + imageList[i];
+  }
+  var current = imageList[index];
+  wx.previewImage({
+    current: current,
+    urls: imageList
+  })
+};
+
+
+
+var showSortList = function () {
+  simpleLib.setData(route, {
+    isShowBackView: true,
+    openSort: true,
+  });
+
+};
+
+var clickBackView = function () {
+  simpleLib.setData(route, {
+    isShowBackView: false,
+    openSort: false,
+  });
+};
+
+var answerConentType = '';
+var clickSortItem = function (event){
+  var index = event.currentTarget.dataset.index;
+  var sortName = event.currentTarget.dataset.sortname;
+  answerConentType = event.currentTarget.dataset.contenttype;
+  simpleLib.setData(route, {
+    activeIndex: index,
+    isShowBackView: false,
+    openSort: false,
+    answerSortName: sortName,
+  });
+  getNewAnswerData(answerConentType);
+};
+
+var onReachBottom = function () {
+  getMoreAnswerData(answerConentType);
+};
 
 Page({
   data: {
-
+    activeIndex:-1,
+    isShowBackView:false,
+    answerSortName:'按时间排序'
   },
   onLoad: onload,
   onShow: onShow,
+  onReachBottom: onReachBottom,
   onShareAppMessage: onShareAppMessage,
   navigateToRespond: navigateToRespond,
   navigateToDetail: navigateToDetail,
   shareToAnswer: shareToAnswer,
   navigateToTagDetail: navigateToTagDetail,
   guanzhuClick: guanzhuClick,
+  previewImage: previewImage,
+  showSortList: showSortList,
+  clickBackView: clickBackView,
+  clickSortItem: clickSortItem,
 })

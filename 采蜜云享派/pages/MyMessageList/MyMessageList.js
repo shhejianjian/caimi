@@ -55,7 +55,13 @@ var getNewLetter = function (){
       if(data.length>0){
         lasttime = data[0].timestamp;
         for (var i = 0; i < data.length; i++) {
+          if (data[i].imageList.length > 0){
+            data[i].imageList[0] = simpleLib.baseUrl + data[i].imageList[0];
+          } else {
+            data[i].imageList = [];
+          }
           messageArr.push(data[i]);
+
         }
         simpleLib.setData(route, {
           messageList: messageArr,
@@ -115,6 +121,11 @@ var getMessageList = function (){
       for (var i = 0; i < data.length; i++) {
         var date = simpleLib.getTime(data[i].timestamp);
         data[i].date = date;
+        if (data[i].imageList.length>0) {
+          data[i].imageList[0] = simpleLib.baseUrl + data[i].imageList[0];
+        } else {
+          data[i].imageList = [];
+        }
         messageArr.unshift(data[i]);
       }
       lasttime = messageArr[messageArr.length-1].timestamp;
@@ -168,8 +179,6 @@ var bindConfirm = function (event){
           messageList: messageArr,
         });
         setBottom();
-
-        
       }
       
     },
@@ -179,6 +188,94 @@ var bindConfirm = function (event){
   })
 };
 
+var chooseImage = function () {
+  wx.chooseImage({
+    count: 1, // 默认9
+    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+    success: function (res) {
+      // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+      simpleLib.setData(route, {
+        imageList: res.tempFilePaths,
+      });
+      uploadImg(res.tempFiles);
+    }
+  })
+};
+
+//查看已压缩的图片
+var previewImage = function (e) {
+  var current = e.target.dataset.src;
+  var imageList = e.currentTarget.dataset.imagelist;
+  wx.previewImage({
+    current: current,
+    urls: imageList,
+  })
+};
+
+
+var chooseImageListArr = [];
+var uploadImg = function (imgSrc) {
+  console.log(imgSrc);
+  chooseImageListArr = [];
+    wx.uploadFile({
+      url: simpleLib.baseUrl + '/system/file/upload',
+      filePath: imgSrc[0].path,
+      name: 'attachment',
+      formData: {
+        name: 'attachment',
+        filename: imgSrc[0] + '.jpg',
+      },
+      success: function (res) {
+        console.log(res);
+        if (res.statusCode == 200) {
+          var dataInfo = JSON.parse(res.data);
+          chooseImageListArr.push(dataInfo);
+          wx.request({
+            url: simpleLib.baseUrl + '/api/v1/caimi/message',
+            data: {
+              content: '',
+              toUser: {
+                objectId: userID
+              },
+              imageList: chooseImageListArr
+            },
+            header: {
+              'Cookie': 'SESSION=' + simpleLib.getGlobalData().SESSION
+            },
+            method: 'POST',
+            success: function (res) {
+              console.log(res.data)
+              if (res.statusCode == 200) {
+                simpleLib.getGlobalData().isSend = '1';
+                var data = {
+                  avatar: simpleLib.getGlobalData().user.avatar,
+                  imageList: imgSrc[0].path,
+                  timestamp: res.data.sendTime,
+                  mine: 1,
+                  successive: res.data.successive
+                }
+                messageArr.push(data);
+                console.log(messageArr);
+                simpleLib.setData(route, {
+                  textValue: '',
+                  messageList: messageArr,
+                });
+                setBottom();
+              }
+
+            },
+            fail: function (res) {
+
+            }
+          })
+        }
+      },
+      fail: function (res) {
+
+      },
+    })
+};
 
 
 Page({
@@ -190,4 +287,6 @@ Page({
   onUnload: onUnload,
   bindConfirm: bindConfirm,
   toupper: toupper,
+  chooseImage: chooseImage,
+  previewImage: previewImage,
 })

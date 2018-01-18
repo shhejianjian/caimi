@@ -26,7 +26,7 @@
                     </view>
                     <view class="shop-rightView"> 
                       <view class="titleAndMoney"> 
-                        <view class="shop-title">{{shop.name}}</view>
+                        <view class="shop-title">{{shop.title}}</view>
                         <view class="shop-money">{{shop.money}}</view>
                       </view>
                       <view class="shop-teacher"> {{shop.teacher}} · {{shop.teacherIntro}}</view>

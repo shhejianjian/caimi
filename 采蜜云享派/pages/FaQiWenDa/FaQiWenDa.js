@@ -282,13 +282,19 @@ var nextStep = function(){
     for(var i = 0;i<addTagArr.length;i++){
       tagsIdList.push(addTagArr[i].tagId);
     }
-    // if(questionPrice.length > 0){
+    var price = 0;
+    if(questionPrice.length == 0){
+      price = 0;
+    } else {
+      price = questionPrice;
+    }
+      simpleLib.loadingToast();
       wx.request({
         url: simpleLib.baseUrl + '/api/v1/caimi/topic',
         data: {
           title: questionTitle,
           content: questionContent,
-          reward: questionPrice,
+          reward: price,
           tags: tagsIdList,
           imageList:chooseImageListArr
         },
@@ -297,6 +303,7 @@ var nextStep = function(){
         },
         method: 'POST',
         success: function (res) {
+          wx.hideLoading();
           console.log(res.data)
           if (res.statusCode == 200) {
             simpleLib.toast("发布成功");
@@ -305,12 +312,14 @@ var nextStep = function(){
               wx.redirectTo({
                 url: '/pages/WenDaPage/WenDaPage?topicId=' + res.data.topicId,
               })
-            }, 2000);
+            },2000);
           } else {
+            
             simpleLib.failToast(res.data.error)
           }
         },
         fail: function (res) {
+          wx.hideLoading();
           simpleLib.failToast("发布失败")
         }
       })
@@ -407,7 +416,8 @@ var uploadImg = function (imgSrc) {
         console.log(res);
         if(res.statusCode == 200){
           var dataInfo = JSON.parse(res.data);
-          chooseImageListArr.push(dataInfo.tempFilename);
+
+          chooseImageListArr.push(dataInfo);
           console.log(chooseImageListArr);
         }
       },

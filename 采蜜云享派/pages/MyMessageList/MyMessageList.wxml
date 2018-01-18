@@ -15,6 +15,9 @@
           </view>
           <view class='left-item-content'>{{item.content}}
             <view class='leftsub-item-content'></view>
+            <view wx:if="{{item.imageList.length>0}}" bindtap='previewImage' data-imagelist='{{item.imageList}}' data-src="{{item.imageList[0]}}">
+              <image class='contentImage' src='{{item.imageList[0]}}'></image>
+            </view>
           </view>
 
         </view>
@@ -22,6 +25,9 @@
         <view class='rightView' wx:if="{{item.mine==1}}">
           <view class='right-item-content'>{{item.content}}
               <view class='rightsub-item-content'></view>
+              <view wx:if="{{item.imageList.length>0}}"  bindtap='previewImage' data-imagelist='{{item.imageList}}' data-src="{{item.imageList[0]}}">
+                <image class='contentImage' src='{{item.imageList[0]}}'></image>
+              </view>
           </view>
           <view class='iconView2'>
             <image class='right-item-icon' src='{{item.avatar}}'></image>
@@ -42,7 +48,7 @@
 
 <view class='bottomInputView'>
     <input class='inputView' value='{{textValue}}' maxlength='-1' bindconfirm='bindConfirm' confirm-type='发送' confirm-hold='true'></input>
-    <view>
+    <view bindtap='chooseImage'>
       <image class='bottomImage' src='../../image/charutupianicon.png'></image>
     </view>
     <view>

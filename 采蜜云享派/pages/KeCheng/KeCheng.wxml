@@ -89,11 +89,14 @@
                       <view class="shop-rightView"> 
                         <view class="titleAndMoney"> 
                           <view class="shop-title">{{shop.name}}</view>
-                          <view class="shop-money">{{shop.realPrice}}</view>
+                          <view class='pecentMoneyView' wx:if="{{shop.pricingRule}}">
+                            <view class='shop-percent'>-{{shop.percentCount}}%</view>
+                            <view class="shop-money">{{shop.realPriceStr}}</view>
+                          </view>
                         </view>
                         <view class='teacherAndBasePriceView'>
                           <view class="shop-teacher"> {{shop.teacher}} | {{shop.teacherIntro}}</view>
-                          <view class='shop-referencePrice'>{{shop.referencePrice}}</view>
+                          <!-- <view class='shop-referencePrice'>{{shop.referencePrice}}</view> -->
                         </view>
                         <view class='shop-tips'>{{shop.tips}}</view>
                         <view class="timeAndSummry" wx:if="{{!shop.pricingRule}}"> 

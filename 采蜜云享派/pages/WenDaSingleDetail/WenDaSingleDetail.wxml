@@ -5,7 +5,7 @@
 
       <view class='top-tagView'>
           <view class='top-tagfirst'>
-            <block wx:for="{{answerInfo.topicInfo.tagList}}" wx:for-item="item">
+            <block wx:for="{{answerInfo.topicInfo.tagList}}" wx:for-item="item" wx:key="index">
               <view class='top-tag'>{{item.name}}</view>
             </block>
             <view class='top-time' wx:if="{{answerInfo.topicInfo.solved==0}}">剩余{{answerInfo.questiondate}}</view>
@@ -33,6 +33,14 @@
         <view class='richTextView'>
           <rich-text class="scribe-content" nodes="{{answerInfo.content}}" ></rich-text>
         </view>
+
+                  <view class='imageitemView' >
+                    <block wx:for="{{answerInfo.imageList}}" wx:for-item="image" wx:key="index">
+                      <view data-imagelist='{{answerInfo.imageList}}' bindtap='previewImage' data-index='{{index}}'>
+                        <image class='imageItem' src='{{baseUrl}}{{image}}'></image>
+                      </view>
+                    </block>
+                  </view>
 
         <view class='line'></view>
 

@@ -315,3 +315,14 @@ letter-spacing: 0;
   color: #FFA900;
   letter-spacing: 0;
 }
+.imageitemView{
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20rpx;
+  margin-left: 40rpx;
+}
+.imageItem{
+  margin: 10rpx;
+  width: 200rpx;
+  height: 200rpx;
+}
