@@ -425,7 +425,7 @@ var onShow = function (){
 var showReport = function (event) {
   var showContent = event.currentTarget.dataset.content;
   wx.showActionSheet({
-    itemList: ['回复', '举报'],
+    itemList: ['举报','回复'],
     success: function (res) {
       console.log(res.tapIndex)
       if(res.tapIndex == 1){

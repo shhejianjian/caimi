@@ -60,9 +60,9 @@ var getLessonList = function (url) {
         var date = simpleLib.getTime(lessonData[i].lastUpdateTime);
         lessonData[i].date = date;
         if(lessonData[i].courseInfo){
-          lessonData[i].cover = lessonData[i].courseInfo.cover.split('.')[0] + '!128_128.jpg';
+          lessonData[i].cover = lessonData[i].courseInfo.cover;
         } else {
-          lessonData[i].cover = lessonData[i].cover.split('.')[0] + '!128_128.jpg';
+          lessonData[i].cover = lessonData[i].cover;
         }
         
         lessonData[i].realPrice = '￥' + lessonData[i].realPrice;

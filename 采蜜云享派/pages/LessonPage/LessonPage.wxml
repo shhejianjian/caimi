@@ -1,6 +1,6 @@
 <view class="topView">
   <view class='top-titleView'>
-    <image class='top-image' src='{{baseUrl}}{{lessonDataInfo.cover}}'></image>
+    <image class='top-image' src='{{lessonDataInfo.cover}}'></image>
     <view class='top-titleAndContent'>
       <view class="top-title">{{lessonDataInfo.name}}</view>
       <view class="top-type">

@@ -13,6 +13,7 @@ var onShow = function (){
   getNewLetter();
   if (simpleLib.getGlobalData().isSend == '1'){
     getMessageListInfo();
+    simpleLib.getGlobalData().isSend = '';
   }
 };
 

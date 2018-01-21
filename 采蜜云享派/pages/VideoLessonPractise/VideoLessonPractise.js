@@ -131,6 +131,9 @@ var commit = function () {
     sureAnswerArr.push(questionParams);
   }
   console.log(sureAnswerArr);
+  if (sureAnswerArr.length != 5) {
+    return;
+  }
   wx.showLoading({
     title: '正在交卷',
   });

@@ -1536,29 +1536,14 @@
   }
 
   function getDateOffset(m) {
-    // On Firefox.24 Date#getTimezoneOffset returns a floating point.
-    // https://github.com/moment/moment/pull/1871
+
     return -Math.round(m._d.getTimezoneOffset() / 15) * 15;
   }
 
-  // HOOKS
-
-  // This function will be called whenever a moment is mutated.
-  // It is intended to keep the offset in sync with the timezone.
+ 
   utils_hooks__hooks.updateOffset = function () { };
 
-  // MOMENTS
 
-  // keepLocalTime = true means only change the timezone, without
-  // affecting the local hour. So 5:31:26 +0300 --[utcOffset(2, true)]-->
-  // 5:31:26 +0200 It is possible that 5:31:26 doesn't exist with offset
-  // +0200, so we adjust the time as needed, to be valid.
-  //
-  // Keeping the time actually adds/subtracts (one hour)
-  // from the actual represented time. That is why we call updateOffset
-  // a second time. In case it wants us to change the offset again
-  // _changeInProgress == true case, then we have to adjust, because
-  // there is no such time in the given timezone.
   function getSetOffset(input, keepLocalTime) {
     var offset = this._offset || 0,
       localAdjust;
@@ -1685,7 +1670,6 @@
 
   function create__createDuration(input, key) {
     var duration = input,
-      // matching against regexp is expensive, do it on demand
       match = null,
       sign,
       ret,
@@ -3059,13 +3043,7 @@
   var iso_string__abs = Math.abs;
 
   function iso_string__toISOString() {
-    // for ISO strings we do not use the normal bubbling rules:
-    //  * milliseconds bubble up until they become hours
-    //  * days do not bubble at all
-    //  * months bubble up until they become years
-    // This is because there is no context-free conversion between hours and days
-    // (think of clock changes)
-    // and also not between days and months (28-31 days per month)
+   
     var seconds = iso_string__abs(this._milliseconds) / 1000;
     var days = iso_string__abs(this._days);
     var months = iso_string__abs(this._months);
@@ -3092,8 +3070,7 @@
     var total = this.asSeconds();
 
     if (!total) {
-      // this is the same as C#'s (Noda) and python (isodate)...
-      // but not other JS (goog.date)
+
       return 'P0D';
     }
 

@@ -103,7 +103,7 @@
 
                   <view class="shop-contentView" bindtap="navigateToBuyLesson" data-contentype="{{shop.contentType}}" data-objectid="{{shop.courseId}}" data-subscribed="{{shop.subscribed}}" data-pricingrule="{{shop.pricingRule}}"> 
                   <view>
-                    <image class="userIcon" src="{{baseUrl}}{{shop.cover}}"> </image>
+                    <image class="userIcon" src="{{shop.cover}}"> </image>
                     </view>
                     <view class="shop-rightView"> 
                       <view class="titleAndMoney"> 

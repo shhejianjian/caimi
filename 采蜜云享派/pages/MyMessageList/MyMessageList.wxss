@@ -38,7 +38,7 @@ page{
 .itemView{
   display: flex;
     flex-flow: row nowrap;
-   padding: 15rpx 40rpx 15rpx 40rpx; 
+   padding: 15rpx 40rpx 25rpx 40rpx; 
 }
 .leftView{
   display: flex;

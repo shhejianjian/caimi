@@ -1,6 +1,6 @@
 <view class="topView">
     <view class='top-videoView'>
-        <video class='Video' id="myVideo" fixed="{{true}}" src="{{baseUrl}}{{videoUrl}}" danmu-list="{{danmuList}}" controls custom-cache="{{false}}"></video>
+        <video class='Video' id="myVideo" fixed="{{true}}" src="{{videoUrl}}" danmu-list="{{danmuList}}" controls custom-cache="{{false}}"></video>
     </view>
     
     <view class="topFirstView" >
@@ -102,7 +102,7 @@
 
                   <view class="shop-contentView" bindtap="navigateToBuyLesson" data-contentype="{{shop.contentType}}" data-objectid="{{shop.courseId}}" data-subscribed="{{shop.subscribed}}" data-pricingrule="{{shop.pricingRule}}"> 
                   <view>
-                    <image class="userIcon" src="{{baseUrl}}{{shop.cover}}"> </image>
+                    <image class="userIcon" src="{{shop.cover}}"> </image>
                     </view>
                     <view class="shop-rightView"> 
                       <view class="titleAndMoney"> 

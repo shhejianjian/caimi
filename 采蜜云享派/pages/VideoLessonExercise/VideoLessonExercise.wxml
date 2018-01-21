@@ -1,6 +1,6 @@
 <view class="topView">
     <view class='top-videoView'>
-        <video class='Video' id="myVideo" src="{{baseUrl}}{{videoUrl}}" danmu-list="{{danmuList}}" controls custom-cache="{{false}}"></video>
+        <video class='Video' id="myVideo" src="{{videoUrl}}" danmu-list="{{danmuList}}" controls custom-cache="{{false}}"></video>
     </view>
 
     <view class="topFirstView" >

@@ -51,7 +51,7 @@
     <view bindtap='chooseImage'>
       <image class='bottomImage' src='../../image/charutupianicon.png'></image>
     </view>
-    <view>
+    <view bindtouchstart='startRecord' bindtouchend='endRecord'>
       <image class='bottomImage2' src='../../image/yuyinicon.png'></image>
     </view>
 </view>

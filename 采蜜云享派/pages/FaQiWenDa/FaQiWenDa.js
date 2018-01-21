@@ -405,11 +405,11 @@ var uploadImg = function (imgSrc) {
   chooseImageListArr = [];
   for (var i = 0; i < imgSrc.length; i++) {
     wx.uploadFile({
-      url: simpleLib.baseUrl + '/system/file/upload',
+      url: simpleLib.imageUploadUrl,
       filePath: imgSrc[i].path,
-      name: 'attachment',
+      name: 'file',
       formData: {
-        name: 'attachment',
+        name: 'file',
         filename: i + '.jpg',
       },
       success: function (res) {
@@ -417,7 +417,9 @@ var uploadImg = function (imgSrc) {
         if(res.statusCode == 200){
           var dataInfo = JSON.parse(res.data);
 
-          chooseImageListArr.push(dataInfo);
+          chooseImageListArr.push({
+            fileInfo:dataInfo
+          });
           console.log(chooseImageListArr);
         }
       },

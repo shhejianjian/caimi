@@ -88,7 +88,6 @@ var changePhoto = function (){
     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
     success: function (res) {
       // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-      console.log(res.tempFilePaths[0]);
       imageList: res.tempFilePaths,
         uploadImg(res.tempFilePaths[0]);
     }
@@ -98,20 +97,20 @@ var changePhoto = function (){
 
 var uploadImg = function (imgSrc) {
   wx.uploadFile({
-    url: simpleLib.baseUrl + '/system/file/upload',
+    url: simpleLib.imageUploadUrl,
     filePath: imgSrc,
-    name: 'attachment',
+    name: 'file',
     formData: {
-      name: 'attachment',
+      name: 'file',
       filename: imgSrc + '.jpg',
     },
     success: function (res) {
       var data = JSON.parse(res.data);
-
+      console.log(data);
       wx.request({
         url: simpleLib.baseUrl + '/api/v1/caimi/user/avatar',
         data: {
-          avatar: data.tempFilename,
+          avatar: data.fileName,
         },
         header: {
           'Cookie': 'SESSION=' + simpleLib.getGlobalData().SESSION

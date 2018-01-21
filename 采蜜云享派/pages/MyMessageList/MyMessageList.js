@@ -118,22 +118,24 @@ var getMessageList = function (){
     success: function (res) {
       console.log(res.data)
       var data = res.data.content;
-      for (var i = 0; i < data.length; i++) {
-        var date = simpleLib.getTime(data[i].timestamp);
-        data[i].date = date;
-        if (data[i].imageList.length>0) {
-          data[i].imageList[0] = simpleLib.baseUrl + data[i].imageList[0];
-        } else {
-          data[i].imageList = [];
+      if(data.length>0){
+        for (var i = 0; i < data.length; i++) {
+          var date = simpleLib.getTime(data[i].timestamp);
+          data[i].date = date;
+          if (data[i].imageList.length > 0) {
+            data[i].imageList[0] = simpleLib.baseUrl + data[i].imageList[0];
+          } else {
+            data[i].imageList = [];
+          }
+          messageArr.unshift(data[i]);
         }
-        messageArr.unshift(data[i]);
-      }
-      lasttime = messageArr[messageArr.length-1].timestamp;
-      simpleLib.setData(route, {
-        messageList: messageArr
-      });
-      if(currentPage==1){
-        setBottom();
+        lasttime = messageArr[messageArr.length - 1].timestamp;
+        simpleLib.setData(route, {
+          messageList: messageArr
+        });
+        if (currentPage == 1) {
+          setBottom();
+        }
       }
     },
     fail: function (res) {
@@ -219,18 +221,23 @@ var uploadImg = function (imgSrc) {
   console.log(imgSrc);
   chooseImageListArr = [];
     wx.uploadFile({
-      url: simpleLib.baseUrl + '/system/file/upload',
+      url: simpleLib.imageUploadUrl,
       filePath: imgSrc[0].path,
-      name: 'attachment',
+      name: 'file',
       formData: {
-        name: 'attachment',
+        name: 'file',
         filename: imgSrc[0] + '.jpg',
       },
       success: function (res) {
-        console.log(res);
+        
         if (res.statusCode == 200) {
           var dataInfo = JSON.parse(res.data);
-          chooseImageListArr.push(dataInfo);
+          console.log(dataInfo);
+          var showImage = [];
+          showImage.push(dataInfo.link);
+          chooseImageListArr.push({
+            fileInfo: dataInfo
+          });
           wx.request({
             url: simpleLib.baseUrl + '/api/v1/caimi/message',
             data: {
@@ -250,7 +257,7 @@ var uploadImg = function (imgSrc) {
                 simpleLib.getGlobalData().isSend = '1';
                 var data = {
                   avatar: simpleLib.getGlobalData().user.avatar,
-                  imageList: imgSrc[0].path,
+                  imageList: showImage,
                   timestamp: res.data.sendTime,
                   mine: 1,
                   successive: res.data.successive
@@ -278,6 +285,32 @@ var uploadImg = function (imgSrc) {
 };
 
 
+var startRecord = function (event){
+  console.log(event);
+  wx.showLoading({
+    title: '正在录音',
+  })
+  wx.startRecord({
+    success: function (res) {
+      console.log(res);
+      var tempFilePath = res.tempFilePath
+    },
+    fail: function (res) {
+      //录音失败
+    }
+  })
+};
+
+var endRecord = function (event){
+  console.log(event);
+  wx.stopRecord({
+    success: function (res) {
+      console.log(res);
+      wx.hideLoading();
+    },
+  });
+};
+
 Page({
   data: {
     textValue:'',
@@ -289,4 +322,6 @@ Page({
   toupper: toupper,
   chooseImage: chooseImage,
   previewImage: previewImage,
+  startRecord: startRecord,
+  endRecord: endRecord,
 })

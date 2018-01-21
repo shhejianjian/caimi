@@ -58,7 +58,7 @@ var getLessonList = function (){
         for (var j = 0; j < subData.length;j++){
           var date = simpleLib.getTime(subData[j].lastUpdateTime);
           subData[j].date = date;
-          subData[j].cover = subData[j].cover.split('.')[0]+'!128_128.jpg';
+          // subData[j].cover = subData[j].cover.split('.')[0]+'!128_128.jpg';
           if (!subData[j].realPrice){
             subData[j].realPriceStr = '';
           } else {

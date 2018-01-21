@@ -34,9 +34,7 @@ var cancel = function (){
 };
 var press = function (){
   clickPreview();
-  wx.showLoading({
-    title: '正在加载',
-  });
+  simpleLib.loadingToast();
   wx.request({
     url: simpleLib.baseUrl + '/api/v1/caimi/user/profile',
     data: {

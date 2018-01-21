@@ -66,6 +66,9 @@ var token = "99290192-67d2-4bac-8fc2-3949429da864";
 //var baseUrl = "https://kjgk.natapp4.cc/caimi";
 //var baseUrl = "http://140.143.130.252";
 var baseUrl = "http://pub.caimi.group";
+var imageUploadUrl = "http://img.caimi.group/web/upload/file";
+var audioUploadUrl = "http://audio.caimi.group/web/upload/file";
+
 
 var getScreenWidth = function () {
     wx.getSystemInfo({
@@ -222,6 +225,8 @@ module.exports.token = token;
 module.exports.getScreenWidth = getScreenWidth;
 module.exports.getScreenHeight = getScreenHeight;
 module.exports.baseUrl = baseUrl;
+module.exports.imageUploadUrl = imageUploadUrl;
+module.exports.audioUploadUrl = audioUploadUrl;
 module.exports.getScreenScale = getScreenScale;
 module.exports.getTime = getTime;
 module.exports.lastTime = lastTime;
