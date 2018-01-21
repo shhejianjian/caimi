@@ -29,9 +29,9 @@
         </view>
 
 
-        <view class='yuyinView'>
+        <!-- <view class='yuyinView'>
           <image class='yuyinImage' src='../../image/yuyinicon.png'></image>
-        </view>
+        </view> -->
 
 
       </view>

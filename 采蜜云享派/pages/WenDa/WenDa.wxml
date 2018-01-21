@@ -103,10 +103,10 @@
                     <view  bindtap="navigateToDetail" data-topicid='{{shop.topicId}}'>
                       <view class='titleAndMoney'>
                         <view class="shop-title">{{shop.title}}</view>
-                        <view class='shop-moneyView'>
+                        <!-- <view class='shop-moneyView'>
                           <image class='shop-moneyImage' src='../../image/money.png'></image>
                           <view class="shop-money">赏金：￥{{shop.reward}}</view>
-                        </view>
+                        </view> -->
                       </view>
 
                       <view class='shop-imageView' wx:if="{{shop.isPublic == 1}}"> 

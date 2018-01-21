@@ -11,7 +11,8 @@
       <view>
         <view class="userName">{{userInfo.nickName}}</view>
         <view class="learnTitle">{{userInfo.intro || ''}}</view>
-        <view class="learnTitle">{{userInfo.answerCount}}个回答 · {{userInfo.income}}元收入</view>
+        <view class="learnTitle">{{userInfo.answerCount}}个回答</view>
+         <!-- · {{userInfo.income}}元收入 -->
       </view>
 
       <view wx:if="{{isSelf==0}}" bindtap='guanzhuClick' data-userid='{{userInfo.userId}}' data-followname='{{userInfo.followStr}}'>
@@ -46,9 +47,10 @@
                     <view class='usericonAndTitle'>
                       <image class="shop-icon" src="{{shop.userAvatar}}"> </image>
                       <view class='shop-iconcontent'>
-                        <view>{{shop.userNickName}}发布了一个金额为</view>
-                        <view class='moneyTitle'>￥{{shop.reward}}</view>
-                        <view class='shop-moneySection'>的悬赏</view>
+                        <view>{{shop.userNickName}}发布了一个问题</view>
+                        <!-- 了一个金额为 -->
+                        <!-- <view class='moneyTitle'>￥{{shop.reward}}</view>
+                        <view class='shop-moneySection'>的悬赏</view> -->
                       
                       </view>
                     </view>
@@ -87,9 +89,9 @@
                       <image class="shop-icon" src="{{shop.userAvatar}}"> </image>
                       <view class='shop-iconcontent'>
                         <view>{{shop.userNickName}}回答了一个问题</view>
-                        <view wx:if="{{shop.reward>0}}">，获得了</view>
+                        <!-- <view wx:if="{{shop.reward>0}}">，获得了</view>
                         <view wx:if="{{shop.reward>0}}" class='moneyTitle'>￥{{shop.reward}}</view>
-                        <view wx:if="{{shop.reward>0}}" class='shop-moneySection'>的赏金</view>
+                        <view wx:if="{{shop.reward>0}}" class='shop-moneySection'>的赏金</view> -->
                       </view>
                     </view>
                     <view class='shop-title'>{{shop.topicInfo.title}}</view>
@@ -121,10 +123,10 @@
                     <view  bindtap="navigateToDetail" data-topicid='{{shop.topicId}}'>
                       <view class='titleAndMoney'>
                         <view class="shop-title">{{shop.title}}</view>
-                        <view class='shop-moneyView'>
+                        <!-- <view class='shop-moneyView'>
                           <image class='shop-moneyImage' src='../../image/money.png'></image>
                           <view class="shop-money">赏金：￥{{shop.reward}}</view>
-                        </view>
+                        </view> -->
                       </view>
 
 

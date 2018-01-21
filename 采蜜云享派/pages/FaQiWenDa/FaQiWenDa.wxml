@@ -19,9 +19,9 @@
         <view class="text-section" wx:if="{{step==3}}">
           <input class='questioninput' placeholder-class="placeholder" value='{{creatTagText}}' bindinput='thirdInputChange' disabled='{{isEnable}}'  placeholder="至少添加一个基础标签后可输入(6个字符以内)"  maxlength='6' />
         </view>
-        <view class="text-section" wx:if="{{step==4}}">
+        <!-- <view class="text-section" wx:if="{{step==4}}">
           <input class='questioninput' placeholder-class="placeholder" type="number" value='{{questionPriceText}}' bindinput='forthInputChange'  placeholder="您可以悬赏赏金来增加问题关注度" maxlength='-1' />
-        </view>
+        </view> -->
 
         <view class='comment-line'></view>
 
@@ -86,7 +86,7 @@
           <view class='comment-line'></view>
         </view>
 
-        <view class='priceTip' wx:if="{{step==4}}">
+        <!-- <view class='priceTip' wx:if="{{step==4}}">
           <view class='tip-title'>1.您可以跳过设置悬赏直接发布问题</view> 
           <view class='tip-title'>2.用户有7天时间通过回答来参加优质问答评选</view>
           <view class='tip-title'>3.当您的问题至少有1个回答时，您可以从回答中评选出优质回答（至多三个至少一个）</view>
@@ -101,7 +101,7 @@
             <view class="zerenshengming" bindtap='showToastModel'>责任声明</view>
           </view>
           <view class='comment-line'></view>
-        </view>
+        </view> -->
         
 
 

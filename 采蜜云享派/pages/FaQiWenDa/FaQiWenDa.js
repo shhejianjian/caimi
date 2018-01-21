@@ -265,29 +265,28 @@ var nextStep = function(){
     }
     
   } else if(this.data.step == 2){
-    simpleLib.setData(route, {
-      step: 3,
-    });
+    
+      simpleLib.setData(route, {
+        step: 3,
+        nextStepText: '发布'
+      });
+    
   } else if (this.data.step == 3) {
     if (addTagArr.length > 0) {
-      simpleLib.setData(route, {
-        step: 4,
-        nextStepText:'发布'
-      });
-    } else {
-      simpleLib.tishiToast("请至少添加一个标签");
-    }
-  } else if (this.data.step == 4) {
-    var tagsIdList = [];
-    for(var i = 0;i<addTagArr.length;i++){
-      tagsIdList.push(addTagArr[i].tagId);
-    }
-    var price = 0;
-    if(questionPrice.length == 0){
-      price = 0;
-    } else {
-      price = questionPrice;
-    }
+      // simpleLib.setData(route, {
+      //   step: 4,
+        
+      // });
+      var tagsIdList = [];
+      for (var i = 0; i < addTagArr.length; i++) {
+        tagsIdList.push(addTagArr[i].tagId);
+      }
+      var price = 0;
+      if (questionPrice.length == 0) {
+        price = 0;
+      } else {
+        price = questionPrice;
+      }
       simpleLib.loadingToast();
       wx.request({
         url: simpleLib.baseUrl + '/api/v1/caimi/topic',
@@ -296,7 +295,7 @@ var nextStep = function(){
           content: questionContent,
           reward: price,
           tags: tagsIdList,
-          imageList:chooseImageListArr
+          imageList: chooseImageListArr
         },
         header: {
           'Cookie': 'SESSION=' + simpleLib.getGlobalData().SESSION
@@ -312,9 +311,9 @@ var nextStep = function(){
               wx.redirectTo({
                 url: '/pages/WenDaPage/WenDaPage?topicId=' + res.data.topicId,
               })
-            },2000);
+            }, 2000);
           } else {
-            
+
             simpleLib.failToast(res.data.error)
           }
         },
@@ -323,6 +322,12 @@ var nextStep = function(){
           simpleLib.failToast("发布失败")
         }
       })
+    } else {
+      simpleLib.tishiToast("请至少添加一个标签");
+    }
+    
+  // } else if (this.data.step == 4) {
+    
 
     // } else {
     //   simpleLib.tishiToast("请输入问题悬赏金额");
@@ -350,13 +355,16 @@ var cancelOrPastStep = function (){
   } else if(this.data.step == 3){
     simpleLib.setData(route, {
       step: 2,
+      nextStepText: '下一步'
     });
-  } else if (this.data.step == 4) {
-    simpleLib.setData(route, {
-      step: 3,
-      nextStepText:'下一步'
-    });
+
   }
+  // } else if (this.data.step == 4) {
+  //   simpleLib.setData(route, {
+  //     step: 3,
+      
+  //   });
+  // }
 };
 
 var showToastModel = function (){

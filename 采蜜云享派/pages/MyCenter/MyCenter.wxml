@@ -12,10 +12,10 @@
       <view class='yellowView'>
       <view>
         <view class="answerCount">{{user.answerCount}}个回答</view>
-        <view class="moneyView">
+        <!-- <view class="moneyView">
           <view class="moneyCount">{{user.income}}</view>
           <view class="shouru"> 元收入</view>
-        </view> 
+        </view>  -->
       </view> 
       <image class="xiaomifeng" src="../../image/xiaomifengImage.png"> </image>
     </view>
@@ -69,7 +69,7 @@
 
 
 
-            <view class='myItemBox' bindtap='navigateToMyPurse'>
+            <!-- <view class='myItemBox' bindtap='navigateToMyPurse'>
               <view class='iconAndTitle'>
                 <image class='myItemImage' src='../../image/mySettingIcon.png'></image>
                 <view class='myItemTitle'>我的钱包</view>
@@ -78,7 +78,7 @@
                 <image class="jiantouimage" src="../../image/enter.png"></image>
               </view>
             </view>
-            <view class="line"></view>
+            <view class="line"></view> -->
 
 
 

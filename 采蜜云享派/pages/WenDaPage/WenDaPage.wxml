@@ -11,10 +11,10 @@
             <view class='top-time' wx:if="{{questionInfo.solved==0}}">剩余{{questionInfo.date}}</view>
             <view class='top-time' wx:if="{{questionInfo.solved==1}}">已解决</view>
           </view>
-          <view class='shop-moneyView'>
+          <!-- <view class='shop-moneyView'>
             <image class='shop-moneyImage' src='../../image/money.png'></image>
             <view class="shop-money">赏金：￥{{questionInfo.reward}}</view>
-          </view>
+          </view> -->
         </view>
 
         <view class='shop-title'>{{questionInfo.title}}</view>

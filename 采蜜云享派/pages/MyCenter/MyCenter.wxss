@@ -61,7 +61,7 @@
   border-radius: 10rpx;
 }
 .answerCount{
-  padding-top: 15rpx;
+  padding-top: 45rpx;
   margin-left: 40rpx;
   font-family: PingFangSC-Regular;
   font-size: 24rpx;
