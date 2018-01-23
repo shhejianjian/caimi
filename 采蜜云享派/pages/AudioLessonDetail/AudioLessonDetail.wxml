@@ -13,9 +13,9 @@
         <progress class='audio-progress' stroke-width='4' percent="{{audioProgress}}" activeColor='#FFA900' />
 
         <view class='playIconView'>
-          <image class='past-icon' src='../../image/pastSongicon.png'></image>
+          <image class='past-icon' bindtap='playPastAudio' src='../../image/pastSongicon.png'></image>
           <image class='play-icon' bindtap='playAudio' src='{{playOrStop}}'></image>
-          <image class='next-icon' src='../../image/nextSongicon.png'></image>
+          <image class='next-icon' bindtap='playNextAudio' src='../../image/nextSongicon.png'></image>
         </view>
 
       </view>
@@ -42,9 +42,9 @@
 
       <view wx:if="{{isLessonOrComment == 1}}">
         <view class="top-scrollView">
-          <scroll-view class="scroll-view_H" scroll-x="true">
+          <scroll-view class="scroll-view_H" scroll-x="true" scroll-into-view="{{toView}}">
               <block  wx:for="{{tabs}}" wx:for-item="item" wx:key="index">
-                  <view class="scroll-view_outView {{activeTab==item.objectId?'scroll-view_outView-active':''}}" bindtap="handlerTabTap" data-index="{{item.objectId}}" data-name='{{item.title}}'>
+                  <view id='{{item.objectId}}' class="scroll-view_outView {{activeTab==item.objectId?'scroll-view_outView-active':''}}" bindtap="handlerTabTap" data-index="{{item.objectId}}" data-name='{{item.title}}'>
                       <view class="outView-title {{activeTab==item.objectId?'outView-title-active':''}}">{{item.title}}</view>
                       <view class="outView-content {{activeTab==item.objectId?'outView-content-active':''}}">{{item.content}}</view>
                   </view>
@@ -126,7 +126,7 @@
 
                   <view class="shop-contentView" bindtap="navigateToBuyLesson" data-contentype="{{shop.contentType}}" data-objectid="{{shop.courseId}}" data-subscribed="{{shop.subscribed}}" data-pricingrule="{{shop.pricingRule}}">
                     <view>
-                      <image class="userIcon" src="{{shop.cover}}"> </image>
+                      <image class="userIcon" src="{{shop.avatarUrl}}"> </image>
                     </view>
                     <view class="shop-rightView"> 
                       <view class="titleAndMoney"> 
@@ -159,7 +159,7 @@
                       <view class='lessonTypeTitle'>课程文稿</view>
                     </view>
           <view class='richTextView'>
-            <rich-text class="scribe-content" nodes="{{lessonData.courseInfo.intro}}" ></rich-text>
+            <rich-text class="scribe-content" nodes="{{lessonData.intro}}" ></rich-text>
           </view>
           <view class='liuyanfloatView' bindtap='comment'>留  言</view>
             <view class='commentInputView' wx:if="{{isClickComment}}">
@@ -176,7 +176,7 @@
                 <view bindtap='navigateToUserInfo' data-userid='{{comment.userId}}'>
                   <image class='comment-image' src="{{comment.userAvatar}}"></image>
                 </view>
-                <view class='showReportView' bindtap='showReport' data-commentid='{{comment.commentId}}' data-username='{{comment.userNickName}}' data-usercontent='{{comment.content}}'>
+                <view class='showReportView' bindtap='showReport' data-commentid='{{comment.commentId}}' data-username='{{comment.userNickName}}' data-usercontent='{{comment.content}}' data-relatedtype='Comment'>
                   <view class='comment-username'>{{comment.userNickName}}</view>
                   <view class='comment-content'>{{comment.content}} </view>
                 </view>
@@ -192,7 +192,10 @@
               <rich-text class='huifu-title' nodes="<span class='huifu-user'>{{comment.replyList[1].userNickName}}:  </span>{{comment.replyList[1].content}}"></rich-text>
             </view>
 
-            <view class='huifu-count' >共{{comment.replyCount}}条回复</view>
+            <view class='huifuCounticonView'>
+              <view class='huifu-count'>共{{comment.replyCount}}条回复</view>
+              <image class='huifu-gengduoicon' src='../../image/gengduohuifu.png'></image>
+            </view>
 
                 </view>
 

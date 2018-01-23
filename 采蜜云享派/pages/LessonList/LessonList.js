@@ -60,9 +60,9 @@ var getLessonList = function (url) {
         var date = simpleLib.getTime(lessonData[i].lastUpdateTime);
         lessonData[i].date = date;
         if(lessonData[i].courseInfo){
-          lessonData[i].cover = lessonData[i].courseInfo.cover;
+          lessonData[i].avatarUrl = lessonData[i].courseInfo.avatarUrl;
         } else {
-          lessonData[i].cover = lessonData[i].cover;
+          lessonData[i].avatarUrl = lessonData[i].avatarUrl;
         }
         
         lessonData[i].realPrice = '￥' + lessonData[i].realPrice;

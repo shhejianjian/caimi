@@ -7,7 +7,7 @@
 
       <block wx:for="{{messageList}}" wx:for-item="item" wx:key="index">
         <view class='item-date' wx:if="{{item.successive==0}}">{{item.date}}</view>
-      <view class='itemView' id="#{{shop.messageId}}">
+      <view class='itemView'>
         
         <view class='leftView' wx:if="{{item.mine==0}}">
           <view class='iconView'>
@@ -27,6 +27,9 @@
               <view class='rightsub-item-content'></view>
               <view wx:if="{{item.imageList.length>0}}"  bindtap='previewImage' data-imagelist='{{item.imageList}}' data-src="{{item.imageList[0]}}">
                 <image class='contentImage' src='{{item.imageList[0]}}'></image>
+              </view>
+              <view wx:if="{{item.voiceList.length>0}}" bindtap="playVoice" data-voiceurl="{{item.voiceList[0]}}">
+                语音文件
               </view>
           </view>
           <view class='iconView2'>

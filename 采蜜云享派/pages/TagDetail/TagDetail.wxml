@@ -49,7 +49,7 @@
 
                   <view class="item-contentView" bindtap="navigateToBuyLesson" data-index='{{index}}' data-contentype="{{shop.contentType}}" data-objectid="{{shop.courseId}}" data-subscribed="{{shop.subscribed}}" data-pricingrule="{{shop.pricingRule}}"> 
                   <view>
-                    <image class="item-userIcon" src="{{shop.cover}}"> </image>
+                    <image class="item-userIcon" src="{{shop.avatarUrl}}"> </image>
                     </view>
                     <view class="item-rightView"> 
                       <view class="item-titleAndMoney"> 
@@ -91,10 +91,10 @@
                     <view  bindtap="navigateToDetail" data-topicid='{{shop.topicId}}'>
                       <view class='titleAndMoney'>
                         <view class="shop-title">{{shop.title}}</view>
-                        <view class='shop-moneyView'>
+                        <!-- <view class='shop-moneyView'>
                           <image class='shop-moneyImage' src='../../image/money.png'></image>
                           <view class="answer-money">赏金：￥{{shop.reward}}</view>
-                        </view>
+                        </view> -->
                       </view>
 
 

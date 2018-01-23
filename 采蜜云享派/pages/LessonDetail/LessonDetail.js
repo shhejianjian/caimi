@@ -2,10 +2,10 @@ var simpleLib = require('../libs/simple-lib.js');
 var route = "pages/LessonDetail/LessonDetail";
 
 var lessonListArr = [];
-var getRelatedLessonList = function () {
+var getRelatedLessonList = function (courseId) {
   lessonListArr = [];
   wx.request({
-    url: simpleLib.baseUrl + '/public/course/' + objectID + '/related',
+    url: simpleLib.baseUrl + '/public/course/' + courseId + '/related',
     data: {
     },
     header: {
@@ -13,7 +13,7 @@ var getRelatedLessonList = function () {
     },
     success: function (res) {
       console.log(res.data)
-      var lessonData = res.data.content;
+      var lessonData = res.data;
       if(lessonData){
         for (var i = 0; i < lessonData.length; i++) {
           var date = simpleLib.getTime(lessonData[i].lastUpdateTime);
@@ -77,7 +77,7 @@ var getArticalDetailInfo = function (objectid) {
       for (var i = 0; i < lessonData.courseInfo.chapterList.length; i++) {
         var subData = lessonData.courseInfo.chapterList[i].lessonList;
         for (var j = 0; j < subData.length; j++) {
-          subData[j].title = lessonData.courseInfo.chapterList[i].name + '/' + subData[j].name;
+          subData[j].title = '第' + simpleLib.NumberToChinese(i + 1) + '章' + '/' + '第' + simpleLib.NumberToChinese(j + 1) + '课';
           tabsArr.push(subData[j]);
         }
       }
@@ -170,7 +170,7 @@ var onload = function (options) {
   objectID = options.objectId;
   getArticalDetailInfo(objectID);
   loadNewDataList();
-  getRelatedLessonList();
+  getRelatedLessonList(options.courseId);
   readLessonTime();
   id = setInterval(function () {
     readLessonTime(60);
@@ -384,7 +384,7 @@ var showReport = function (event) {
         });
       } else if (res.tapIndex == 1) {
         wx.navigateTo({
-          url: '/pages/ReportView/ReportView?commentId=' + event.currentTarget.dataset.commentid + '&userName=' + event.currentTarget.dataset.username + '&content=' + event.currentTarget.dataset.usercontent,
+          url: '/pages/ReportView/ReportView?commentId=' + event.currentTarget.dataset.commentid + '&userName=' + event.currentTarget.dataset.username + '&content=' + event.currentTarget.dataset.usercontent + '&relatedType=' + event.currentTarget.dataset.relatedtype,
         })
       }
     },

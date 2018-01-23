@@ -17,7 +17,8 @@ var onload = function (options) {
     baseUrl: simpleLib.baseUrl,
     commentId:options.commentId,
     userNickName:options.userName,
-    userContent:options.content
+    userContent:options.content,
+    commentType:options.relatedType
   });
   getReportReason();
 };
@@ -58,7 +59,7 @@ var commit = function (){
     url: simpleLib.baseUrl + '/api/v1/caimi/contentReport',
     data: {
       relatedId:this.data.commentId,
-      relatedType:'Comment',
+      relatedType:this.data.commentType,
       reportReason: {
         objectId: this.data.reasonId
       },
@@ -92,6 +93,7 @@ Page({
     userContent:'',
     commentId:'',
     reasonId:'',
+    commentType:'',
   },
   onLoad: onload,
   chooseReportItem: chooseReportItem,

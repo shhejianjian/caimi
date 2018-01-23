@@ -14,7 +14,7 @@ var onload = function (options) {
 
 var inputStr = '';
 var bindinputChange = function (event){
-  inputStr = event.detail.value;
+  inputStr = (event.detail.value).trim();
 };
 
 var cancel = function (){

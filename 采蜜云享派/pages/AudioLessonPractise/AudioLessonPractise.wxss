@@ -108,6 +108,7 @@
 .detail-lianxiView{
   margin-top: 20rpx;
   margin-left: 40rpx;
+  margin-right: 40rpx;
 }
 .lianxi-title{
   font-family: PingFangSC-Semibold;

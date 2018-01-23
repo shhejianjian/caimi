@@ -15,21 +15,21 @@ var questionTag = '';
 var questionPrice = '';
 
 var firstInputChange = function (event){
-  questionTitle = event.detail.value;
+  questionTitle = (event.detail.value).trim();
   simpleLib.setData(route, {
     questionTitleText: questionTitle,
   });
   getrelatedQuestionList(questionTitle);
 };
 var secondInputChange = function (event) {
-  questionContent = event.detail.value;
+  questionContent = (event.detail.value).trim();
   simpleLib.setData(route, {
     questionContentText: questionContent,
   });
 };
 var thirdInputChange = function (event) {
   
-  questionTag = event.detail.value;
+  questionTag = (event.detail.value).trim();
   simpleLib.setData(route, {
     creatTagText: questionTag,
   });
@@ -40,7 +40,7 @@ var thirdInputChange = function (event) {
   }
 };
 var forthInputChange = function (event) {
-  questionPrice = event.detail.value;
+  questionPrice = (event.detail.value).trim();
   simpleLib.setData(route, {
     questionPriceText: questionPrice,
   });

@@ -26,9 +26,9 @@ var onload = function (options) {
     });
   }  
   getUserDetailInfo(this.data.userId);
-  getUserQuestionList(this.data.userId);
-  getUserAnswerList(this.data.userId);
-  getMyFollowList(this.data.userId);
+  getNewQuestionList(this.data.userId);
+  getNewAnswerList(this.data.userId);
+  getNewFollowList(this.data.userId);
 };
 
 var getUserDetailInfo = function (userid){
@@ -63,12 +63,24 @@ var getUserDetailInfo = function (userid){
   })
 };
 
+
+var questionListPage = 1;
 var questionListArr = [];
-var getUserQuestionList = function (userid){
+var getNewQuestionList = function (userid){
+  questionListPage = 1;
   questionListArr = [];
+  getUserQuestionList(userid);
+};
+var getMoreQuestionList = function (userid) {
+  questionListPage++;
+  getUserQuestionList(userid);
+};
+var getUserQuestionList = function (userid){
   wx.request({
     url: simpleLib.baseUrl + '/public/userProfile/' + userid + '/topic',
     data: {
+      pageNo:questionListPage,
+      pageSize:10,
     },
     header: {
       'Cookie': 'SESSION=' + simpleLib.getGlobalData().SESSION
@@ -103,12 +115,23 @@ var getUserQuestionList = function (userid){
 };
 
 
+var answerListPage = 1;
 var answerListArr = [];
-var getUserAnswerList = function (userid){
+var getNewAnswerList = function (userid) {
+  answerListPage = 1;
   answerListArr = [];
+  getUserAnswerList(userid);
+};
+var getMoreAnswerList = function (userid) {
+  answerListPage++;
+  getUserAnswerList(userid);
+};
+var getUserAnswerList = function (userid){
   wx.request({
     url: simpleLib.baseUrl + '/public/userProfile/' + userid + '/answer',
     data: {
+      pageNo:answerListPage,
+      pageSize:10,
     },
     header: {
       'Cookie': 'SESSION=' + simpleLib.getGlobalData().SESSION
@@ -137,12 +160,23 @@ var getUserAnswerList = function (userid){
   })
 };
 
-var followListArr =[];
-var getMyFollowList = function (userid){
+var followListPage = 1;
+var followListArr = [];
+var getNewFollowList = function (userid) {
+  followListPage = 1;
   followListArr = [];
+  getMyFollowList(userid);
+};
+var getMoreFollowList = function (userid) {
+  followListPage++;
+  getMyFollowList(userid);
+};
+var getMyFollowList = function (userid){
   wx.request({
     url: simpleLib.baseUrl + '/api/v1/caimi/topic/follow',
     data: {
+      pageNO:followListPage,
+      pageSize:10,
     },
     header: {
       'Cookie': 'SESSION=' + simpleLib.getGlobalData().SESSION
@@ -192,6 +226,18 @@ var changeMyFollowList = function (){
     isQuestionOrAnswer: 3,
   });
 };
+
+var onReachBottom = function () {
+  var that = this;
+  if (that.data.isQuestionOrAnswer == 1){
+    getMoreQuestionList(that.data.userId);
+  } else if (that.data.isQuestionOrAnswer == 2){
+    getMoreAnswerList(that.data.userId);
+  } else if (that.data.isQuestionOrAnswer == 3) {
+    getMoreFollowList(that.data.userId);
+  }
+};
+
 var clickPreview = function () {
   simpleLib.setData(route, {
     prevent: true
@@ -285,6 +331,7 @@ Page({
     pinglunText: '评论 ',
   },
   onLoad: onload,
+  onReachBottom: onReachBottom,
   changeQuestionList: changeQuestionList,
   changeAnswerList: changeAnswerList,
   navigateToSingleDetail: navigateToSingleDetail,

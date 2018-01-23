@@ -5,6 +5,7 @@ var route = "pages/LessonPage/LessonPage";
 
 
 //获取课程内页数据
+var detailData = '';
 var getLessonDetail = function (courseId) {
   wx.showLoading({
     title: '加载中',
@@ -17,21 +18,23 @@ var getLessonDetail = function (courseId) {
     success: function (res) {
       wx.hideLoading();
       console.log(res.data)
+
       var lessonData = res.data;
       if (lessonData.subscribed == 0){
         lessonData.subscribedStr = '订阅课程';
       } else if(lessonData.subscribed == 1){
         lessonData.subscribedStr = '播放全部';
       }
-
+      if (lessonData.pricingRule != null){
+        wx.hideShareMenu();
+      }
       lessonData.intro = lessonData.intro.replace(/<img[^>]*src=['"]([^'"]+)[^>]*>/g, function (match, capture) {
         if (capture && capture.indexOf('http') == 0) {
           return match;
         }
         return match.replace(capture, simpleLib.baseUrl +'/image/' + capture + '.jpg');
       });
-
-      
+      detailData = lessonData;
       simpleLib.setData(route, {
         lessonDataInfo: lessonData,
         scribeContent: res.data.summary
@@ -105,18 +108,19 @@ var navigateToVideoDetail = function (event){
   } else if (that.lessonDataInfo.subscribed == 1) {
     var contentType = event.currentTarget.dataset.contenttype;
     var objectId = event.currentTarget.dataset.objectid;
+    var courseId = event.currentTarget.dataset.courseid;
     var url = event.currentTarget.dataset.videourl;
     if(contentType == 3){
       wx.navigateTo({
-        url: '/pages/VideoLessonDetail/VideoLessonDetail?objectId='+objectId,
+        url: '/pages/VideoLessonDetail/VideoLessonDetail?objectId=' + objectId + '&courseId=' + courseId,
       })
     } else if (contentType == 2) {
       wx.navigateTo({
-        url: '/pages/AudioLessonDetail/AudioLessonDetail?objectId=' + objectId,
+        url: '/pages/AudioLessonDetail/AudioLessonDetail?objectId=' + objectId + '&courseId=' + courseId,
       })
     } else if (contentType == 1) {
       wx.navigateTo({
-        url: '/pages/LessonDetail/LessonDetail?objectId=' + objectId,
+        url: '/pages/LessonDetail/LessonDetail?objectId=' + objectId + '&courseId=' + courseId,
       })
     }
   }
@@ -425,18 +429,18 @@ var onShow = function (){
 var showReport = function (event) {
   var showContent = event.currentTarget.dataset.content;
   wx.showActionSheet({
-    itemList: ['举报','回复'],
+    itemList: ['回复', '举报'],
     success: function (res) {
       console.log(res.tapIndex)
-      if(res.tapIndex == 1){
+      if(res.tapIndex == 0){
         simpleLib.setData(route, {
           isClickComment: true,
           focus: true,
           isShowFloatView: false,
         });
-      } else if(res.tapIndex == 2){
+      } else if(res.tapIndex == 1){
         wx.navigateTo({
-          url: '/pages/ReportView/ReportView?commentId=' + event.currentTarget.dataset.commentid + '&userName=' + event.currentTarget.dataset.username + '&content=' + event.currentTarget.dataset.usercontent,
+          url: '/pages/ReportView/ReportView?commentId=' + event.currentTarget.dataset.commentid + '&userName=' + event.currentTarget.dataset.username + '&content=' + event.currentTarget.dataset.usercontent + '&relatedType=' + event.currentTarget.dataset.relatedtype,
         })
       }
     },
@@ -447,6 +451,7 @@ var showReport = function (event) {
 };
 
 var navigateToUserInfo = function (event){
+  
   var userId = event.currentTarget.dataset.userid;
   var isSelf = '';
   if (userId == simpleLib.getGlobalData().user.userId){
@@ -458,6 +463,23 @@ var navigateToUserInfo = function (event){
     url: '/pages/UserMainInfo/UserMainInfo?userId=' + userId + '&isSelf=' + isSelf,
   })
 };
+
+
+var onShareAppMessage = function () {
+  
+    return {
+      title: detailData.name,
+      path: 'pages/LessonPage/LessonPage?objectId=' + detailData.courseId,
+      success: function (res) {
+        simpleLib.toast('转发成功');
+      },
+      fail: function (res) {
+        simpleLib.failToast('转发失败');
+      }
+    }
+  
+};
+
 
 
 Page({
@@ -472,6 +494,7 @@ Page({
   },
   onLoad: onload,
   onShow: onShow,
+  onShareAppMessage: onShareAppMessage,
   onReachBottom: onReachBottom,
   zhankaiquanwen: zhankaiquanwen,
   navigateToCommentDetail: navigateToCommentDetail,

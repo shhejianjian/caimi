@@ -15,7 +15,6 @@ var onReady = function () {
   }
 };
 
-
 var clickPreview = function () {
   simpleLib.setData(route, {
     prevent: true
@@ -50,7 +49,6 @@ var playAudio = function () {
     });
   }
 };
-
 
 var songPlay = function () {
   let inv = setInterval(function () {

@@ -3,10 +3,10 @@ var route = "pages/AudioLessonDetail/AudioLessonDetail";
 
 
 var lessonListArr = [];
-var getRelatedLessonList = function (){
+var getRelatedLessonList = function (couesrId){
   lessonListArr = [];
   wx.request({
-    url: simpleLib.baseUrl + '/public/course/' + objectID +'/related' ,
+    url: simpleLib.baseUrl + '/public/course/' + couesrId +'/related' ,
     data: {
     },
     header: {
@@ -14,7 +14,7 @@ var getRelatedLessonList = function (){
     },
     success: function (res) {
       console.log(res.data)
-      var lessonData = res.data.content;
+      var lessonData = res.data;
       if(lessonData){
         for (var i = 0; i < lessonData.length; i++) {
           var date = simpleLib.getTime(lessonData[i].lastUpdateTime);
@@ -43,7 +43,8 @@ var handlerTabTap = function (e) {
     simpleLib.getGlobalData().isplaying = false;
     simpleLib.setData(route, {
       playOrStop: '../../image/bofangicon.png',
-      audioCurrentTime:'00:00'
+      audioCurrentTime:'00:00',
+      audioProgress: 0,
     });
   }
   audioIndex = e.currentTarget.dataset.index;
@@ -56,6 +57,9 @@ var handlerTabTap = function (e) {
   });
   
 };
+
+
+
 
 
 var tabsArr = [];
@@ -76,25 +80,10 @@ var getVideoDetailInfo = function (objectid) {
 
       lessonData = res.data;
 
-      // for (var i = 0; i < lessonData.commentInfoList.length; i++) {
-      //   var date = simpleLib.getTime(lessonData.commentInfoList[i].submitTime);
-      //   lessonData.commentInfoList[i].submitTime = date;
-      //   if (lessonData.commentInfoList[i].liked == 0) {
-      //     lessonData.commentInfoList[i].zanImg = '../../image/dianzanicon.png';
-      //   } else if (lessonData.commentInfoList[i].liked == 1) {
-      //     lessonData.commentInfoList[i].zanImg = '../../image/yizanicon.png';
-      //   }
-      // }
-
-      // for (var i = 0; i < lessonData.courseInfo.tagList.length;i++){
-      //   tagListStr = '&tag=' + lessonData.courseInfo.tagList[i].objectId;
-      // }
-      // console.log(tagListStr);
-
       for (var i = 0; i < lessonData.courseInfo.chapterList.length; i++) {
         var subData = lessonData.courseInfo.chapterList[i].lessonList;
         for (var j = 0; j < subData.length; j++) {
-          subData[j].title = lessonData.courseInfo.chapterList[i].name + '/' + subData[j].name;
+          subData[j].title = '第' + simpleLib.NumberToChinese(i+1) + '章' + '/' + '第' + simpleLib.NumberToChinese(j+1) +'课';
           tabsArr.push(subData[j]);
         }
       }
@@ -204,6 +193,54 @@ var playAudio = function (){
   }
 };
 
+var playPastAudio = function (){
+  for(var i = 0;i<tabsArr.length;i++){
+    if(objectID == tabsArr[i].objectId){
+      if(i != 0){
+        objectID = tabsArr[i-1].objectId;
+        var title = tabsArr[i - 1].title;
+        simpleLib.getGlobalData().isplaying = false;
+        simpleLib.setData(route, {
+          playOrStop: '../../image/bofangicon.png',
+          audioCurrentTime: '00:00',
+          audioProgress: 0,
+        });
+        audioIndex = objectID;
+        getVideoDetailInfo(objectID);
+        loadNewDataList();
+        simpleLib.setData(route, {
+          activeTab: objectID,
+          practiseName: title,
+        });
+      }
+    }
+  }
+};
+var playNextAudio = function (){
+  for (var i = 0; i < tabsArr.length; i++) {
+    if (objectID == tabsArr[i].objectId) {
+      if (i != tabsArr.length-1) {
+        objectID = tabsArr[i+1].objectId;
+        var title = tabsArr[i+1].title;
+        simpleLib.getGlobalData().isplaying = false;
+        simpleLib.setData(route, {
+          playOrStop: '../../image/bofangicon.png',
+          audioCurrentTime: '00:00',
+          audioProgress: 0,
+        });
+        audioIndex = objectID;
+        getVideoDetailInfo(objectID);
+        loadNewDataList();
+        simpleLib.setData(route, {
+          activeTab: objectID,
+          practiseName: title,
+        });
+      }
+    }
+  }
+};
+
+
 var onReady = function (){
   wx.onBackgroundAudioPlay(function () {
     console.log('播放了');
@@ -264,13 +301,14 @@ var id1;
 var id2;
 var onload = function (options) {
   simpleLib.setData(route, {
-    baseUrl: simpleLib.baseUrl
+    baseUrl: simpleLib.baseUrl,
+    toView: options.objectId,
   });
   objectID = options.objectId;
 
   getVideoDetailInfo(objectID);
   loadNewDataList();
-  getRelatedLessonList();
+  getRelatedLessonList(options.courseId);
   readLessonTime();
   id1 = setInterval(function () {
     readLessonTime(60);
@@ -552,7 +590,7 @@ var showReport = function (event) {
         });
       } else if (res.tapIndex == 1) {
         wx.navigateTo({
-          url: '/pages/ReportView/ReportView?commentId=' + event.currentTarget.dataset.commentid + '&userName=' + event.currentTarget.dataset.username + '&content=' + event.currentTarget.dataset.usercontent,
+          url: '/pages/ReportView/ReportView?commentId=' + event.currentTarget.dataset.commentid + '&userName=' + event.currentTarget.dataset.username + '&content=' + event.currentTarget.dataset.usercontent + '&relatedType=' + event.currentTarget.dataset.relatedtype,
         })
       }
     },
@@ -583,6 +621,7 @@ Page({
     isLessonOrComment:1,
     practiseName: '',
     playOrStop:'../../image/bofangicon.png',
+    toView: '',
   },
   onLoad: onload,
   onReachBottom: onReachBottom,
@@ -603,5 +642,7 @@ Page({
   changeArtical: changeArtical,
   navigateToBuyLesson: navigateToBuyLesson,
   showReport: showReport,
+  playNextAudio: playNextAudio,
+  playPastAudio: playPastAudio,
   navigateToUserInfo: navigateToUserInfo,
 })

@@ -288,12 +288,79 @@ var uploadImg = function (imgSrc) {
 var startRecord = function (event){
   console.log(event);
   wx.showLoading({
-    title: '正在录音',
+    title: '正在说话',
   })
   wx.startRecord({
     success: function (res) {
       console.log(res);
-      var tempFilePath = res.tempFilePath
+      if (res.errMsg == "startRecord:ok"){
+        
+        wx.uploadFile({
+          url: simpleLib.audioUploadUrl,
+          filePath: res.tempFilePath,
+          name: 'file',
+          formData: {
+            name: 'file',
+            filename: res.tempFilePath,
+          },
+          success: function (res) {
+
+            if (res.statusCode == 200) {
+              var dataInfo = JSON.parse(res.data);
+              console.log(dataInfo);
+              var voiceListArr = [];
+              voiceListArr.push(dataInfo.link);
+              var voiceArr = [];
+              voiceArr.push({
+                fileInfo: dataInfo
+              });
+              wx.request({
+                url: simpleLib.baseUrl + '/api/v1/caimi/message',
+                data: {
+                  content: '',
+                  toUser: {
+                    objectId: userID
+                  },
+                  voiceList: voiceArr
+                },
+                header: {
+                  'Cookie': 'SESSION=' + simpleLib.getGlobalData().SESSION
+                },
+                method: 'POST',
+                success: function (res) {
+                  console.log(res.data)
+                  if (res.statusCode == 200) {
+                    simpleLib.getGlobalData().isSend = '1';
+                    var data = {
+                      avatar: simpleLib.getGlobalData().user.avatar,
+                      voiceList: voiceListArr,
+                      timestamp: res.data.sendTime,
+                      mine: 1,
+                      successive: res.data.successive
+                    }
+                    messageArr.push(data);
+                    console.log(messageArr);
+                    simpleLib.setData(route, {
+                      textValue: '',
+                      messageList: messageArr,
+                    });
+                    setBottom();
+                  }
+
+                },
+                fail: function (res) {
+
+                }
+              })
+            }
+          },
+          fail: function (res) {
+
+          },
+        })
+       
+      }
+      
     },
     fail: function (res) {
       //录音失败
@@ -311,6 +378,18 @@ var endRecord = function (event){
   });
 };
 
+var playVoice = function (event){
+  var voiceUrl = event.currentTarget.dataset.voiceurl;
+  console.log(voiceUrl);
+  wx.playBackgroundAudio({
+    dataUrl: simpleLib.baseUrl + voiceUrl,
+    complete: function (res) {
+      console.log(res);
+    }
+  })
+
+};
+
 Page({
   data: {
     textValue:'',
@@ -324,4 +403,5 @@ Page({
   previewImage: previewImage,
   startRecord: startRecord,
   endRecord: endRecord,
+  playVoice: playVoice,
 })

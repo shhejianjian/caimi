@@ -45,6 +45,7 @@
   letter-spacing: 1px;
   background: #FFD100;
   border-radius: 4rpx;
+  margin-top: 8rpx;
 }
 .top-time{
   margin-left: 10rpx;
@@ -52,6 +53,7 @@
 font-size: 20rpx;
 color: #4A4A4A;
 letter-spacing: 0;
+margin-top: 8rpx;
 }
 .shop-money{
   margin-left: 10rpx;
@@ -68,6 +70,9 @@ letter-spacing: 0;
 .top-tagfirst{
   display: flex;
   align-items: center;
+  max-width: 800rpx;
+  flex-flow: wrap;
+  margin-top: -8rpx;
 }
 .shop-moneyImage{
   width: 30rpx;
@@ -212,7 +217,7 @@ letter-spacing: 0;
 .float-leftView{
   width: 50%;
   height: 100rpx;
-  background: #FFFFFF;
+  background-color: #FFFFFF !important;
   border: 1rpx solid #9B9B9B;
   font-family: PingFangSC-Semibold;
   font-size: 24rpx;
@@ -272,7 +277,7 @@ letter-spacing: 0;
   display: flex;
   flex-wrap: wrap;
   margin-top: 20rpx;
-  margin-left: 40rpx;
+  margin-left: 30rpx;
 }
 .imageItem{
   margin: 10rpx;

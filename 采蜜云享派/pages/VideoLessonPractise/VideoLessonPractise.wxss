@@ -42,11 +42,12 @@
   margin-left: -10rpx;
   margin-right: -10rpx;
   background: #FFFFFF;
-  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  box-shadow: 0 -16rpx 16rpx -16rpx rgba(0,111,255,0.50);
   border-radius: 10rpx;
 }
 .detail-lianxiView{
   margin-top: 20rpx;
+  margin-right: 40rpx;
   margin-left: 40rpx;
 }
 .lianxi-title{

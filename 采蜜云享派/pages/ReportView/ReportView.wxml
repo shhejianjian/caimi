@@ -5,10 +5,14 @@
 
        <view class='topTitleView'>
         <view class='jubaoText'>举报</view>
-        <view class='titleName'>@{{userNickName}}的评论:</view>
+        <view class='titleName' wx:if="{{commentType=='Comment'}}">@{{userNickName}}的评论:</view>
+        <view class='titleName' wx:if="{{commentType=='Answer'}}">@{{userNickName}}的回答:</view>
+        <view class='titleName' wx:if="{{commentType=='Topic'}}">@{{userNickName}}的提问:</view>
        </view>
 
-       <view class='grayView'>@{{userNickName}}的评论:{{userContent}} </view>
+       <view class='grayView' wx:if="{{commentType=='Comment'}}">@{{userNickName}}的评论:{{userContent}} </view>
+       <view class='grayView' wx:if="{{commentType=='Answer'}}">@{{userNickName}}的回答:{{userContent}} </view>
+       <view class='grayView' wx:if="{{commentType=='Topic'}}">@{{userNickName}}的提问:{{userContent}} </view>
 
 
           <view class='itemView'>

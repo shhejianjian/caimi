@@ -103,7 +103,7 @@
 
                   <view class="shop-contentView" bindtap="navigateToBuyLesson" data-contentype="{{shop.contentType}}" data-objectid="{{shop.courseId}}" data-subscribed="{{shop.subscribed}}" data-pricingrule="{{shop.pricingRule}}"> 
                   <view>
-                    <image class="userIcon" src="{{shop.cover}}"> </image>
+                    <image class="userIcon" src="{{shop.avatarUrl}}"> </image>
                     </view>
                     <view class="shop-rightView"> 
                       <view class="titleAndMoney"> 
@@ -135,7 +135,7 @@
                 <view bindtap='navigateToUserInfo' data-userid='{{comment.userId}}'>
                   <image class='comment-image' src="{{comment.userAvatar}}"></image>
                 </view>
-                <view class='showReportView' bindtap='showReport' data-commentid='{{comment.commentId}}' data-username='{{comment.userNickName}}' data-usercontent='{{comment.content}}'>
+                <view class='showReportView' bindtap='showReport' data-commentid='{{comment.commentId}}' data-username='{{comment.userNickName}}' data-usercontent='{{comment.content}}' data-relatedtype='Comment'>
                   <view class='comment-username'>{{comment.userNickName}}</view>
                   <view class='comment-content'>{{comment.content}} </view>
                 </view>
@@ -151,7 +151,10 @@
               <rich-text class='huifu-title' nodes="<span class='huifu-user'>{{comment.replyList[1].userNickName}}:  </span>{{comment.replyList[1].content}}"></rich-text>
             </view>
 
-            <view class='huifu-count' >共{{comment.replyCount}}条回复</view>
+            <view class='huifuCounticonView'>
+              <view class='huifu-count'>共{{comment.replyCount}}条回复</view>
+              <image class='huifu-gengduoicon' src='../../image/gengduohuifu.png'></image>
+            </view>
 
                 </view>
 

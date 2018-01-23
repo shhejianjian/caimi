@@ -33,3 +33,12 @@
   color: #9B9B9B;
   letter-spacing: 0;
 }
+.huifuCounticonView{
+  display: flex;
+  align-items: center;
+}
+.huifu-gengduoicon{
+  margin-top: 10rpx;
+  height: 20rpx;
+  width: 20rpx;
+}

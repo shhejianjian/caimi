@@ -209,7 +209,7 @@ letter-spacing: 0;
   top: 190rpx;
 }
 .guanzhuTitle-active{
-  margin-left: 110rpx;
+  right: 95rpx;
 }
 .shop-bottom{
     margin-top: 15rpx;

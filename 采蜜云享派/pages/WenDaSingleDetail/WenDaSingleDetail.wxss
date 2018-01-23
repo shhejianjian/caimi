@@ -45,6 +45,7 @@
   letter-spacing: 1px;
   background: #FFD100;
   border-radius: 4rpx;
+  margin-top: 8rpx;
 }
 .top-time{
   margin-left: 10rpx;
@@ -52,6 +53,8 @@
 font-size: 20rpx;
 color: #4A4A4A;
 letter-spacing: 0;
+margin-top: 8rpx;
+
 }
 .shop-money{
   margin-left: 10rpx;
@@ -68,6 +71,9 @@ letter-spacing: 0;
 .top-tagfirst{
   display: flex;
   align-items: center;
+  max-width: 800rpx;
+  flex-flow: wrap;
+  margin-top: -8rpx;
 }
 .shop-moneyImage{
   width: 30rpx;

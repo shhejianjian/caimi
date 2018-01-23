@@ -9,7 +9,7 @@
   width: 100%;
 }
 .top-image{
-  width: 95%;
+  width: 712rpx;
   margin-top: 20rpx; 
   margin-left: 20rpx; 
   margin-right: 20rpx; 
@@ -161,9 +161,12 @@
   letter-spacing: 0;
 }
 
-.lesson-item{
+.lessonListView{
   overflow-y: auto;
-  max-height: 500rpx;
+  max-height: 550rpx;
+}
+.lesson-item{
+  
 }
 .item-subTitleAndTime{
   display: flex;

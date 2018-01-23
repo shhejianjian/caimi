@@ -1,6 +1,6 @@
 <view class="topView">
   <view class='top-titleView'>
-    <image class='top-image' src='{{lessonDataInfo.cover}}'></image>
+    <image class='top-image' src='{{lessonDataInfo.coverUrl}}'></image>
     <view class='top-titleAndContent'>
       <view class="top-title">{{lessonDataInfo.name}}</view>
       <view class="top-type">
@@ -47,13 +47,14 @@
                     <view class='lessonTypeTitle'>课程安排</view>
                   </view>
 
+      <view class='lessonListView'>
         <block wx:for="{{lessonDataInfo.chapterList}}" wx:for-item="item" wx:key="index">
           <view class="lesson-item"   >
             <view class='item-title'>{{item.name}}</view>
             <view class="item-line"></view>
 
             <block wx:for="{{item.lessonList}}" wx:for-item="shop" wx:key="index" >
-              <view class='item-subTitleAndTime' bindtap='navigateToVideoDetail' data-objectid="{{shop.objectId}}" data-videourl='{{shop.url}}' data-contenttype='{{shop.contentType}}' >
+              <view class='item-subTitleAndTime' bindtap='navigateToVideoDetail' data-objectid="{{shop.objectId}}" data-courseid='{{lessonDataInfo.courseId}}' data-videourl='{{shop.url}}' data-contenttype='{{shop.contentType}}' >
                 <view class="item-subtitle {{shop.read==1?'item-subtitle-active':''}}">{{shop.name}}</view>
                 <view class="item-subtime {{shop.read==1?'item-subtime-active':''}}">{{shop.contentDurationText}}</view>
               </view>
@@ -62,7 +63,7 @@
 
           </view>
         </block>
-
+      </view>
         <view class="shop-lessonType"> 
                     <image class='lessonTypeImageThree' src='../../image/threeTypeIcon.png'></image>
                     <view class='lessonTypeTitleThree'>留言区</view>
@@ -75,7 +76,7 @@
           <view bindtap='navigateToUserInfo' data-userid='{{comment.userId}}'>
             <image class='comment-image' src="{{comment.userAvatar}}"></image>
           </view>
-          <view class='showReportView' bindtap='showReport' data-commentid='{{comment.commentId}}' data-username='{{comment.userNickName}}' data-usercontent='{{comment.content}}' data-content='{{comment.content}}'>
+          <view class='showReportView' bindtap='showReport' data-commentid='{{comment.commentId}}' data-username='{{comment.userNickName}}' data-usercontent='{{comment.content}}' data-content='{{comment.content}}' data-relatedtype='Comment'>
             <view class='comment-username'>{{comment.userNickName}}</view>
             <view class='comment-content'>{{comment.content}} </view>
           </view>
@@ -91,7 +92,10 @@
               <rich-text class='huifu-title' nodes="<span class='huifu-user'>{{comment.replyList[1].userNickName}}:  </span>{{comment.replyList[1].content}}"></rich-text>
             </view>
 
-            <view class='huifu-count'>共{{comment.replyCount}}条回复</view>
+            <view class='huifuCounticonView'>
+              <view class='huifu-count'>共{{comment.replyCount}}条回复</view>
+              <image class='huifu-gengduoicon' src='../../image/gengduohuifu.png'></image>
+            </view>
 
           </view>
 

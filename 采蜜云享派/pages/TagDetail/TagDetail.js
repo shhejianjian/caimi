@@ -73,7 +73,7 @@ var getRelatedLessonList = function (tagId,sortby) {
     title: '加载中',
   });
   wx.request({
-    url: simpleLib.baseUrl + '/public/course?' + tagId,
+    url: simpleLib.baseUrl + '/public/course?tag=' + tagId,
     data: {
       sortBy:sortby,
       pageNo: currentLessonPage,
@@ -124,7 +124,7 @@ var getMoreAnswerData = function (tagId, sortby) {
 var questionArr = [];
 var getRelatedAnswerList = function (tagId,sortby){
   wx.request({
-    url: simpleLib.baseUrl + '/public/topic?' + tagId,
+    url: simpleLib.baseUrl + '/public/topic?tag=' + tagId,
     header: {
       'Cookie': 'SESSION=' + simpleLib.getGlobalData().SESSION
     },

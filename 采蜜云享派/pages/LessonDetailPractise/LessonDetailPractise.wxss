@@ -2,7 +2,7 @@
 .topView{
   padding-top: 20rpx;
   width: 100%;
-  height: 500rpx;
+  height: 100rpx;
   background-image: linear-gradient(-180deg, #41C3FD 0%, #08A4FF 100%);
 }
 .topFirstView{
@@ -11,7 +11,7 @@
   margin-top: -20rpx;  
   margin-left: 10rpx;
   margin-right: 10rpx;
-  height: 300rpx;
+  height: 100rpx;
   background: #FFFFFF;
   box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
   border-radius: 10rpx;
@@ -22,12 +22,13 @@
   margin-right: -10rpx;
   padding-bottom: 110rpx;
   background: #FFFFFF;
-  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  box-shadow: 0 -16rpx 16rpx -16rpx rgba(0,111,255,0.50);
   border-radius: 10rpx;
 }
 .detail-lianxiView{
   margin-top: 20rpx;
   margin-left: 40rpx;
+  margin-right: 40rpx;
 }
 .lianxi-title{
   font-family: PingFangSC-Semibold;

@@ -82,29 +82,43 @@ var clickPreview = function () {
 
 var BuyCourse = function (){
   clickPreview();
-  wx.request({
-    url: simpleLib.baseUrl + '/api/v1/caimi/course/' + lessonData.courseId +'/subscribe',
-    header: {
-      'Cookie': 'SESSION=' + simpleLib.getGlobalData().SESSION
-    },
-    method:'POST',
-    success: function (res) {
-      console.log(res.data)
-      if(res.statusCode == 200){
-        simpleLib.toast("订阅成功");
-        simpleLib.getGlobalData().isSubscribe = '1';
-        setTimeout(function () {
-          wx.redirectTo({
-            url: '/pages/LessonPage/LessonPage?objectId=' + lessonData.courseId,
-          })
-        }, 2000)
-      }
+  if (!simpleLib.getGlobalData().user) {
+    wx.checkSession({
+      success: function (res) {
 
-    },
-    fail: function (res) {
-      simpleLib.failToast("订阅失败")
-    }
-  })
+        getApplicationInfo();
+
+      },
+      fail: function () {
+        // 登录
+        doLogin();
+      }
+    })
+  } else {
+    wx.request({
+      url: simpleLib.baseUrl + '/api/v1/caimi/course/' + lessonData.courseId + '/subscribe',
+      header: {
+        'Cookie': 'SESSION=' + simpleLib.getGlobalData().SESSION
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res.data)
+        if (res.statusCode == 200) {
+          simpleLib.toast("订阅成功");
+          simpleLib.getGlobalData().isSubscribe = '1';
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '/pages/LessonPage/LessonPage?objectId=' + lessonData.courseId,
+            })
+          }, 2000)
+        }
+
+      },
+      fail: function (res) {
+        simpleLib.failToast("订阅失败")
+      }
+    })
+  }
 };
 
 
@@ -174,6 +188,91 @@ var timeToString = function (duration) {
 };
 
 
+var onShareAppMessage = function () {
+  return {
+    title: lessonData.name,
+    path: 'pages/BuyLesson/BuyLesson?objectId=' + lessonData.courseId,
+    success: function (res) {
+      simpleLib.toast('转发成功');
+    },
+    fail: function (res) {
+      simpleLib.failToast('转发失败');
+    }
+  }
+};
+
+var doLogin = function () {
+  wx.login({
+    success: res => {
+      // 发送 res.code 到后台换取 openId, sessionKey, unionId
+      wx.request({
+        url: simpleLib.baseUrl + '/login/weixin',
+        method: 'GET',
+        data: {
+          code: res.code
+        },
+        success: res => {
+          console.log(res);
+          if (res.statusCode == 200) {
+            simpleLib.getGlobalData().SESSION = res.data.jsessionid;
+            getApplicationInfo();
+          }
+        }
+      })
+    }
+  })
+};
+
+var getApplicationInfo = function () {
+
+  wx.request({
+    url: simpleLib.baseUrl + '/public/getCurrentInfo',
+    header: {
+      'Cookie': 'SESSION=' + simpleLib.getGlobalData().SESSION
+    },
+    success: function (res) {
+      if (!res.data.currentUser) {
+        doLogin();
+      } else {
+        console.log(res.data.currentUser)
+        simpleLib.setData(route, {
+          user: res.data.currentUser
+        });
+        simpleLib.getGlobalData().user = res.data.currentUser;
+        wx.navigateTo({
+          url: '/pages/WenDaRespond/WenDaRespond?topicId=' + topicID,
+        })
+        if (res.data.currentUser.status == 0) {
+          wx.getUserInfo({
+            success: res => {
+              console.log(res)
+              wx.request({
+                url: simpleLib.baseUrl + '/api/v1/caimi/user/weixin',
+                method: 'PUT',
+                data: {
+                  encryptedData: res.encryptedData,
+                  iv: res.iv
+                },
+                header: {
+                  'Cookie': 'SESSION=' + simpleLib.getGlobalData().SESSION
+                },
+                success: function (res) {
+                  if (res.statusCode == 200) {
+                    getApplicationInfo();
+                  }
+
+                }
+              })
+            }
+          });
+        }
+      }
+
+
+    }
+  })
+}
+
 Page({
   data: {
     scribeContent:'',
@@ -182,6 +281,7 @@ Page({
     playOrStop: '../../image/bofangicon.png',
   },
   onLoad: onload,
+  onShareAppMessage: onShareAppMessage,
   onUnload: onUnload,
   onReady: onReady,
   zhankaiquanwen : zhankaiquanwen,

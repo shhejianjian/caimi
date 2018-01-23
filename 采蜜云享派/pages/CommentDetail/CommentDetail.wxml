@@ -42,7 +42,7 @@
                   <view bindtap='navigateToUserInfo' data-userid='{{comment.userId}}'> 
                     <image class='comment-image' src="{{comment.userAvatar}}"></image>
                   </view>
-                  <view class='showReportView' bindtap='showReport' data-commentid='{{comment.commentId}}' data-username='{{comment.userNickName}}' data-usercontent='{{comment.content}}'>
+                  <view class='showReportView' bindtap='showReport' data-commentid='{{comment.commentId}}' data-username='{{comment.userNickName}}' data-usercontent='{{comment.content}}' data-relatedtype='Comment'>
                     <view class='comment-username'>{{comment.userNickName}}</view>
                     <view wx:if="{{!comment.isHuifuComment}}" class='comment-content'>{{comment.content}} </view>
                     <view wx:else class='huifu-commentView'>

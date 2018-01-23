@@ -38,7 +38,7 @@
 
 
           <view class='audioView' wx:if="{{lessonData.showAudio}}">
-            <image class='audio-image' src='{{baseUrl}}{{lessonData.cover}}'></image>
+            <image class='audio-image' src='{{lessonData.coverUrl}}'></image>
             <view class='audio-titleAndTime'>
               <view class='audio-title'>{{lessonData.name}}</view>
               <view class='audio-time'>{{audioCurrentTime}} - {{lessonData.teacher}}</view>

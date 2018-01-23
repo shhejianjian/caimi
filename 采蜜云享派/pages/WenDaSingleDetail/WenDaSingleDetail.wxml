@@ -3,6 +3,8 @@
     <view class="topSecondView" >
       <view class="topThirdView" >
 
+
+    <view bindtap='showReport' data-relatedid='{{answerInfo.topicInfo.topicId}}' data-relatedtype='Topic' data-username='{{answerInfo.topicInfo.userNickName}}' data-usercontent='{{answerInfo.topicInfo.title}}'>
       <view class='top-tagView'>
           <view class='top-tagfirst'>
             <block wx:for="{{answerInfo.topicInfo.tagList}}" wx:for-item="item" wx:key="index">
@@ -11,26 +13,30 @@
             <view class='top-time' wx:if="{{answerInfo.topicInfo.solved==0}}">剩余{{answerInfo.questiondate}}</view>
             <view class='top-time' wx:if="{{answerInfo.topicInfo.solved==1}}">已解决</view>
           </view>
-          <!-- <view class='shop-moneyView'>
+           <!-- <view class='shop-moneyView'>
             <image class='shop-moneyImage' src='../../image/money.png'></image>
             <view class="shop-money">赏金：￥{{answerInfo.topicInfo.reward}}</view>
-          </view> -->
+          </view>  -->
         </view>
 
         <view class='shop-title'>{{answerInfo.topicInfo.title}}</view>
+    </view>
+
+
         <view class='line'></view>
 
+    <view >
         <view class='userInfoView' bindtap='navigateToUserInfo' data-userid='{{answerInfo.userId}}'>
           <view class='user-iconAndName'>
             <image class='user-icon' src='{{answerInfo.userAvatar}}'></image>
             <view class='userName'>{{answerInfo.userNickName}}</view>
           </view>
           <view class='user-time'>编辑于{{answerInfo.date}}</view>
-        
         </view>
+    </view>
 
 
-        <view class='richTextView'>
+        <view class='richTextView' bindtap='showReport'  data-relatedid='{{answerInfo.answerId}}' data-relatedtype='Answer' data-username='{{answerInfo.userNickName}}' data-usercontent='{{answerInfo.content}}'>
           <rich-text class="scribe-content" nodes="{{answerInfo.content}}" ></rich-text>
         </view>
 
@@ -55,7 +61,7 @@
                 <view bindtap='navigateToUserInfo' data-userid='{{comment.userId}}'>
                   <image class='comment-image' src="{{comment.userAvatar}}"></image>
                 </view>
-                <view class='showReportView' bindtap='showReport' data-commentid='{{comment.commentId}}' data-username='{{comment.userNickName}}' data-usercontent='{{comment.content}}'>
+                <view class='showReportView' bindtap='showReport' data-commentid='{{comment.commentId}}' data-username='{{comment.userNickName}}' data-usercontent='{{comment.content}}' data-relatedtype='Comment'>
                   <view class='comment-username'>{{comment.userNickName}}</view>
                   <view class='comment-content'>{{comment.content}} </view>
                 </view>
@@ -71,7 +77,10 @@
               <rich-text class='huifu-title' nodes="<span class='huifu-user'>{{comment.replyList[1].userNickName}}:  </span>{{comment.replyList[1].content}}"></rich-text>
             </view>
 
-            <view class='huifu-count' >共{{comment.replyCount}}条回复</view>
+            <view class='huifuCounticonView'>
+              <view class='huifu-count'>共{{comment.replyCount}}条回复</view>
+              <image class='huifu-gengduoicon' src='../../image/gengduohuifu.png'></image>
+            </view>
 
                 </view>
 

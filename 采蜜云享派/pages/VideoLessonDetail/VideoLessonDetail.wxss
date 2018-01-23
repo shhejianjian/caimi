@@ -120,6 +120,10 @@
   font-size: 28rpx;
   color: #9B9B9B;
   letter-spacing: 0;
+  white-space: nowrap;
+  overflow-x: hidden;
+  width: 200rpx;
+  text-overflow: ellipsis;
 }
 .outView-content{
   margin-top: -10rpx;
@@ -162,6 +166,7 @@
 .detail-lianxiView{
   margin-top: 20rpx;
   margin-left: 40rpx;
+  margin-right: 40rpx;
 }
 .lianxi-title{
   font-family: PingFangSC-Semibold;

@@ -2,10 +2,10 @@ var simpleLib = require('../libs/simple-lib.js');
 var route = "pages/VideoLessonDetail/VideoLessonDetail";
 
 var lessonListArr = [];
-var getRelatedLessonList = function () {
+var getRelatedLessonList = function (courseId) {
   lessonListArr = [];
   wx.request({
-    url: simpleLib.baseUrl + '/public/course/' + objectID + '/related',
+    url: simpleLib.baseUrl + '/public/course/' + courseId + '/related',
     data: {
     },
     header: {
@@ -13,7 +13,7 @@ var getRelatedLessonList = function () {
     },
     success: function (res) {
       console.log(res.data)
-      var lessonData = res.data.content;
+      var lessonData = res.data;
       if(lessonData){
         for (var i = 0; i < lessonData.length; i++) {
           var date = simpleLib.getTime(lessonData[i].lastUpdateTime);
@@ -90,7 +90,7 @@ var getVideoDetailInfo = function (objectId){
       for (var i = 0; i < lessonData.courseInfo.chapterList.length; i++) {
         var subData = lessonData.courseInfo.chapterList[i].lessonList;
         for(var j = 0;j < subData.length;j++){
-          subData[j].title = lessonData.courseInfo.chapterList[i].name + '/' + subData[j].name;
+          subData[j].title = '第' + simpleLib.NumberToChinese(i + 1) + '章' + '/' + '第' + simpleLib.NumberToChinese(j + 1) + '课';
           tabsArr.push(subData[j]);
         }
       }
@@ -107,13 +107,20 @@ var getVideoDetailInfo = function (objectId){
           });
         }
       }
+      console.log(tabsArr);
       simpleLib.setData(route, {
         lessonData: lessonData,
         videoUrl: res.data.url,
         tabs : tabsArr,
         activeTab:objectID,
         scribeContent: res.data.courseInfo.summary,
+        
       });
+      setTimeout(function () {
+        simpleLib.setData(route, {
+          toView: '#' + objectID,
+        });
+      }, 1000)
     },
     fail: function (res) {
       wx.hideLoading();
@@ -182,12 +189,13 @@ var objectID = '';
 var id;
 var onload = function (options) {
   simpleLib.setData(route, {
-    baseUrl: simpleLib.baseUrl
+    baseUrl: simpleLib.baseUrl,
   });
+  
   objectID = options.objectId;
   getVideoDetailInfo(objectID);
   loadNewDataList();
-  getRelatedLessonList();
+  getRelatedLessonList(options.courseId);
   readLessonTime();
   id = setInterval(function () {
     readLessonTime(60);
@@ -200,6 +208,9 @@ var onload = function (options) {
       });
     }
   });
+  
+  
+  
 };
 
 var onUnload = function () {
@@ -413,7 +424,7 @@ var showReport = function (event) {
         });
       } else if (res.tapIndex == 1) {
         wx.navigateTo({
-          url: '/pages/ReportView/ReportView?commentId=' + event.currentTarget.dataset.commentid + '&userName=' + event.currentTarget.dataset.username + '&content=' + event.currentTarget.dataset.usercontent,
+          url: '/pages/ReportView/ReportView?commentId=' + event.currentTarget.dataset.commentid + '&userName=' + event.currentTarget.dataset.username + '&content=' + event.currentTarget.dataset.usercontent + '&relatedType=' + event.currentTarget.dataset.relatedtype,
         })
       }
     },
@@ -452,6 +463,7 @@ Page({
     practiseName:'',
     isClickComment:false,
     focus:false,
+    toView:'',
   },
   onLoad: onload,
   onShow: onShow,
