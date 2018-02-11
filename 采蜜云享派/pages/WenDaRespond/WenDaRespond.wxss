@@ -1,3 +1,4 @@
+@import "/pages/PublicAudioView/PublicAudioView.wxss";
 @import "/pages/PublicWxss/PublicWxss.wxss";
 .topView{
   width: 100%;
@@ -68,6 +69,8 @@
   
   letter-spacing: 0;
   line-height: 34rpx;
+  display: flex;
+  align-items: center;
 }
 .placeholder{
   color: #9B9B9B;
@@ -122,4 +125,8 @@
 }
 .yuyinView{
   margin-left: 20rpx;
+}
+.recordImage{
+  height: 50rpx;
+  width: 60rpx;
 }

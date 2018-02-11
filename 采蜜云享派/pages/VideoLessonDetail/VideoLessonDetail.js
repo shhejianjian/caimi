@@ -1,6 +1,12 @@
 var simpleLib = require('../libs/simple-lib.js');
 var route = "pages/VideoLessonDetail/VideoLessonDetail";
 
+var onPullDownRefresh = function () {
+  setTimeout(function () {
+    wx.stopPullDownRefresh();
+  }, 600)
+};
+
 var lessonListArr = [];
 var getRelatedLessonList = function (courseId) {
   lessonListArr = [];
@@ -48,16 +54,8 @@ var handlerTabTap = function (e) {
 
 
 
-var audioContext;
-
-var playAudio = function () {
-
-};
-
-
 var tabsArr = [];
 var lessonData = '';
-// var tagListStr = '';
 
 var getVideoDetailInfo = function (objectId){
   wx.showLoading({
@@ -74,19 +72,6 @@ var getVideoDetailInfo = function (objectId){
       console.log(res.data)
       
       lessonData = res.data;
-      // for (var i = 0; i < lessonData.commentInfoList.length; i++) {
-      //   var date = simpleLib.getTime(lessonData.commentInfoList[i].submitTime);
-      //   lessonData.commentInfoList[i].submitTime = date;
-      //   if (lessonData.commentInfoList[i].liked == 0) {
-      //     lessonData.commentInfoList[i].zanImg = '../../image/dianzanicon.png';
-      //   } else if (lessonData.commentInfoList[i].liked == 1) {
-      //     lessonData.commentInfoList[i].zanImg = '../../image/yizanicon.png';
-      //   }
-      // }
-      // for (var i = 0; i < lessonData.courseInfo.tagList.length; i++) {
-      //   tagListStr = 'tag=' + lessonData.courseInfo.tagList[i].objectId;
-      // }
-      // console.log(tagListStr);
       for (var i = 0; i < lessonData.courseInfo.chapterList.length; i++) {
         var subData = lessonData.courseInfo.chapterList[i].lessonList;
         for(var j = 0;j < subData.length;j++){
@@ -107,7 +92,6 @@ var getVideoDetailInfo = function (objectId){
           });
         }
       }
-      console.log(tabsArr);
       simpleLib.setData(route, {
         lessonData: lessonData,
         videoUrl: res.data.url,
@@ -118,9 +102,10 @@ var getVideoDetailInfo = function (objectId){
       });
       setTimeout(function () {
         simpleLib.setData(route, {
-          toView: '#' + objectID,
+          toView: 'X' + objectID,
         });
-      }, 1000)
+      },300)
+      
     },
     fail: function (res) {
       wx.hideLoading();
@@ -190,6 +175,7 @@ var id;
 var onload = function (options) {
   simpleLib.setData(route, {
     baseUrl: simpleLib.baseUrl,
+    lessonId:options.objectId,
   });
   
   objectID = options.objectId;
@@ -215,6 +201,7 @@ var onload = function (options) {
 
 var onUnload = function () {
   clearInterval(id);
+    clearInterval(setProgressTimer);
 };
 
 var readLessonTime = function (duration) {
@@ -447,10 +434,111 @@ var navigateToUserInfo = function (event) {
   })
 };
 
+
+const backgroundAudioManager = wx.getBackgroundAudioManager();
+var setProgressTimer = '';
 var onShow = function () {
   if (simpleLib.getGlobalData().jjsuccess == '1') {
     getVideoDetailInfo();
     simpleLib.getGlobalData().jjsuccess = '';
+  }
+  wx.getSystemInfo({
+    success: function (res) {
+      simpleLib.setData(route, {
+        movableHeigth: res.windowHeight
+      });
+    }
+  });
+  if (simpleLib.getGlobalData().isPlayingAudio == '1') {
+    simpleLib.setData(route, {
+      isShowSimpleAudio: true,
+      'audioInfo.title': backgroundAudioManager.title,
+      'audioInfo.duration': simpleLib.timeToString(parseInt(backgroundAudioManager.duration)),
+      'audioInfo.playImage': '../../image/stopIcon.png',
+    })
+    setProgressTimer = setInterval(function () {
+      simpleLib.setData(route, {
+        'audioInfo.currentTime': simpleLib.timeToString(parseInt(backgroundAudioManager.currentTime)),
+      })
+    }, 1000);
+    backgroundAudioManager.onEnded((res) => {
+      clearInterval(setProgressTimer);
+      console.log('结束了');
+      simpleLib.getGlobalData().isPlayingAudio = '3';
+      simpleLib.setData(route, {
+        'audioInfo.currentTime': '00:00',
+      })
+    });
+  } else if (simpleLib.getGlobalData().isPlayingAudio == '3') {
+    simpleLib.setData(route, {
+      isShowSimpleAudio: false
+    })
+  } else if (simpleLib.getGlobalData().isPlayingAudio == '2') {
+    simpleLib.setData(route, {
+      isShowSimpleAudio: true,
+      'audioInfo.title': backgroundAudioManager.title,
+      'audioInfo.duration': simpleLib.timeToString(parseInt(backgroundAudioManager.duration)),
+      'audioInfo.currentTime': simpleLib.timeToString(parseInt(backgroundAudioManager.currentTime)),
+      'audioInfo.playImage': '../../image/bofangicon.png',
+    })
+  }
+};
+
+var onHide = function () {
+  clearInterval(setProgressTimer);
+}
+//公用悬浮音频组件内的播放暂停事件
+var playAudio = function (event) {
+  var playImage = event.currentTarget.dataset.playimage;
+  console.log(playImage);
+  if (playImage == '../../image/stopIcon.png') {
+    console.log('暂停');
+    backgroundAudioManager.pause();
+    //播放暂停事件
+    backgroundAudioManager.onPause((res) => {
+      simpleLib.getGlobalData().isPlayingAudio = '2';
+      console.log('暂停了');
+      clearInterval(setProgressTimer);
+      simpleLib.setData(route, {
+        'audioInfo.playImage': '../../image/bofangicon.png',
+      });
+    });
+  } else if (playImage == '../../image/bofangicon.png') {
+    console.log('播放');
+    backgroundAudioManager.play();
+    //正在播放事件
+    backgroundAudioManager.onPlay((res) => {
+      console.log('播放了');
+      simpleLib.getGlobalData().isPlayingAudio = '1';
+      simpleLib.setData(route, {
+        'audioInfo.playImage': '../../image/stopIcon.png',
+      });
+      setProgressTimer = setInterval(function () {
+        simpleLib.setData(route, {
+          'audioInfo.currentTime': simpleLib.timeToString(parseInt(backgroundAudioManager.currentTime)),
+        })
+      }, 1000);
+    });
+    //播放结束事件
+    backgroundAudioManager.onEnded((res) => {
+      console.log('结束了');
+      simpleLib.getGlobalData().isPlayingAudio = '3';
+      clearInterval(setProgressTimer);
+      simpleLib.setData(route, {
+        'audioInfo.playImage': '../../image/bofangicon.png',
+        'audioInfo.currentTime': '00:00',
+      });
+    });
+    //播放停止事件
+    backgroundAudioManager.onStop((res) => {
+      console.log('停止了');
+      simpleLib.getGlobalData().isPlayingAudio = '3';
+      clearInterval(setProgressTimer);
+      simpleLib.setData(route, {
+        'audioInfo.playImage': '../../image/bofangicon.png',
+        'audioInfo.currentTime': '00:00',
+      });
+    });
   }
 };
 
@@ -463,13 +551,19 @@ Page({
     practiseName:'',
     isClickComment:false,
     focus:false,
-    toView:'',
+    toView:'bottom',
+    lessonId:'',
+    isShowSimpleAudio: false,
+    'audioInfo.title': '',
+    'audioInfo.currentTime': '00:00'
   },
   onLoad: onload,
   onShow: onShow,
+  playAudio: playAudio,
+  onHide: onHide,
+  
   onReachBottom: onReachBottom,
   onUnload: onUnload,
-  playAudio: playAudio,
   handlerTabTap: handlerTabTap,
   changeLessonList: changeLessonList,
   changeCommentList: changeCommentList,
@@ -483,5 +577,6 @@ Page({
   changeArtical: changeArtical,
   navigateToBuyLesson: navigateToBuyLesson,
   showReport:showReport,
+  onPullDownRefresh: onPullDownRefresh,
   navigateToUserInfo: navigateToUserInfo,
 })

@@ -123,9 +123,6 @@
   bottom: 120rpx;
   left: 20rpx;
   right: 20rpx;
-  /* margin-top: 20rpx;
-  margin-left: 20rpx;
-  margin-right: 20rpx; */
   height: 100rpx;
   background: #FFFFFF;
   box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);

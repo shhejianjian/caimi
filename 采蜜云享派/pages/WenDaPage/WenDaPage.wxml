@@ -1,8 +1,13 @@
+<import src="../../pages/PublicAudioView/PublicAudioView.wxml"/>
+<movable-area class="movableArea" wx:if="{{isShowSimpleAudio}}" style="height: {{movableHeigth}}px;width: 100%;position:fixed;z-index:999;">
+  <template is="simpleAudio" data="{{...audioInfo}}" />  
+</movable-area>
 <view class="topView">
   <view class="topFirstView" >
     <view class="topSecondView" >
       <view class="topThirdView" >
 
+<view wx:if="{{questionInfo.banned==0}}">
         <view class='top-tagView'>
           <view class='top-tagfirst'>
             <block wx:for="{{questionInfo.tagList}}" wx:for-item="item" wx:key="index">
@@ -55,7 +60,7 @@
         <block wx:for="{{answerInfo}}" wx:for-item="shop" wx:key="index">
                 <view class="shop-item">
 
-                  <view bindtap="navigateToDetail" data-answerid='{{shop.answerId}}'>
+                  <view bindtap="navigateToDetail" data-answerid='{{shop.answerId}}' data-banned='{{shop.banned}}'>
                     <view class='shop-user'>
                       <view class='iconAndName'>
                         <view >
@@ -64,24 +69,31 @@
                         <view class='shop-username'>{{shop.userNickName}}</view>
                       </view>
 
-                      <view class='bestAnswerView' wx:if="{{shop.choice==1}}">
+                      <!-- <view class='bestAnswerView' wx:if="{{shop.choice==1}}">
                         <image class='bestAnswerImage' src='../../image/youzhihuida.png'></image>
                         <view class='moneyView'>
                           <image class='moneyImage' src='../../image/money.png'></image>
                           <view class='moneyTitle'>获得赏金￥{{shop.reward}}</view>
                         </view>
-                      </view>
+                      </view> -->
 
                     </view>
                     
-                    <view class='shop-answercontent'>{{shop.content}}</view>
-                  </view>
-                  <view class='imageitemView' >
-                    <block wx:for="{{shop.imageList}}" wx:for-item="image" wx:key="index">
-                      <view data-imagelist='{{shop.imageList}}' bindtap='previewImage' data-index='{{index}}'>
-                        <image class='imageItem' src='{{baseUrl}}{{image}}'></image>
+                  <view wx:if="{{shop.banned==0}}">
+                      <view class='shop-answercontent' >{{shop.content}}</view>
+                      
+                      <view class='imageitemContentView' >
+                        <block wx:for="{{shop.imageList}}" wx:for-item="image" wx:key="index">
+                          <view data-imagelist='{{shop.imageList}}' bindtap='previewImage' data-index='{{index}}'>
+                            <image class='imageItem' src='{{baseUrl}}{{image}}'></image>
+                          </view>
+                        </block>
                       </view>
-                    </block>
+                    </view>
+                  </view>
+                  <view wx:if="{{shop.banned==1}}">
+                    <view class='shop-answercontent' wx:if="{{shop.contentBanned==1}}">该回答涉嫌违规，已被屏蔽</view>
+                    <view class='shop-answercontent' wx:if="{{shop.contentBanned==0}}">该用户涉嫌违规，已被屏蔽</view>
                   </view>
                   
                   <view class='shop-likeCountAndTime'>
@@ -97,6 +109,13 @@
         <view wx:else>
           <view class='tipView'>暂时还没有用户回答，您可以关注该问题，有新的回答会及时通知您</view>
         
+          </view>
+
+        </view>
+
+        <view class='criminalView' wx:if="{{questionInfo.banned==1}}">
+          <view wx:if="{{questionInfo.contentBanned==0}}">该用户涉嫌违规，已被屏蔽</view>
+          <view wx:if="{{questionInfo.contentBanned==1}}">该问题涉嫌违规，已被屏蔽</view>
         </view>
 
       </view>
@@ -105,6 +124,7 @@
 </view>
 
 
+<view wx:if="{{questionInfo.banned==0}}">
 <view class='floatView' wx:if="{{questionInfo.solved==0}}">
             <button class='float-leftView' plain='true' bindtap='shareToAnswer' open-type="share">邀请回答</button>
             <view class="float-rightView {{(answerInfo.length==0 && questionInfo.self==1)?'float-rightView-active':''}}" bindtap='navigateToRespond' data-answertext='{{questionInfo.answerText}}' data-answerid='{{questionInfo.myAnswerId}}' data-topicstatus='{{questionInfo.status}}'>{{questionInfo.answerText}}</view>
@@ -112,3 +132,4 @@
 
 <view wx:if="{{isShowBackView}}" bindtap='clickBackView' class='backgroundView'></view>
 <view class="prevent-screen" hidden="{{!prevent}}"></view>
+</view>

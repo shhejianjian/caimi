@@ -1,3 +1,7 @@
+<import src="../../pages/PublicAudioView/PublicAudioView.wxml"/>
+<movable-area class="movableArea" wx:if="{{isShowSimpleAudio}}" style="height: {{movableHeigth}}px;width: 100%;position:fixed;z-index:999;">
+  <template is="simpleAudio" data="{{...audioInfo}}" />  
+</movable-area>
 <view class="TopView"> 
 
   <view class="topSearchView" wx:if="{{isSelf==0}}">
@@ -41,6 +45,7 @@
                   <view class='kongbaiTitle'>您似乎来到了外太空...</view>
                 </view>
           <block wx:for="{{questionsList}}" wx:for-item="shop" wx:key="index">
+          <!-- <view wx:if="{{shop.banned==0}}"> -->
                 <view class="shop-item">
 
                   <view bindtap="navigateToDetail" data-topicid='{{shop.topicId}}'>
@@ -74,6 +79,7 @@
                 </view>
 
                 <view class="list-line"></view>
+                <!-- </view> -->
             </block>
           </view>
 
@@ -83,6 +89,7 @@
                   <view class='kongbaiTitle'>您似乎来到了外太空...</view>
                 </view>
             <block wx:for="{{answerList}}" wx:for-item="shop" wx:key="index">
+            <!-- <view wx:if="{{shop.banned==0}}"> -->
                 <view class="shop-item">
                   <view bindtap="navigateToSingleDetail" data-topicid='{{shop.topicInfo.topicId}}' data-answerid='{{shop.answerId}}'>
                     <view class='usericonAndTitle'>
@@ -106,6 +113,7 @@
                 </view>
 
                 <view class="list-line"></view>
+                <!-- </view> -->
             </block>
           </view>
 
@@ -115,6 +123,7 @@
                     <view class='kongbaiTitle'>您似乎来到了外太空...</view>
                   </view>
             <block wx:for="{{followList}}" wx:for-item="shop" wx:key="index">
+            <!-- <view wx:if="{{shop.banned==0}}"> -->
                 <view class="shop-item" >
                   
 
@@ -151,6 +160,7 @@
                 </view>
 
                 <view class="line"></view>
+                <!-- </view> -->
             </block>
           </view>
 

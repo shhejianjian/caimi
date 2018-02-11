@@ -1,5 +1,8 @@
+// import { playAudio } from './pages/PublicAudioView/PublicAudioView'
+
 //app.js
 App({
+  // playAudio,
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []

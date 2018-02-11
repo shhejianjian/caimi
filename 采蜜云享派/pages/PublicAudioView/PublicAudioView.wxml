@@ -1,0 +1,14 @@
+<template name="simpleAudio">
+  <movable-view class='movableView' x="0" y="0" direction="all"> 
+    <view class='audioView'>
+      <image class='audio-image' src='../../image/ceshitouxiang.png'></image>
+      <view class='audio-titleAndTime'>
+      <view class='audio-title'>{{title}}</view>
+      <view class='audio-time'>{{currentTime}} - {{duration}}</view>
+      </view>
+        <view bindtap='playAudio' data-playimage='{{playImage}}'>
+          <image class='audio-image2' src='{{playImage}}' ></image>
+        </view>
+      </view>
+  </movable-view>
+</template>

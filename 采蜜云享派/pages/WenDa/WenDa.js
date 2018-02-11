@@ -62,9 +62,16 @@ var getMenuList = function (){
 
 
 
-
-
-
+var listPage = 1;
+var totalPages = 0;
+var changeListData = function (event){
+  if(listPage == totalPages){
+    listPage = 1;
+  } else {
+    listPage++;
+  }
+  loadQuestionListDetail(typeIndex, solvedStr, tagID);
+};
 
 
 
@@ -74,6 +81,7 @@ var loadQuestionListDetail = function (sortby,solved,tagId){
   // wx.showLoading({
   //   title: '加载中',
   // });
+  wx.showNavigationBarLoading();
   wx.request({
     url: simpleLib.baseUrl + '/public/topic',
     header: {
@@ -82,36 +90,41 @@ var loadQuestionListDetail = function (sortby,solved,tagId){
     data: {
       sortBy: sortby,
       solved: solved,
-      tag:tagId
+      tag:tagId,
+      pageNo:listPage,
     },
     success: function (res) {
       // wx.hideLoading();
-      console.log(res.data.content)
-      var questionData = res.data.content;
-      for(var i = 0;i < questionData.length;i++){
-        questionData[0].isPublic = 1;
-        var date = simpleLib.lastTime(questionData[i].expiredTime);
-        questionData[i].date = date;
-        if (questionData[i].followed == 0){
-          questionData[i].followStr = '关注问题';
-        } else if (questionData[i].followed == 1){
-          questionData[i].followStr = '已关注';
-        }
-        if (questionData[i].bestAnswerLiked == 0) {
-          questionData[i].likeStr = '点赞';
-        } else if (questionData[i].bestAnswerLiked == 1) {
-          questionData[i].likeStr = '已赞';
+      console.log(res);
+      totalPages = res.data.totalPages;
+      wx.hideNavigationBarLoading();
+      wx.stopPullDownRefresh();
+        var questionData = res.data.content;
+        for (var i = 0; i < questionData.length; i++) {
+          questionData[0].isPublic = 1;
+          var date = simpleLib.lastTime(questionData[i].expiredTime);
+          questionData[i].date = date;
+          if (questionData[i].followed == 0) {
+            questionData[i].followStr = '关注问题';
+          } else if (questionData[i].followed == 1) {
+            questionData[i].followStr = '已关注';
+          }
+          if (questionData[i].bestAnswerLiked == 0) {
+            questionData[i].likeStr = '点赞';
+          } else if (questionData[i].bestAnswerLiked == 1) {
+            questionData[i].likeStr = '已赞';
+          }
+
+          questionArr.push(questionData[i]);
         }
 
-        questionArr.push(questionData[i]);
-      }
-      
-      simpleLib.setData(route, {
-        questionList: questionArr
-      });
+        simpleLib.setData(route, {
+          questionList: questionArr
+        });
     },
     fail: function (res) {
       // wx.hideLoading();
+      wx.hideNavigationBarLoading();
       simpleLib.failToast("查询失败")
     }
   })
@@ -161,6 +174,7 @@ var clickSortItem = function (event){
     openSort:false,
     sortName:name,
   });
+  listPage = 1;
   loadQuestionListDetail(typeIndex, solvedStr,tagID);
 };
 
@@ -196,6 +210,7 @@ var clickSubMenu = function (event){
     isShowBackView: false,
     openSort: false,
   });
+  listPage = 1;
   loadQuestionListDetail(typeIndex, solvedStr, tagID);
   console.log(subMenuName + '/' + tagId);
 };
@@ -228,6 +243,7 @@ var clickJiejue = function (){
       jiejueText:'已解决'
     });
   }
+  listPage = 1;
   loadQuestionListDetail(typeIndex, solvedStr,tagID);
 };
 
@@ -262,6 +278,7 @@ var followQuestion = function (event){
       wx.hideLoading();
       console.log(res.data);
       if (res.statusCode == 200) {
+        
         loadQuestionListDetail(typeIndex, solvedStr,tagID);
       }
     },
@@ -280,11 +297,111 @@ var navigateToSingleDetail = function (event){
   })
 };
 
-var onShow = function (){
 
-    loadQuestionListDetail(typeIndex, solvedStr,tagID);
+const backgroundAudioManager = wx.getBackgroundAudioManager();
+var setProgressTimer = '';
+var onShow = function () {
+  loadQuestionListDetail(typeIndex, solvedStr, tagID);
 
+  wx.getSystemInfo({
+    success: function (res) {
+      simpleLib.setData(route, {
+        movableHeigth: res.windowHeight
+      });
+    }
+  });
+  if (simpleLib.getGlobalData().isPlayingAudio == '1') {
+    simpleLib.setData(route, {
+      isShowSimpleAudio: true,
+      'audioInfo.title': backgroundAudioManager.title,
+      'audioInfo.duration': simpleLib.timeToString(parseInt(backgroundAudioManager.duration)),
+      'audioInfo.playImage': '../../image/stopIcon.png',
+    })
+    setProgressTimer = setInterval(function () {
+      simpleLib.setData(route, {
+        'audioInfo.currentTime': simpleLib.timeToString(parseInt(backgroundAudioManager.currentTime)),
+      })
+    }, 1000);
+    backgroundAudioManager.onEnded((res) => {
+      clearInterval(setProgressTimer);
+      console.log('结束了');
+      simpleLib.getGlobalData().isPlayingAudio = '3';
+      simpleLib.setData(route, {
+        'audioInfo.currentTime': '00:00',
+      })
+    });
+  } else if (simpleLib.getGlobalData().isPlayingAudio == '3') {
+    simpleLib.setData(route, {
+      isShowSimpleAudio: false
+    })
+  } else if (simpleLib.getGlobalData().isPlayingAudio == '2') {
+    simpleLib.setData(route, {
+      isShowSimpleAudio: true,
+      'audioInfo.title': backgroundAudioManager.title,
+      'audioInfo.duration': simpleLib.timeToString(parseInt(backgroundAudioManager.duration)),
+      'audioInfo.currentTime': simpleLib.timeToString(parseInt(backgroundAudioManager.currentTime)),
+      'audioInfo.playImage': '../../image/bofangicon.png',
+    })
+  }
+};
+
+var onHide = function () {
+  clearInterval(setProgressTimer);
 }
+//公用悬浮音频组件内的播放暂停事件
+var playAudio = function (event) {
+  var playImage = event.currentTarget.dataset.playimage;
+  console.log(playImage);
+  if (playImage == '../../image/stopIcon.png') {
+    console.log('暂停');
+    backgroundAudioManager.pause();
+    //播放暂停事件
+    backgroundAudioManager.onPause((res) => {
+      simpleLib.getGlobalData().isPlayingAudio = '2';
+      console.log('暂停了');
+      clearInterval(setProgressTimer);
+      simpleLib.setData(route, {
+        'audioInfo.playImage': '../../image/bofangicon.png',
+      });
+    });
+  } else if (playImage == '../../image/bofangicon.png') {
+    console.log('播放');
+    backgroundAudioManager.play();
+    //正在播放事件
+    backgroundAudioManager.onPlay((res) => {
+      console.log('播放了');
+      simpleLib.getGlobalData().isPlayingAudio = '1';
+      simpleLib.setData(route, {
+        'audioInfo.playImage': '../../image/stopIcon.png',
+      });
+      setProgressTimer = setInterval(function () {
+        simpleLib.setData(route, {
+          'audioInfo.currentTime': simpleLib.timeToString(parseInt(backgroundAudioManager.currentTime)),
+        })
+      }, 1000);
+    });
+    //播放结束事件
+    backgroundAudioManager.onEnded((res) => {
+      console.log('结束了');
+      simpleLib.getGlobalData().isPlayingAudio = '3';
+      clearInterval(setProgressTimer);
+      simpleLib.setData(route, {
+        'audioInfo.playImage': '../../image/bofangicon.png',
+        'audioInfo.currentTime': '00:00',
+      });
+    });
+    //播放停止事件
+    backgroundAudioManager.onStop((res) => {
+      console.log('停止了');
+      simpleLib.getGlobalData().isPlayingAudio = '3';
+      clearInterval(setProgressTimer);
+      simpleLib.setData(route, {
+        'audioInfo.playImage': '../../image/bofangicon.png',
+        'audioInfo.currentTime': '00:00',
+      });
+    });
+  }
+};
 
 var bindfocus = function (event) {
 
@@ -300,6 +417,11 @@ var navigateToNotice = function () {
   })
 };
 
+var onPullDownRefresh = function () {
+  loadQuestionListDetail(typeIndex, solvedStr, tagID);
+  
+
+};
 
 Page({
   data: {
@@ -315,10 +437,16 @@ Page({
     selectedSubIndex:-1,
     dianzanText:'点赞 ',
     pinglunText:'评论 ',
-    jiejueText:'未解决'
+    jiejueText:'未解决',
+    isShowSimpleAudio: false,
+    'audioInfo.title': '',
+    'audioInfo.currentTime': '00:00'
   },
   onLoad: onload,
+  playAudio: playAudio,
+  onHide: onHide,
   onShow: onShow,
+  onPullDownRefresh: onPullDownRefresh,
   bindfocus: bindfocus,
   clickJiejue: clickJiejue,
   navigateToDetail: navigateToDetail,
@@ -332,4 +460,5 @@ Page({
   followQuestion: followQuestion,
   navigateToSingleDetail: navigateToSingleDetail,
   navigateToNotice: navigateToNotice,
+  changeListData: changeListData,
 })

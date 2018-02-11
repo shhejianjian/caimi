@@ -1,3 +1,7 @@
+<import src="../../pages/PublicAudioView/PublicAudioView.wxml"/>
+<movable-area class="movableArea" wx:if="{{isShowSimpleAudio}}" style="height: {{movableHeigth}}px;width: 100%;position:fixed;z-index:999;">
+  <template is="simpleAudio" data="{{...audioInfo}}" />  
+</movable-area>
 <view class="TopView"> 
   <view class="topFirstView" >
     <view class="topSecondView" >

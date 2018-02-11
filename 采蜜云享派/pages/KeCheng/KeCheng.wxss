@@ -1,4 +1,6 @@
 @import "/pages/PublicWxss/PublicWxss.wxss";
+@import "/pages/PublicAudioView/PublicAudioView.wxss";
+
 .TopView{
   width: 100%;
   height: 325rpx;

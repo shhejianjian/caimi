@@ -1,3 +1,4 @@
+@import "/pages/PublicAudioView/PublicAudioView.wxss";
 @import "/pages/PublicWxss/PublicWxss.wxss";
 .topView{
   width: 100%;
@@ -76,8 +77,6 @@
 
 .shop-topView{
   margin-top: 20rpx;
-  /* margin-left: 40rpx; */
-  margin-right: 40rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -117,4 +116,13 @@
   font-size: 20rpx;
   color: #9B9B9B;
   letter-spacing: 0;
+}
+.unreadPoint{
+  position: absolute;
+  margin-top: -130rpx;
+  margin-left: 30rpx;
+  height: 20rpx;
+  width: 20rpx;
+  border-radius: 50%;
+  background: #FF3B30;
 }

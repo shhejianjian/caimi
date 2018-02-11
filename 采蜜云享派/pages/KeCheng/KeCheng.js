@@ -36,9 +36,9 @@ var getReadStaus = function (){
 
 var lessonArr = [];
 var getLessonList = function (){
-  wx.showLoading({
-    title: '加载中',
-  });
+  // wx.showLoading({
+  //   title: '加载中',
+  // });
   lessonArr = [];
   wx.request({
     url: simpleLib.baseUrl + '/public/course/home',
@@ -50,7 +50,7 @@ var getLessonList = function (){
       // pageSize: '10',
     },
     success: function (res) {
-      wx.hideLoading();
+      // wx.hideLoading();
       console.log(res.data)
       var courseData = res.data;
       for(var i = 0;i < courseData.length;i++){
@@ -79,7 +79,7 @@ var getLessonList = function (){
       });
     },
     fail: function (res) {
-      wx.hideLoading();
+      // wx.hideLoading();
       simpleLib.failToast("查询失败")
     }
   })
@@ -89,7 +89,13 @@ var getLessonList = function (){
 
 
 var onload = function () {
-  
+  wx.getSystemInfo({
+    success: function (res) {
+      simpleLib.setData(route, {
+        movableHeigth: res.windowHeight
+      });
+    }
+  });
   simpleLib.setData(route, {
     baseUrl: simpleLib.baseUrl
   });
@@ -110,6 +116,8 @@ var onload = function () {
   
 };
 
+const backgroundAudioManager = wx.getBackgroundAudioManager();
+var setProgressTimer = '';
 var onShow = function (){
   if (simpleLib.getGlobalData().isSubscribe == '1'){
     wx.checkSession({
@@ -159,6 +167,97 @@ var onShow = function (){
     simpleLib.getGlobalData().isChangeName = '';
   }
 
+
+  if (simpleLib.getGlobalData().isPlayingAudio == '1') {
+    simpleLib.setData(route, {
+      isShowSimpleAudio: true,
+      'audioInfo.title': backgroundAudioManager.title,
+      'audioInfo.duration': simpleLib.timeToString(parseInt(backgroundAudioManager.duration)),
+      'audioInfo.playImage': '../../image/stopIcon.png',
+    })
+    setProgressTimer = setInterval(function () {
+      simpleLib.setData(route, {
+        'audioInfo.currentTime': simpleLib.timeToString(parseInt(backgroundAudioManager.currentTime)),
+      })
+    }, 1000);
+    backgroundAudioManager.onEnded((res) => {
+      clearInterval(setProgressTimer);
+      console.log('结束了');
+      simpleLib.getGlobalData().isPlayingAudio = '3';
+      simpleLib.setData(route, {
+        'audioInfo.currentTime': '00:00',
+      })
+    });
+  } else if (simpleLib.getGlobalData().isPlayingAudio == '3') {
+    simpleLib.setData(route, {
+      isShowSimpleAudio: false
+    })
+  } else if (simpleLib.getGlobalData().isPlayingAudio == '2') {
+    simpleLib.setData(route, {
+      isShowSimpleAudio: true,
+      'audioInfo.title': backgroundAudioManager.title,
+      'audioInfo.duration': simpleLib.timeToString(parseInt(backgroundAudioManager.duration)),
+      'audioInfo.currentTime': simpleLib.timeToString(parseInt(backgroundAudioManager.currentTime)),
+      'audioInfo.playImage': '../../image/bofangicon.png',
+    })
+  }
+};
+var onHide = function () {
+  clearInterval(setProgressTimer);
+}
+//公用悬浮音频组件内的播放暂停事件
+var playAudio = function (event) {
+  var playImage = event.currentTarget.dataset.playimage;
+  console.log(playImage);
+  if (playImage == '../../image/stopIcon.png') {
+    console.log('暂停');
+    backgroundAudioManager.pause();
+    //播放暂停事件
+    backgroundAudioManager.onPause((res) => {
+      simpleLib.getGlobalData().isPlayingAudio = '2';
+      console.log('暂停了');
+      clearInterval(setProgressTimer);
+      simpleLib.setData(route, {
+        'audioInfo.playImage': '../../image/bofangicon.png',
+      });
+    });
+  } else if (playImage == '../../image/bofangicon.png') {
+    console.log('播放');
+    backgroundAudioManager.play();
+    //正在播放事件
+    backgroundAudioManager.onPlay((res) => {
+      console.log('播放了');
+      simpleLib.getGlobalData().isPlayingAudio = '1';
+      simpleLib.setData(route, {
+        'audioInfo.playImage': '../../image/stopIcon.png',
+      });
+      setProgressTimer = setInterval(function () {
+        simpleLib.setData(route, {
+          'audioInfo.currentTime': simpleLib.timeToString(parseInt(backgroundAudioManager.currentTime)),
+        })
+      }, 1000);
+    });
+    //播放结束事件
+    backgroundAudioManager.onEnded((res) => {
+      console.log('结束了');
+      simpleLib.getGlobalData().isPlayingAudio = '3';
+      clearInterval(setProgressTimer);
+      simpleLib.setData(route, {
+        'audioInfo.playImage': '../../image/bofangicon.png',
+        'audioInfo.currentTime': '00:00',
+      });
+    });
+    //播放停止事件
+    backgroundAudioManager.onStop((res) => {
+      console.log('停止了');
+      simpleLib.getGlobalData().isPlayingAudio = '3';
+      clearInterval(setProgressTimer);
+      simpleLib.setData(route, {
+        'audioInfo.playImage': '../../image/bofangicon.png',
+        'audioInfo.currentTime': '00:00',
+      });
+    });
+  }
 };
 
 var doLogin = function () {
@@ -184,7 +283,7 @@ var doLogin = function () {
 };
 
 var getApplicationInfo = function () {
-  
+  wx.showNavigationBarLoading()
   wx.request({
     url: simpleLib.baseUrl+'/public/getCurrentInfo',
     header: {
@@ -199,7 +298,10 @@ var getApplicationInfo = function () {
           user: res.data.currentUser
         });
         simpleLib.getGlobalData().user = res.data.currentUser;
-        
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh();
+        // wx.stopPullDownRefresh();
+
         if (res.data.currentUser.status == 0) {
           wx.getUserInfo({
             success: res => {
@@ -229,6 +331,9 @@ var getApplicationInfo = function () {
       }
 
 
+    },
+    fail: function(res){
+      wx.hideNavigationBarLoading();
     }
   })
 }
@@ -296,24 +401,30 @@ var navigateToNotice = function (){
 
 
 var onPullDownRefresh = function (){
-  wx.checkSession({
-    success: function (res) {
-      getApplicationInfo();
 
-    },
-    fail: function () {
-      // 登录
-      doLogin();
-    }
-  })
+      wx.checkSession({
+        success: function (res) {
+          getApplicationInfo();
+
+        },
+        fail: function () {
+          // 登录
+          doLogin();
+        }
+      })
+  
 };
 
 Page({
   data: {
-
+    isShowSimpleAudio: false,
+    'audioInfo.title': '',
+    'audioInfo.currentTime': '00:00'
   },
   onLoad: onload,
+  playAudio: playAudio,
   onShow: onShow,
+  onHide: onHide,
   onPullDownRefresh: onPullDownRefresh,
   navigateToBuyLesson: navigateToBuyLesson,
   navigateToLessonList: navigateToLessonList,

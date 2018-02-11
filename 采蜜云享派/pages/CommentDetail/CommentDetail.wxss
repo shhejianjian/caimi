@@ -1,3 +1,4 @@
+@import "/pages/PublicAudioView/PublicAudioView.wxss";
 @import "/pages/PublicWxss/PublicWxss.wxss";
 .topView{
   padding-top: 20rpx;
@@ -94,7 +95,7 @@
   padding-top: 16rpx;
   margin-left: -10rpx;
   margin-right: -10rpx;
-  padding-bottom: 110rpx;
+  padding-bottom: 220rpx;
   background: #FFFFFF;
   box-shadow: 0 -16rpx 16rpx -16rpx rgba(0,111,255,0.50);
   border-radius: 10rpx;
@@ -179,5 +180,18 @@
   font-family: PingFangSC-Regular;
   font-size: 28rpx;
   color: #4A4A4A;
+  letter-spacing: 0;
+}
+.showReportView{
+  width: 100%;
+  margin-right: 40rpx;
+}
+.criminalView{
+  margin-top: 200rpx;
+  width: 100%;
+  text-align: center;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #9B9B9B;
   letter-spacing: 0;
 }

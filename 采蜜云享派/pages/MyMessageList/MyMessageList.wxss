@@ -1,3 +1,4 @@
+@import "/pages/PublicAudioView/PublicAudioView.wxss";
 @import "/pages/PublicWxss/PublicWxss.wxss";
 page{
   background-color: #F5F5F5;
@@ -60,7 +61,6 @@ page{
   padding: 15rpx;
   background: #FFFFFF;
   border-radius: 10rpx;
-  
   font-family: PingFangSC-Regular;
   font-size: 24rpx;
   color: #4A4A4A;
@@ -74,6 +74,53 @@ page{
 
     
 }
+.left-item-voice{
+  margin: 0rpx auto 0rpx 20rpx;
+  background: #FFFFFF;
+  height: 50rpx;
+  border-radius: 10rpx;
+  padding-left: 80rpx;
+}
+.left-item-image{
+  margin: 0rpx auto 0rpx 20rpx;
+  padding: 15rpx; 
+}
+.leftvoiceImage{
+  position:absolute;
+  height:40rpx;
+  width:50rpx;
+  margin-top:5rpx;
+  margin-left:-60rpx;
+
+}
+.rightvoiceImage{
+  position:absolute;
+  height:40rpx;
+  width:50rpx;
+  right: 100rpx;
+}
+.leftVoiceView{
+  display: flex;
+  align-items: center;
+}
+.rightVoiceView{
+  margin: 8rpx 20rpx 8rpx auto;
+  display: flex;
+  align-items: center;
+
+}
+.leftSecondView{
+  color: #9B9B9B;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  margin-left: 15rpx;
+}
+.rightSecondView{
+  color: #9B9B9B;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  margin-right: 15rpx;
+}
 .rightView{
   width: 540rpx;
   display: flex;
@@ -84,11 +131,10 @@ page{
   /* justify-content: space-between; */
 }
 .iconView2{
-    position: absolute;
+  position: absolute;
   right: 0;
 }
 .right-item-content{
-  
   margin: 0rpx 20rpx 0rpx auto;
   padding: 15rpx; 
   background: #FFD100;
@@ -97,12 +143,22 @@ page{
   font-size: 24rpx;
   color: #4A4A4A;
   letter-spacing: 0;
-   overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box !important;
-    -webkit-box-orient: vertical;
-    word-break: break-all; 
-    
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical;
+  word-break: break-all;   
+}
+.right-item-image{
+  margin: 0rpx 20rpx 0rpx auto;
+  padding: 15rpx; 
+}
+.right-item-voice{
+  
+  background: #FFD100;
+  height: 50rpx;
+  border-radius: 10rpx;
+  padding-right: 80rpx;
 }
 
 .rightsub-item-content{
@@ -157,11 +213,19 @@ page{
   width: 50rpx;
   height: 50rpx;
   margin-left: 20rpx;
+  margin-top: 6rpx;
 }
 .bottomImage2{
   width: 60rpx;
   height: 50rpx;
   margin-left: 10rpx;
+  margin-top: 6rpx;
+}
+.bottomImage3{
+  width: 45rpx;
+  height: 45rpx;
+  margin-left: 25rpx;
+  margin-top: 6rpx;
 }
 .item-date{
   text-align: center;
@@ -174,4 +238,23 @@ page{
   width: 300rpx;
   max-height: 300rpx;
   
+}
+.touchRecordView{
+  background: #F5F5F5;
+  height: 60rpx;
+  border-radius: 10rpx;
+  width: 80%;
+  text-align: center;
+  font-family: PingFangSC-Regular;
+  font-size: 30rpx;
+  color: #000000;
+   line-height: 60rpx;
+}
+
+.unreadPoint{
+  margin-left: 5rpx;
+  height: 15rpx;
+  width: 15rpx;
+  border-radius: 50%;
+  background: #FF3B30;
 }

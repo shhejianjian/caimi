@@ -1,6 +1,11 @@
 var simpleLib = require('../libs/simple-lib.js');
 var route = "pages/AudioLessonDetail/AudioLessonDetail";
 
+var onPullDownRefresh = function () {
+  setTimeout(function () {
+    wx.stopPullDownRefresh();
+  }, 600)
+};
 
 var lessonListArr = [];
 var getRelatedLessonList = function (couesrId){
@@ -14,12 +19,12 @@ var getRelatedLessonList = function (couesrId){
     },
     success: function (res) {
       console.log(res.data)
-      var lessonData = res.data;
-      if(lessonData){
-        for (var i = 0; i < lessonData.length; i++) {
-          var date = simpleLib.getTime(lessonData[i].lastUpdateTime);
-          lessonData[i].date = date;
-          lessonListArr.push(lessonData[i]);
+      var data = res.data;
+      if (data){
+        for (var i = 0; i < data.length; i++) {
+          var date = simpleLib.getTime(data[i].lastUpdateTime);
+          data[i].date = date;
+          lessonListArr.push(data[i]);
         }
 
         simpleLib.setData(route, {
@@ -63,7 +68,6 @@ var handlerTabTap = function (e) {
 
 
 var tabsArr = [];
-var lessonData = '';
 var getVideoDetailInfo = function (objectid) {
   wx.showLoading({
     title: '加载中',
@@ -78,16 +82,16 @@ var getVideoDetailInfo = function (objectid) {
       wx.hideLoading();
       console.log(res.data)
 
-      lessonData = res.data;
+      var audioLessonData = res.data;
 
-      for (var i = 0; i < lessonData.courseInfo.chapterList.length; i++) {
-        var subData = lessonData.courseInfo.chapterList[i].lessonList;
+      for (var i = 0; i < audioLessonData.courseInfo.chapterList.length; i++) {
+        var subData = audioLessonData.courseInfo.chapterList[i].lessonList;
         for (var j = 0; j < subData.length; j++) {
           subData[j].title = '第' + simpleLib.NumberToChinese(i+1) + '章' + '/' + '第' + simpleLib.NumberToChinese(j+1) +'课';
           tabsArr.push(subData[j]);
         }
       }
-      lessonData.courseInfo.intro = lessonData.courseInfo.intro.replace(/<img[^>]*src=['"]([^'"]+)[^>]*>/g, function (match, capture) {
+      audioLessonData.courseInfo.intro = audioLessonData.courseInfo.intro.replace(/<img[^>]*src=['"]([^'"]+)[^>]*>/g, function (match, capture) {
         if (capture && capture.indexOf('http') == 0) {
           return match;
         }
@@ -101,12 +105,17 @@ var getVideoDetailInfo = function (objectid) {
         }
       }
       simpleLib.setData(route, {
-        lessonData: lessonData,
+        lessonData: audioLessonData,
         videoUrl: res.data.url,
         tabs: tabsArr,
         activeTab: objectID,
         scribeContent: res.data.courseInfo.summary,
       });
+      setTimeout(function () {
+        simpleLib.setData(route, {
+          toView: 'X' + objectID,
+        });
+      }, 300)
     },
     fail: function (res) {
       wx.hideLoading();
@@ -169,26 +178,65 @@ var onReachBottom = function () {
 
 
 
+const backgroundAudioManager = wx.getBackgroundAudioManager();
+var setProgressTimer = '';
 var playAudio = function (){
   clickPreview();
+  console.log(this.data.playOrStop);
   if (this.data.playOrStop == '../../image/stopIcon.png'){
-    wx.pauseBackgroundAudio({
-      success: function (res) {
-        simpleLib.getGlobalData().isplaying = false;
-      }
-    });
-    simpleLib.setData(route, {
-      playOrStop: '../../image/bofangicon.png',
+    console.log('暂停')
+    backgroundAudioManager.pause();
+    //播放暂停事件
+    backgroundAudioManager.onPause((res) => {
+      simpleLib.getGlobalData().isPlayingAudio = '2';
+      console.log('暂停了');
+      clearInterval(setProgressTimer);
+      simpleLib.setData(route, {
+        playOrStop: '../../image/bofangicon.png',
+      });
     });
   } else if (this.data.playOrStop == '../../image/bofangicon.png'){
-    wx.playBackgroundAudio({
-      dataUrl: simpleLib.baseUrl + lessonData.url,
-      success: function (res) {
-        simpleLib.getGlobalData().isplaying = true;
+    console.log('播放')
+    backgroundAudioManager.src = simpleLib.baseUrl + this.data.lessonData.url;
+    backgroundAudioManager.title = this.data.lessonData.name;
+    backgroundAudioManager.play();
+    //正在播放事件
+    backgroundAudioManager.onPlay((res) => {
+      console.log('播放了');
+      simpleLib.getGlobalData().isPlayingAudio = '1';
+      simpleLib.setData(route, {
+        playOrStop: '../../image/stopIcon.png',
+      });
+      setProgressTimer = setInterval(function () {
+        console.log(backgroundAudioManager.paused);
         simpleLib.setData(route, {
-          playOrStop: '../../image/stopIcon.png',
-        });
-      }
+          audioProgress: parseInt(backgroundAudioManager.currentTime) / parseInt(backgroundAudioManager.duration) * 100,
+          audioCurrentTime: timeToString(parseInt(backgroundAudioManager.currentTime)),
+        })
+      }, 1000);
+    });
+    //播放结束事件
+    backgroundAudioManager.onEnded((res) => {
+      console.log('结束了');
+      simpleLib.getGlobalData().isPlayingAudio = '3';
+      console.log(backgroundAudioManager.paused);
+      clearInterval(setProgressTimer);
+      simpleLib.setData(route, {
+        playOrStop: '../../image/bofangicon.png',
+        audioCurrentTime: '00:00',
+        audioProgress: 0,
+      });
+    });
+    //播放停止事件
+    backgroundAudioManager.onStop((res) => {
+      console.log('停止了');
+      simpleLib.getGlobalData().isPlayingAudio = '3';
+      clearInterval(setProgressTimer);
+      simpleLib.setData(route, {
+        playOrStop: '../../image/bofangicon.png',
+        audioCurrentTime: '00:00',
+        audioProgress: 0,
+      });
     });
   }
 };
@@ -200,6 +248,7 @@ var playPastAudio = function (){
         objectID = tabsArr[i-1].objectId;
         var title = tabsArr[i - 1].title;
         simpleLib.getGlobalData().isplaying = false;
+        backgroundAudioManager.stop();
         simpleLib.setData(route, {
           playOrStop: '../../image/bofangicon.png',
           audioCurrentTime: '00:00',
@@ -223,6 +272,7 @@ var playNextAudio = function (){
         objectID = tabsArr[i+1].objectId;
         var title = tabsArr[i+1].title;
         simpleLib.getGlobalData().isplaying = false;
+        backgroundAudioManager.stop();
         simpleLib.setData(route, {
           playOrStop: '../../image/bofangicon.png',
           audioCurrentTime: '00:00',
@@ -242,47 +292,67 @@ var playNextAudio = function (){
 
 
 var onReady = function (){
-  wx.onBackgroundAudioPlay(function () {
-    console.log('播放了');
-    songPlay();
-  });
+  // wx.onBackgroundAudioPlay(function () {
+  //   console.log('播放了');
+  //   songPlay();
+  // });
 };
 
 var onShow = function (){
-  if (simpleLib.getGlobalData().isplaying == true) {
-    simpleLib.setData(route, {
-      playOrStop: '../../image/stopIcon.png',
-    });
-  } else if (simpleLib.getGlobalData().isplaying == false) {
-    simpleLib.setData(route, {
-      playOrStop: '../../image/bofangicon.png',
-    });
-  }
+  // if (simpleLib.getGlobalData().isplaying == true) {
+  //   simpleLib.setData(route, {
+  //     playOrStop: '../../image/stopIcon.png',
+  //   });
+  // } else if (simpleLib.getGlobalData().isplaying == false) {
+  //   simpleLib.setData(route, {
+  //     playOrStop: '../../image/bofangicon.png',
+  //   });
+  // }
   if (simpleLib.getGlobalData().jjsuccess == '1'){
     getVideoDetailInfo();
     simpleLib.getGlobalData().jjsuccess = '';
   }
-}
 
-var inv;
-var songPlay = function (){
-  inv = setInterval(function () {
-    wx.getBackgroundAudioPlayerState({
-      success: function (res) {
-        console.log(res);
-        audioCurrent = res.currentPosition;
-        if (res.status == 1) {
-          simpleLib.setData(route,{
-            audioProgress: res.currentPosition / res.duration * 100,
-            audioCurrentTime: timeToString(parseInt(res.currentPosition)),
-          })
-        } else {
-
-        }
-      }
+  if (simpleLib.getGlobalData().isPlayingAudio == '1'){
+    simpleLib.setData(route, {
+      playOrStop: '../../image/stopIcon.png',
     });
-  }, 1000);
-};
+    setProgressTimer = setInterval(function () {
+      simpleLib.setData(route, {
+        audioProgress: backgroundAudioManager.currentTime / backgroundAudioManager.duration * 100,
+        audioCurrentTime: timeToString(parseInt(backgroundAudioManager.currentTime)),
+      })
+    }, 1000);
+  } else if (simpleLib.getGlobalData().isPlayingAudio == '2'){
+    simpleLib.setData(route, {
+      playOrStop: '../../image/bofangicon.png',
+      audioProgress: backgroundAudioManager.currentTime / backgroundAudioManager.duration * 100,
+      audioCurrentTime: timeToString(parseInt(backgroundAudioManager.currentTime)),
+    });
+  }
+
+
+}
+  
+// var inv = '';
+// var songPlay = function (){
+//   inv = setInterval(function () {
+//     wx.getBackgroundAudioPlayerState({
+//       success: function (res) {
+//         console.log(res);
+//         audioCurrent = res.currentPosition;
+//         if (res.status == 1) {
+//           simpleLib.setData(route,{
+//             audioProgress: res.currentPosition / res.duration * 100,
+//             audioCurrentTime: timeToString(parseInt(res.currentPosition)),
+//           })
+//         } else {
+
+//         }
+//       }
+//     });
+//   }, 1000);
+// };
 
 var timeToString = function (duration){
   let str = '';
@@ -297,12 +367,12 @@ var timeToString = function (duration){
 
 var objectID = '';
 var Duration = 0;
-var id1;
-var id2;
+var id1 = '';
+var id2 = '';
 var onload = function (options) {
   simpleLib.setData(route, {
     baseUrl: simpleLib.baseUrl,
-    toView: options.objectId,
+    lessonId: options.objectId,
   });
   objectID = options.objectId;
 
@@ -370,30 +440,30 @@ var readLessonTime = function (duration) {
 // };
 
 var onUnload = function () {
-  wx.stopBackgroundAudio();
-  clearInterval(inv);
+  // wx.stopBackgroundAudio();
+  clearInterval(setProgressTimer);
   clearInterval(id1);
   clearInterval(id2);
-  simpleLib.getGlobalData().isplaying = '';
-  console.log(audioCurrent);
-  wx.request({
-    url: simpleLib.baseUrl + '/api/v1/caimi/course/lesson/' + objectID + '/read',
-    data: {
-      duration: Duration,
-      progress: audioCurrent
-    },
-    header: {
-      'Cookie': 'SESSION=' + simpleLib.getGlobalData().SESSION
-    },
-    method: 'POST',
-    success: function (res) {
-      console.log(res);
+  // simpleLib.getGlobalData().isplaying = '';
+  // console.log(audioCurrent);
+  // wx.request({
+  //   url: simpleLib.baseUrl + '/api/v1/caimi/course/lesson/' + objectID + '/read',
+  //   data: {
+  //     duration: Duration,
+  //     progress: audioCurrent
+  //   },
+  //   header: {
+  //     'Cookie': 'SESSION=' + simpleLib.getGlobalData().SESSION
+  //   },
+  //   method: 'POST',
+  //   success: function (res) {
+  //     console.log(res);
 
-    },
-    fail: function (res) {
+  //   },
+  //   fail: function (res) {
 
-    }
-  })
+  //   }
+  // })
 };
 
 var changeLessonList = function (){
@@ -615,6 +685,7 @@ var navigateToUserInfo = function (event) {
 
 Page({
   data: {
+    lessonData:'',
     audioProgress:0,
     audioCurrentTime:'00:00',
     activeTab:0,
@@ -622,6 +693,7 @@ Page({
     practiseName: '',
     playOrStop:'../../image/bofangicon.png',
     toView: '',
+    lessonId:'',
   },
   onLoad: onload,
   onReachBottom: onReachBottom,
@@ -645,4 +717,5 @@ Page({
   playNextAudio: playNextAudio,
   playPastAudio: playPastAudio,
   navigateToUserInfo: navigateToUserInfo,
+  onPullDownRefresh: onPullDownRefresh,
 })

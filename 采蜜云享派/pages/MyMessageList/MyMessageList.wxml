@@ -1,3 +1,7 @@
+<import src="../../pages/PublicAudioView/PublicAudioView.wxml"/>
+<movable-area class="movableArea" wx:if="{{isShowSimpleAudio}}" style="height: {{movableHeigth}}px;width: 100%;position:fixed;z-index:999;">
+  <template is="simpleAudio" data="{{...audioInfo}}" />  
+</movable-area>
 <view class="topView">
   <view class="topFirstView" >
     <view class="topSecondView" >
@@ -13,25 +17,40 @@
           <view class='iconView'>
             <image class='left-item-icon' src='{{item.avatar}}'></image>
           </view>
-          <view class='left-item-content'>{{item.content}}
+
+
+          <view wx:if="{{item.content}}" class='left-item-content'>{{item.content}}
             <view class='leftsub-item-content'></view>
-            <view wx:if="{{item.imageList.length>0}}" bindtap='previewImage' data-imagelist='{{item.imageList}}' data-src="{{item.imageList[0]}}">
-              <image class='contentImage' src='{{item.imageList[0]}}'></image>
+          </view>
+          <view wx:if="{{item.voice}}" class='leftVoiceView' bindtap="playVoice" data-voiceurl="{{item.voice}}" data-ismine='{{item.mine}}' data-messageid='{{item.messageId}}'>
+            <view class='left-item-voice' style='width:{{item.voiceDuration/100}}rpx'> 
+              <image class='leftvoiceImage' src='../../image/yuyinfuwuicon.png'></image>
             </view>
+            <view class='leftSecondView'>{{item.voiceDuration/1000}}'</view>
+            <view class="unreadPoint" wx:if="{{item.status==1}}"></view>
+          </view>
+          <view wx:if="{{item.image}}" class='left-item-image' bindtap='previewImage' data-imagelist='{{item.image}}' data-src="{{item.image}}">
+            <image class='contentImage' src='{{item.image}}'></image>
           </view>
 
         </view>
 
         <view class='rightView' wx:if="{{item.mine==1}}">
-          <view class='right-item-content'>{{item.content}}
-              <view class='rightsub-item-content'></view>
-              <view wx:if="{{item.imageList.length>0}}"  bindtap='previewImage' data-imagelist='{{item.imageList}}' data-src="{{item.imageList[0]}}">
-                <image class='contentImage' src='{{item.imageList[0]}}'></image>
-              </view>
-              <view wx:if="{{item.voiceList.length>0}}" bindtap="playVoice" data-voiceurl="{{item.voiceList[0]}}">
-                语音文件
-              </view>
+
+          <view wx:if="{{item.content}}" class='right-item-content' >{{item.content}}
+              <view class='rightsub-item-content' ></view>  
           </view>
+
+          <view wx:if="{{item.image}}" class='right-item-image'  bindtap='previewImage' data-imagelist='{{item.image}}' data-src="{{item.image}}">
+            <image class='contentImage' src='{{item.image}}'></image>
+          </view>
+
+          <view class='rightVoiceView' wx:if="{{item.voice}}" bindtap="playVoice" data-voiceurl="{{item.voice}}" data-ismine='{{item.mine}}' data-messageid='{{item.messageId}}'>
+            <view class='rightSecondView'>{{item.voiceDuration/1000}}'</view>
+            <view  class='right-item-voice' style='width:{{item.voiceDuration/100}}rpx' ></view> 
+            <image class='rightvoiceImage' src='../../image/yuyinfuwuicon.png'></image>
+          </view>
+
           <view class='iconView2'>
             <image class='right-item-icon' src='{{item.avatar}}'></image>
           </view>        
@@ -50,12 +69,21 @@
 </view>
 
 <view class='bottomInputView'>
-    <input class='inputView' value='{{textValue}}' maxlength='-1' bindconfirm='bindConfirm' confirm-type='发送' confirm-hold='true'></input>
+    <view class='inputView' wx:if="{{isHideYuyinView}}">
+      <input  value='{{textValue}}' maxlength='-1' bindconfirm='bindConfirm' confirm-type='发送' confirm-hold='true'></input>
+    </view>
+    <view wx:else class='touchRecordView' bindtouchstart='startRecord' bindtouchend='endRecord'>按住说话</view>
     <view bindtap='chooseImage'>
       <image class='bottomImage' src='../../image/charutupianicon.png'></image>
     </view>
-    <view bindtouchstart='startRecord' bindtouchend='endRecord'>
-      <image class='bottomImage2' src='../../image/yuyinicon.png'></image>
+    <view bindtap='showYuyinView'>
+      <block wx:if="{{isHideYuyinView}}">
+        <image class='bottomImage2' src='../../image/yuyinicon.png'></image>
+      </block>
+      <block wx:else>
+        <image class='bottomImage3' src='../../image/jianpanicon.png'></image>
+      </block>
+      
     </view>
 </view>
 

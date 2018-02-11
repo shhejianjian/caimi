@@ -1,0 +1,44 @@
+.audioView{
+  /* position: fixed;
+  bottom: 120rpx;
+  left: 20rpx;
+  right: 20rpx; */
+  height: 100rpx;
+  background: #FFFFFF;
+  box-shadow: 0 0 16rpx 0 rgba(0,111,255,0.50);
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 999999999999;
+  width: 400rpx;
+}
+.audio-image{
+  height: 100rpx;
+  width: 100rpx;
+}
+.audio-titleAndTime{
+  /* margin-left: -260rpx; */
+}
+.audio-title{
+  font-family: PingFangSC-Semibold;
+  font-size: 24rpx;
+  color: #4A4A4A;
+  letter-spacing: 0;
+}
+.audio-time{
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #4A4A4A;
+  /* margin-top: 8rpx; */
+  letter-spacing: 0;
+}
+.audio-image2{
+  height: 40rpx;
+  width: 40rpx;
+  margin-right: 20rpx;
+  margin-top: 10rpx;
+}
+.movableView{
+  pointer-events: auto;
+}

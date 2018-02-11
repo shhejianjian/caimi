@@ -1,3 +1,4 @@
+@import "/pages/PublicAudioView/PublicAudioView.wxss";
 @import "/pages/PublicWxss/PublicWxss.wxss";
 .topView{
   width: 100%;
@@ -32,6 +33,7 @@
   padding-bottom: 100rpx;
 } 
 .top-tagView{
+  margin-left: 30rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -137,7 +139,7 @@ letter-spacing: 0;
   line-height: 28rpx;
 }
 .answer-sort{
-  margin-right: 40rpx;
+  margin-right: 50rpx;
   font-family: PingFangSC-Regular;
 font-size: 20rpx;
 color: #9B9B9B;
@@ -279,6 +281,11 @@ letter-spacing: 0;
   margin-top: 20rpx;
   margin-left: 30rpx;
 }
+.imageitemContentView{
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20rpx;
+}
 .imageItem{
   margin: 10rpx;
   width: 200rpx;
@@ -323,4 +330,13 @@ letter-spacing: 0;
   background:  #E6E6E6;
   height: 1rpx;
   opacity: 0.7;
+}
+.criminalView{
+  margin-top: 200rpx;
+  width: 100%;
+  text-align: center;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #9B9B9B;
+  letter-spacing: 0;
 }

@@ -1,3 +1,4 @@
+@import "/pages/PublicAudioView/PublicAudioView.wxss";
 @import "/pages/PublicWxss/PublicWxss.wxss";
 .topView{
   width: 100%;
@@ -331,4 +332,13 @@ letter-spacing: 0;
   margin: 10rpx;
   width: 200rpx;
   height: 200rpx;
+}
+.criminalView{
+  margin-top: 200rpx;
+  width: 100%;
+  text-align: center;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #9B9B9B;
+  letter-spacing: 0;
 }

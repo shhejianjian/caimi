@@ -1,3 +1,7 @@
+<import src="../../pages/PublicAudioView/PublicAudioView.wxml"/>
+<movable-area class="movableArea" wx:if="{{isShowSimpleAudio}}" style="height: {{movableHeigth}}px;width: 100%;position:fixed;z-index:999;">
+  <template is="simpleAudio" data="{{...audioInfo}}" />  
+</movable-area>
 <view class="TopView"> 
 
   <view class="topSearchView">
@@ -36,7 +40,7 @@
           </view>
           <view class="blueline"></view>
 
-          <view wx:if="{{openSort}}" class='sortList'>
+          <view hidden="{{!openSort}}" class='sortList'>
             <view class='chooseTypeView' >
             <view class='firstType' bindtap='showFirstSortList'>
               <view class="typeTitle {{showNavIndex==1?'typeTitle-active':''}}">{{menuName}}</view>
@@ -87,8 +91,9 @@
                   <image class='kongbaiImage' src='../../image/kongbaiyeicon.png'></image>
                   <view class='kongbaiTitle'>您似乎来到了外太空...</view>
                 </view>
+          
             <block wx:for="{{questionList}}" wx:for-item="shop" wx:key="index">
-                
+              <view wx:if="{{shop.banned==0}}">
                 <view class="shop-item" >
                     
                   <view class="shop-lessonType" wx:if="{{shop.isPublic == 1}}"> 
@@ -134,6 +139,7 @@
                 </view>
 
                 <view class="line"></view>
+              </view>
             </block>
           </view>
 

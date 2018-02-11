@@ -1,7 +1,11 @@
 var simpleLib = require('../libs/simple-lib.js');
 var route = "pages/BuyLesson/BuyLesson";
 
-
+var onPullDownRefresh = function () {
+  setTimeout(function () {
+    wx.stopPullDownRefresh();
+  }, 600)
+};
 
 
 var onload = function (options) {
@@ -288,4 +292,5 @@ Page({
   BuyCourse: BuyCourse,
   showAudio: showAudio,
   playAudio: playAudio,
+  onPullDownRefresh: onPullDownRefresh,
 })

@@ -1,3 +1,7 @@
+<import src="../../pages/PublicAudioView/PublicAudioView.wxml"/>
+<movable-area class="movableArea" wx:if="{{isShowSimpleAudio}}" style="height: {{movableHeigth}}px;width: 100%;position:fixed;z-index:999;">
+  <template is="simpleAudio" data="{{...audioInfo}}" />  
+</movable-area>
 <view class="topView">
     <view class='top-videoView'>
         <video class='Video' id="myVideo" fixed="{{true}}" src="{{videoUrl}}" danmu-list="{{danmuList}}" controls custom-cache="{{false}}"></video>
@@ -16,13 +20,17 @@
 
       <view wx:if="{{isLessonOrComment == 1}}">
         <view class="top-scrollView ">
-          <scroll-view class="scroll-view_H" scroll-left="50" scroll-x="true" scroll-into-view="{{toView}}">
+          <scroll-view class="scroll-view_H" scroll-x="true" scroll-into-view="{{toView}}">
+            <view class='scrollview-test'>
               <block  wx:for="{{tabs}}" wx:for-item="item" wx:key="index">
-                  <view id='#{{item.objectId}}' class="scroll-view_outView {{activeTab==item.objectId?'scroll-view_outView-active':''}}" bindtap="handlerTabTap" data-index="{{item.objectId}}" data-name='{{item.title}}'>
+                  <view class="scroll-view_outView {{activeTab==item.objectId?'scroll-view_outView-active':''}}" bindtap="handlerTabTap" data-index="{{item.objectId}}" data-name='{{item.title}}'>
                       <view class="outView-title {{activeTab==item.objectId?'outView-title-active':''}}">{{item.title}}</view>
                       <view class="outView-content {{activeTab==item.objectId?'outView-content-active':''}}">{{item.content}}</view>
                   </view>
+                  <!-- <view id='#{{item.objectId}}'></view> -->
               </block>
+              <view id='X{{lessonId}}'></view>
+            </view>
           </scroll-view>     
         </view>
 
@@ -151,7 +159,8 @@
                 </view>
                 <view class='showReportView' bindtap='showReport' data-commentid='{{comment.commentId}}' data-username='{{comment.userNickName}}' data-usercontent='{{comment.content}}' data-relatedtype='Comment'>
                   <view class='comment-username'>{{comment.userNickName}}</view>
-                  <view class='comment-content'>{{comment.content}} </view>
+                  <view class='comment-content' wx:if="{{comment.banned==0}}">{{comment.content}}</view>
+            <view class='comment-content' wx:if="{{comment.banned==1}}">该内容涉嫌违规，已被屏蔽</view>
                 </view>
 
               </view>
@@ -159,10 +168,20 @@
               <view class='comment-huifuView' bindtap='navigateToCommentDetail' data-commentid='{{comment.commentId}}' wx:if="{{comment.replyList.length>0}}">
 
              <view class='userAndHuifu'> 
-              <rich-text class='huifu-title' nodes="<span class='huifu-user'>{{comment.replyList[0].userNickName}}:  </span>{{comment.replyList[0].content}}"></rich-text>
+              <view wx:if="{{comment.replyList[0].banned==0}}">
+                <rich-text class='huifu-title' nodes="<span class='huifu-user'>{{comment.replyList[0].userNickName}}:  </span>{{comment.replyList[0].content}}"></rich-text>
+              </view>
+              <view wx:if="{{comment.replyList[0].banned==1}}">
+                <rich-text class='huifu-title' nodes="<span class='huifu-user'>{{comment.replyList[0].userNickName}}:  </span>该内容涉嫌违规，已被屏蔽"></rich-text>
+              </view>
             </view>
             <view class='userAndHuifu'  wx:if="{{comment.replyList.length>1}}"> 
-              <rich-text class='huifu-title' nodes="<span class='huifu-user'>{{comment.replyList[1].userNickName}}:  </span>{{comment.replyList[1].content}}"></rich-text>
+              <view wx:if="{{comment.replyList[1].banned==0}}">
+                <rich-text class='huifu-title' nodes="<span class='huifu-user'>{{comment.replyList[1].userNickName}}:  </span>{{comment.replyList[1].content}}"></rich-text>
+              </view>
+              <view wx:if="{{comment.replyList[1].banned==1}}">
+                <rich-text class='huifu-title' nodes="<span class='huifu-user'>{{comment.replyList[1].userNickName}}:  </span>该内容涉嫌违规，已被屏蔽"></rich-text>
+              </view>
             </view>
 
             <view class='huifuCounticonView'>

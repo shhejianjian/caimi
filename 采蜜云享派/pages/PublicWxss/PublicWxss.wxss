@@ -42,3 +42,6 @@
   height: 20rpx;
   width: 20rpx;
 }
+.movableArea{
+  pointer-events: none;
+}

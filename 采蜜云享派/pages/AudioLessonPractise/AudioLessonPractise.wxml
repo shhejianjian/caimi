@@ -14,9 +14,9 @@
         <progress class='audio-progress' stroke-width='4' percent="{{audioProgress}}" activeColor='#FFA900' />
 
         <view class='playIconView'>
-          <image class='past-icon' src='../../image/pastSongicon.png'></image>
+          <image class='past-icon' bindtap='playPastAudio' src='../../image/pastSongicon.png'></image>
           <image class='play-icon' bindtap='playAudio' src='{{playOrStop}}'></image>
-          <image class='next-icon' src='../../image/nextSongicon.png'></image>
+          <image class='next-icon' bindtap='playNextAudio' src='../../image/nextSongicon.png'></image>
         </view>
 
       </view>

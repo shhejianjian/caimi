@@ -1,8 +1,13 @@
+<import src="../../pages/PublicAudioView/PublicAudioView.wxml"/>
+<movable-area class="movableArea" wx:if="{{isShowSimpleAudio}}" style="height: {{movableHeigth}}px;width: 100%;position:fixed;z-index:999;">
+  <template is="simpleAudio" data="{{...audioInfo}}" />  
+</movable-area>
 <view class="topView">
   <view class="topFirstView" >
     <view class="topSecondView" >
       <view class="topThirdView" >
 
+  <view wx:if="{{answerInfo.banned==0}}">
 
     <view bindtap='showReport' data-relatedid='{{answerInfo.topicInfo.topicId}}' data-relatedtype='Topic' data-username='{{answerInfo.topicInfo.userNickName}}' data-usercontent='{{answerInfo.topicInfo.title}}'>
       <view class='top-tagView'>
@@ -63,18 +68,32 @@
                 </view>
                 <view class='showReportView' bindtap='showReport' data-commentid='{{comment.commentId}}' data-username='{{comment.userNickName}}' data-usercontent='{{comment.content}}' data-relatedtype='Comment'>
                   <view class='comment-username'>{{comment.userNickName}}</view>
-                  <view class='comment-content'>{{comment.content}} </view>
+                  <view class='comment-content' wx:if="{{comment.banned==0}}">{{comment.content}}</view>
+          <view wx:if="{{comment.banned==1}}">
+            <view class='comment-content' wx:if="{{comment.contentBanned==0}}">该用户涉嫌违规，已被屏蔽</view>
+            <view class='comment-content' wx:if="{{comment.contentBanned==1}}">该内容涉嫌违规，已被屏蔽</view>
+          </view>
                 </view>
 
               </view>
 
               <view class='comment-huifuView' bindtap='navigateToCommentDetail' data-commentid='{{comment.commentId}}' wx:if="{{comment.replyList.length>0}}">
 
-              <view class='userAndHuifu'> 
-              <rich-text class='huifu-title' nodes="<span class='huifu-user'>{{comment.replyList[0].userNickName}}:  </span>{{comment.replyList[0].content}}"></rich-text>
+             <view class='userAndHuifu'> 
+              <view wx:if="{{comment.replyList[0].banned==0}}">
+                <rich-text class='huifu-title' nodes="<span class='huifu-user'>{{comment.replyList[0].userNickName}}:  </span>{{comment.replyList[0].content}}"></rich-text>
+              </view>
+              <view wx:if="{{comment.replyList[0].banned==1}}">
+                <rich-text class='huifu-title' nodes="<span class='huifu-user'>{{comment.replyList[0].userNickName}}:  </span>该内容涉嫌违规，已被屏蔽"></rich-text>
+              </view>
             </view>
             <view class='userAndHuifu'  wx:if="{{comment.replyList.length>1}}"> 
-              <rich-text class='huifu-title' nodes="<span class='huifu-user'>{{comment.replyList[1].userNickName}}:  </span>{{comment.replyList[1].content}}"></rich-text>
+              <view wx:if="{{comment.replyList[1].banned==0}}">
+                <rich-text class='huifu-title' nodes="<span class='huifu-user'>{{comment.replyList[1].userNickName}}:  </span>{{comment.replyList[1].content}}"></rich-text>
+              </view>
+              <view wx:if="{{comment.replyList[1].banned==1}}">
+                <rich-text class='huifu-title' nodes="<span class='huifu-user'>{{comment.replyList[1].userNickName}}:  </span>该内容涉嫌违规，已被屏蔽"></rich-text>
+              </view>
             </view>
 
             <view class='huifuCounticonView'>
@@ -99,8 +118,11 @@
               <view class="commentList-line"></view> 
             </block>
 
-
-
+        </view>
+        <view class='criminalView' wx:if="{{answerInfo.banned==1}}">
+          <view wx:if="{{answerInfo.contentBanned==0}}">该用户涉嫌违规，已被屏蔽</view>
+          <view wx:if="{{answerInfo.contentBanned==1}}">该问题涉嫌违规，已被屏蔽</view>
+        </view>
           
 
           
@@ -110,7 +132,7 @@
   </view>
 </view>
 
-
+<view wx:if="{{answerInfo.banned==0}}">
 <view class='floatView'>
             <view class='float-leftView' bindtap='dianzan'>{{answerInfo.likeText}}</view>
             <view class='float-rightView' bindtap='comment'>留  言</view>
@@ -122,3 +144,4 @@
 
 
 <view class="prevent-screen" hidden="{{!prevent}}"></view>
+</view>

@@ -65,9 +65,9 @@ var navigateTo = function (url) {
 var token = "99290192-67d2-4bac-8fc2-3949429da864";
 //var baseUrl = "https://kjgk.natapp4.cc/caimi";
 //var baseUrl = "http://140.143.130.252";
-var baseUrl = "http://pub.caimi.group";
-var imageUploadUrl = "http://img.caimi.group/web/upload/file";
-var audioUploadUrl = "http://audio.caimi.group/web/upload/file";
+var baseUrl = "https://caimi.we.com/wc";
+var imageUploadUrl = "https://caimi.we.com/img/upload/file";
+var audioUploadUrl = "https://caimi.we.com/audio/upload/file";
 
 
 var getScreenWidth = function () {
@@ -81,6 +81,7 @@ var getScreenWidth = function () {
 var getScreenHeight = function () {
     wx.getSystemInfo({
         success: function (res) {
+          console.log(res.windowHeight)
             return res.windowHeight;
         }
     });
@@ -120,11 +121,11 @@ var getTime = function (dateTimeStamp) {
   
   if (monthC >= 1) {
     // result = "" + parseInt(monthC) + "月前";
-    //result = moment(dateTimeStamp).format(format);
+    result = moment(dateTimeStamp).format(format);
   }
   else if (weekC >= 1) {
     // result = "" + parseInt(weekC) + "周前";
-    //result = moment(dateTimeStamp).format(format);
+    result = moment(dateTimeStamp).format(format);
   }
   else if (dayC >= 1) {
      //result = "" + parseInt(dayC) + "天前";
@@ -242,6 +243,15 @@ var NumberToChinese = function(num) {
 }
 
 
+var timeToString = function (duration) {
+  let str = '';
+  let minute = parseInt(duration / 60) < 10 ? ('0' + parseInt(duration / 60)) : (parseInt(duration / 60));
+  let second = duration % 60 < 10 ? ('0' + duration % 60) : (duration % 60);
+  str = minute + ':' + second;
+  return str;
+};
+
+
 var getRequest = function (session,params,url){
   wx.request({
     url: baseUrl + url,
@@ -284,3 +294,4 @@ module.exports.lastTime = lastTime;
 module.exports.getRequest = getRequest;
 module.exports.loadingToast = loadingToast;
 module.exports.NumberToChinese = NumberToChinese;
+module.exports.timeToString = timeToString;
