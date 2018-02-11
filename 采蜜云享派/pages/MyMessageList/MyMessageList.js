@@ -448,6 +448,15 @@ var endRecord = function (event){
 };
 
 var playVoice = function (event){
+  backgroundAudioManager.pause();
+  backgroundAudioManager.onPause((res) => {
+    simpleLib.getGlobalData().isPlayingAudio = '2';
+    console.log('暂停了');
+    clearInterval(setProgressTimer);
+    simpleLib.setData(route, {
+      'audioInfo.playImage': '../../image/bofangicon.png',
+    });
+  });
   var voiceUrl = event.currentTarget.dataset.voiceurl;
   var isMine = event.currentTarget.dataset.ismine;
   var messageId = event.currentTarget.dataset.messageid;
